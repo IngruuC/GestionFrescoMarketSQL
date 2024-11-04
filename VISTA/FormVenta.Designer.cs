@@ -1,6 +1,6 @@
 ﻿namespace VISTA
 {
-    partial class Login
+    partial class FormVenta
     {
         /// <summary>
         /// Required designer variable.
@@ -28,33 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            SuspendLayout();
-            // 
-            // textBox1
-            // 
-            textBox1.BackColor = Color.White;
-            textBox1.Location = new Point(588, 385);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(180, 23);
-            textBox1.TabIndex = 0;
-            // 
-            // Form1
-            // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Black;
-            ClientSize = new Size(1031, 509);
-            Controls.Add(textBox1);
-            FormBorderStyle = FormBorderStyle.None;
-            Name = "Form1";
-            TransparencyKey = Color.FromArgb(255, 192, 255);
-            ResumeLayout(false);
-            PerformLayout();
+            this.components = new System.ComponentModel.Container();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "FormVenta";
         }
 
         #endregion
-
-        private TextBox textBox1;
     }
 }
