@@ -12,113 +12,114 @@ namespace CONTROLADORA
 {
     public class ControladoraVenta
     {
-        private readonly Contexto _contexto;
-        private readonly ControladoraProducto _controladoraProducto;
+        private static ControladoraVenta instancia;
+        private Contexto contexto;
 
-        public ControladoraVenta()
+        private ControladoraVenta()
         {
-            _contexto = new Contexto();
-            _controladoraProducto = new ControladoraProducto();
+            contexto = new Contexto();
+        }
+
+        public static ControladoraVenta ObtenerInstancia()
+        {
+            if (instancia == null)
+                instancia = new ControladoraVenta();
+            return instancia;
+        }
+
+        public void RealizarVenta(Venta venta)
+        {
+            using (var transaction = contexto.Database.BeginTransaction())
+            {
+                try
+                {
+                    // Validar cliente
+                    if (!contexto.Clientes.Any(c => c.Id == venta.ClienteId))
+                        throw new Exception("Cliente no encontrado.");
+
+                    // Validar y actualizar stock de productos
+                    foreach (var detalle in venta.Detalles)
+                    {
+                        var producto = contexto.Productos.Find(detalle.ProductoId);
+                        if (producto == null)
+                            throw new Exception($"Producto no encontrado: {detalle.ProductoId}");
+
+                        if (producto.Stock < detalle.Cantidad)
+                            throw new Exception($"Stock insuficiente para el producto: {producto.Nombre}");
+
+                        detalle.PrecioUnitario = producto.Precio;
+                        detalle.Subtotal = detalle.PrecioUnitario * detalle.Cantidad;
+                        producto.Stock -= detalle.Cantidad;
+                    }
+
+                    // Calcular total según forma de pago
+                    decimal totalOriginal = venta.Detalles.Sum(d => d.Subtotal);
+                    switch (venta.FormaPago)
+                    {
+                        case "Efectivo":
+                            venta.Total = totalOriginal * 0.85m; // 15% descuento
+                            break;
+                        case "Tarjeta de Crédito":
+                            venta.Total = totalOriginal * 1.10m; // 10% recargo
+                            break;
+                        default:
+                            venta.Total = totalOriginal;
+                            break;
+                    }
+
+                    contexto.Ventas.Add(venta);
+                    contexto.SaveChanges();
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
         }
 
         public List<Venta> ObtenerVentas()
         {
-            return _contexto.Ventas
-                .Include(v => v.Cliente)
-                .Include(v => v.Detalles)
+            return contexto.Ventas
+                .Include("Cliente")
+                .Include("Detalles")
+                .Include("Detalles.Producto")
                 .ToList();
         }
 
         public Venta ObtenerVentaPorId(int id)
         {
-            return _contexto.Ventas
-                .Include(v => v.Cliente)
-                .Include(v => v.Detalles)
-                .FirstOrDefault(v => v.VentaId == id);
+            return contexto.Ventas
+                .Include("Cliente")
+                .Include("Detalles")
+                .Include("Detalles.Producto")
+                .FirstOrDefault(v => v.Id == id);
         }
 
-        public void RealizarVenta(Venta venta)
+        public void EliminarVenta(int id)
         {
-            using (var transaction = _contexto.Database.BeginTransaction())
+            using (var transaction = contexto.Database.BeginTransaction())
             {
                 try
                 {
-                    if (venta.ClienteId == 0)
-                        throw new Exception("Debe seleccionar un cliente");
-
-                    if (!venta.Detalles.Any())
-                        throw new Exception("La venta debe tener al menos un producto");
-
-                    // Verificar y actualizar stock
-                    foreach (var detalle in venta.Detalles)
-                    {
-                        var producto = _contexto.Productos.Find(detalle.ProductoId);
-                        if (producto == null)
-                            throw new Exception($"Producto no encontrado: {detalle.ProductoId}");
-
-                        if (producto.Stock < detalle.CantidadProducto)
-                            throw new Exception($"Stock insuficiente para el producto: {producto.Nombre}");
-
-                        producto.Stock -= detalle.CantidadProducto;
-
-                        // Actualizar detalles
-                        detalle.PrecioUnitario = producto.Precio;
-                        detalle.Subtotal = detalle.CantidadProducto * detalle.PrecioUnitario;
-                        detalle.ProductoNombre = producto.Nombre;
-                    }
-
-                    // Calcular total
-                    venta.Total = venta.Detalles.Sum(d => d.Subtotal);
-
-                    // Aplicar descuentos o recargos según forma de pago
-                    switch (venta.FormaPago?.ToUpper())
-                    {
-                        case "EFECTIVO":
-                            venta.Total *= 0.85M; // 15% descuento
-                            break;
-                        case "TARJETA DE CREDITO":
-                            venta.Total *= 1.10M; // 10% recargo
-                            break;
-                    }
-
-                    venta.FechaVenta = DateTime.Now;
-                    _contexto.Ventas.Add(venta);
-                    _contexto.SaveChanges();
-                    transaction.Commit();
-                }
-                catch
-                {
-                    transaction.Rollback();
-                    throw;
-                }
-            }
-        }
-
-        public void EliminarVenta(int ventaId)
-        {
-            using (var transaction = _contexto.Database.BeginTransaction())
-            {
-                try
-                {
-                    var venta = _contexto.Ventas
-                        .Include(v => v.Detalles)
-                        .FirstOrDefault(v => v.VentaId == ventaId);
+                    var venta = contexto.Ventas
+                        .Include("Detalles")
+                        .FirstOrDefault(v => v.Id == id);
 
                     if (venta == null)
-                        throw new Exception("Venta no encontrada");
+                        throw new Exception("Venta no encontrada.");
 
                     // Restaurar stock
                     foreach (var detalle in venta.Detalles)
                     {
-                        var producto = _contexto.Productos.Find(detalle.ProductoId);
+                        var producto = contexto.Productos.Find(detalle.ProductoId);
                         if (producto != null)
-                        {
-                            producto.Stock += detalle.CantidadProducto;
-                        }
+                            producto.Stock += detalle.Cantidad;
                     }
 
-                    _contexto.Ventas.Remove(venta);
-                    _contexto.SaveChanges();
+                    contexto.Ventas.Remove(venta);
+                    contexto.SaveChanges();
                     transaction.Commit();
                 }
                 catch
@@ -128,31 +129,7 @@ namespace CONTROLADORA
                 }
             }
         }
-
-        public decimal CalcularTotalVentas(DateTime fecha)
-        {
-            return _contexto.Ventas
-                .Where(v => v.FechaVenta.Date == fecha.Date)
-                .Sum(v => v.Total);
-        }
-
-        public List<Venta> ObtenerVentasPorFecha(DateTime fecha)
-        {
-            return _contexto.Ventas
-                .Include(v => v.Cliente)
-                .Include(v => v.Detalles)
-                .Where(v => v.FechaVenta.Date == fecha.Date)
-                .ToList();
-        }
-
-        public List<Venta> ObtenerVentasPorCliente(int clienteId)
-        {
-            return _contexto.Ventas
-                .Include(v => v.Cliente)
-                .Include(v => v.Detalles)
-                .Where(v => v.ClienteId == clienteId)
-                .ToList();
-        }
     }
 }
+
 

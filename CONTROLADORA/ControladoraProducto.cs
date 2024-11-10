@@ -12,78 +12,82 @@ namespace CONTROLADORA
 {
     public class ControladoraProducto
     {
-        private readonly Contexto _contexto;
+        private static ControladoraProducto instancia;
+        private Contexto contexto;
 
-        public ControladoraProducto()
+        private ControladoraProducto()
         {
-            _contexto = new Contexto();
+            contexto = new Contexto();
         }
 
-        public List<Producto> ObtenerProductos()
+        public static ControladoraProducto ObtenerInstancia()
         {
-            return _contexto.Productos.ToList();
-        }
-
-        public Producto ObtenerProductoPorId(int id)
-        {
-            return _contexto.Productos.Find(id);
+            if (instancia == null)
+                instancia = new ControladoraProducto();
+            return instancia;
         }
 
         public void AgregarProducto(Producto producto)
         {
-            if (string.IsNullOrEmpty(producto.CodigoBarra))
-                throw new Exception("El código de barras es requerido");
+            if (string.IsNullOrWhiteSpace(producto.CodigoBarra) || producto.CodigoBarra.Length != 8)
+                throw new Exception("El código de barras debe tener 8 dígitos.");
 
-            if (_contexto.Productos.Any(p => p.CodigoBarra == producto.CodigoBarra))
-                throw new Exception("Ya existe un producto con ese código de barras");
-
-            if (producto.Precio <= 0)
-                throw new Exception("El precio debe ser mayor que cero");
-
-            if (producto.Stock < 0)
-                throw new Exception("El stock no puede ser negativo");
+            if (contexto.Productos.Any(p => p.CodigoBarra == producto.CodigoBarra))
+                throw new Exception("Ya existe un producto con ese código de barras.");
 
             if (producto.EsPerecedero && !producto.FechaVencimiento.HasValue)
-                throw new Exception("Los productos perecederos deben tener una fecha de vencimiento");
+                throw new Exception("Los productos perecederos deben tener fecha de vencimiento.");
 
-            _contexto.Productos.Add(producto);
-            _contexto.SaveChanges();
+            if (producto.Precio <= 0)
+                throw new Exception("El precio debe ser mayor que cero.");
+
+            if (producto.Stock < 0)
+                throw new Exception("El stock no puede ser negativo.");
+
+            contexto.Productos.Add(producto);
+            contexto.SaveChanges();
         }
 
-        public void ActualizarProducto(Producto producto)
+        public void ModificarProducto(Producto producto)
         {
-            var productoExistente = _contexto.Productos.Find(producto.Id);
+            var productoExistente = contexto.Productos.Find(producto.Id);
             if (productoExistente == null)
-                throw new Exception("Producto no encontrado");
+                throw new Exception("Producto no encontrado.");
 
-            if (_contexto.Productos.Any(p => p.CodigoBarra == producto.CodigoBarra && p.Id != producto.Id))
-                throw new Exception("Ya existe otro producto con ese código de barras");
+            if (contexto.Productos.Any(p => p.CodigoBarra == producto.CodigoBarra && p.Id != producto.Id))
+                throw new Exception("Ya existe otro producto con ese código de barras.");
 
-            _contexto.Entry(productoExistente).CurrentValues.SetValues(producto);
-            _contexto.SaveChanges();
+            productoExistente.Nombre = producto.Nombre;
+            productoExistente.CodigoBarra = producto.CodigoBarra;
+            productoExistente.EsPerecedero = producto.EsPerecedero;
+            productoExistente.FechaVencimiento = producto.FechaVencimiento;
+            productoExistente.Precio = producto.Precio;
+            productoExistente.Stock = producto.Stock;
+
+            contexto.SaveChanges();
         }
 
         public void EliminarProducto(int id)
         {
-            var producto = _contexto.Productos.Find(id);
-            if (producto != null)
-            {
-                _contexto.Productos.Remove(producto);
-                _contexto.SaveChanges();
-            }
+            var producto = contexto.Productos.Find(id);
+            if (producto == null)
+                throw new Exception("Producto no encontrado.");
+
+            if (contexto.DetallesVenta.Any(d => d.ProductoId == id))
+                throw new Exception("No se puede eliminar el producto porque tiene ventas asociadas.");
+
+            contexto.Productos.Remove(producto);
+            contexto.SaveChanges();
         }
 
-        public void ActualizarStock(int productoId, int cantidad)
+        public List<Producto> ObtenerProductos()
         {
-            var producto = _contexto.Productos.Find(productoId);
-            if (producto == null)
-                throw new Exception("Producto no encontrado");
+            return contexto.Productos.ToList();
+        }
 
-            producto.Stock += cantidad;
-            if (producto.Stock < 0)
-                throw new Exception("No hay suficiente stock disponible");
-
-            _contexto.SaveChanges();
+        public Producto ObtenerProductoPorId(int id)
+        {
+            return contexto.Productos.Find(id);
         }
     }
 }

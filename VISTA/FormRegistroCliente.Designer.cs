@@ -1,244 +1,373 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-namespace VISTA
+﻿namespace VISTA
+{
+    partial class FormRegistroCliente
     {
-        partial class FormRegistroCliente
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
         {
-            private System.ComponentModel.IContainer components = null;
-
-            protected override void Dispose(bool disposing)
+            if (disposing && (components != null))
             {
-                if (disposing && (components != null))
-                {
-                    components.Dispose();
-                }
-                base.Dispose(disposing);
+                components.Dispose();
             }
-
-            private void InitializeComponent()
-            {
-                System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-                System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-
-                this.panelDatos = new System.Windows.Forms.Panel();
-                this.lblTitulo = new System.Windows.Forms.Label();
-                this.txtDireccion = new System.Windows.Forms.TextBox();
-                this.txtApellido = new System.Windows.Forms.TextBox();
-                this.txtNombre = new System.Windows.Forms.TextBox();
-                this.txtDocumento = new System.Windows.Forms.TextBox();
-                this.lblDireccion = new System.Windows.Forms.Label();
-                this.lblApellido = new System.Windows.Forms.Label();
-                this.lblNombre = new System.Windows.Forms.Label();
-                this.lblDocumento = new System.Windows.Forms.Label();
-                this.panelBotones = new System.Windows.Forms.Panel();
-                this.btnLimpiar = new System.Windows.Forms.Button();
-                this.btnEliminar = new System.Windows.Forms.Button();
-                this.btnModificar = new System.Windows.Forms.Button();
-                this.btnGuardar = new System.Windows.Forms.Button();
-                this.panelBusqueda = new System.Windows.Forms.Panel();
-                this.lblResultadoBusqueda = new System.Windows.Forms.Label();
-                this.txtBuscar = new System.Windows.Forms.TextBox();
-                this.lblBuscar = new System.Windows.Forms.Label();
-                this.dgvClientes = new System.Windows.Forms.DataGridView();
-                this.panelContenedor = new System.Windows.Forms.Panel();
-
-                // 
-                // panelDatos
-                // 
-                this.panelDatos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(68)))));
-                this.panelDatos.Controls.Add(this.lblTitulo);
-                this.panelDatos.Controls.Add(this.txtDireccion);
-                this.panelDatos.Controls.Add(this.txtApellido);
-                this.panelDatos.Controls.Add(this.txtNombre);
-                this.panelDatos.Controls.Add(this.txtDocumento);
-                this.panelDatos.Controls.Add(this.lblDireccion);
-                this.panelDatos.Controls.Add(this.lblApellido);
-                this.panelDatos.Controls.Add(this.lblNombre);
-                this.panelDatos.Controls.Add(this.lblDocumento);
-                this.panelDatos.Controls.Add(this.panelBotones);
-                this.panelDatos.Dock = System.Windows.Forms.DockStyle.Top;
-                this.panelDatos.Location = new System.Drawing.Point(0, 0);
-                this.panelDatos.Name = "panelDatos";
-                this.panelDatos.Padding = new System.Windows.Forms.Padding(10);
-                this.panelDatos.Size = new System.Drawing.Size(1000, 280);
-
-                // 
-                // lblTitulo
-                // 
-                this.lblTitulo.AutoSize = true;
-                this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-                this.lblTitulo.ForeColor = System.Drawing.Color.Gainsboro;
-                this.lblTitulo.Location = new System.Drawing.Point(15, 15);
-                this.lblTitulo.Name = "lblTitulo";
-                this.lblTitulo.Size = new System.Drawing.Size(186, 25);
-                this.lblTitulo.Text = "Registro de Clientes";
-
-                // 
-                // Labels
-                // 
-                ConfigurarLabel(lblDocumento, "Documento", 50);
-                ConfigurarLabel(lblNombre, "Nombre", 100);
-                ConfigurarLabel(lblApellido, "Apellido", 150);
-                ConfigurarLabel(lblDireccion, "Dirección", 200);
-
-                // 
-                // TextBoxes
-                // 
-                ConfigurarTextBox(txtDocumento, 50);
-                ConfigurarTextBox(txtNombre, 100);
-                ConfigurarTextBox(txtApellido, 150);
-                ConfigurarTextBox(txtDireccion, 200);
-
-                // 
-                // panelBotones
-                // 
-                this.panelBotones.Controls.Add(this.btnLimpiar);
-                this.panelBotones.Controls.Add(this.btnEliminar);
-                this.panelBotones.Controls.Add(this.btnModificar);
-                this.panelBotones.Controls.Add(this.btnGuardar);
-                this.panelBotones.Dock = System.Windows.Forms.DockStyle.Bottom;
-                this.panelBotones.Location = new System.Drawing.Point(10, 220);
-                this.panelBotones.Name = "panelBotones";
-                this.panelBotones.Size = new System.Drawing.Size(980, 50);
-
-                // 
-                // Botones
-                // 
-                ConfigurarBoton(btnGuardar, "Guardar", 0);
-                ConfigurarBoton(btnModificar, "Modificar", 1);
-                ConfigurarBoton(btnEliminar, "Eliminar", 2);
-                ConfigurarBoton(btnLimpiar, "Limpiar", 3);
-
-                // 
-                // panelBusqueda
-                // 
-                this.panelBusqueda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
-                this.panelBusqueda.Controls.Add(this.lblResultadoBusqueda);
-                this.panelBusqueda.Controls.Add(this.txtBuscar);
-                this.panelBusqueda.Controls.Add(this.lblBuscar);
-                this.panelBusqueda.Dock = System.Windows.Forms.DockStyle.Top;
-                this.panelBusqueda.Location = new System.Drawing.Point(0, 280);
-                this.panelBusqueda.Name = "panelBusqueda";
-                this.panelBusqueda.Size = new System.Drawing.Size(1000, 60);
-                this.panelBusqueda.Padding = new System.Windows.Forms.Padding(10);
-
-                // 
-                // lblBuscar y txtBuscar
-                // 
-                this.lblBuscar.AutoSize = true;
-                this.lblBuscar.ForeColor = System.Drawing.Color.Gainsboro;
-                this.lblBuscar.Location = new System.Drawing.Point(15, 25);
-                this.lblBuscar.Name = "lblBuscar";
-                this.lblBuscar.Size = new System.Drawing.Size(45, 13);
-                this.lblBuscar.Text = "Buscar:";
-
-                this.txtBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(44)))), ((int)(((byte)(85)))));
-                this.txtBuscar.ForeColor = System.Drawing.Color.Gainsboro;
-                this.txtBuscar.Location = new System.Drawing.Point(70, 22);
-                this.txtBuscar.Name = "txtBuscar";
-                this.txtBuscar.Size = new System.Drawing.Size(300, 20);
-
-                // 
-                // lblResultadoBusqueda
-                // 
-                this.lblResultadoBusqueda.AutoSize = true;
-                this.lblResultadoBusqueda.ForeColor = System.Drawing.Color.Gainsboro;
-                this.lblResultadoBusqueda.Location = new System.Drawing.Point(380, 25);
-                this.lblResultadoBusqueda.Name = "lblResultadoBusqueda";
-                this.lblResultadoBusqueda.Size = new System.Drawing.Size(0, 13);
-                this.lblResultadoBusqueda.Visible = false;
-
-                // 
-                // dgvClientes
-                // 
-                this.dgvClientes.AllowUserToAddRows = false;
-                this.dgvClientes.AllowUserToDeleteRows = false;
-                this.dgvClientes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
-                this.dgvClientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-                this.dgvClientes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-                this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-                this.dgvClientes.Dock = System.Windows.Forms.DockStyle.Fill;
-                this.dgvClientes.Location = new System.Drawing.Point(0, 340);
-                this.dgvClientes.Name = "dgvClientes";
-                this.dgvClientes.ReadOnly = true;
-                this.dgvClientes.RowHeadersVisible = false;
-                this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-                this.dgvClientes.Size = new System.Drawing.Size(1000, 360);
-
-                // 
-                // FormRegistroCliente
-                // 
-                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-                this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
-                this.ClientSize = new System.Drawing.Size(1000, 700);
-                this.Controls.Add(this.dgvClientes);
-                this.Controls.Add(this.panelBusqueda);
-                this.Controls.Add(this.panelDatos);
-                this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-                this.Name = "FormRegistroCliente";
-                this.Text = "Registro de Clientes";
-                this.Load += new System.EventHandler(this.FormRegistroCliente_Load);
-                this.panelDatos.ResumeLayout(false);
-                this.panelBotones.ResumeLayout(false);
-                this.panelBusqueda.ResumeLayout(false);
-                ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
-                this.ResumeLayout(false);
-            }
-
-            private void ConfigurarLabel(Label lbl, string texto, int y)
-            {
-                lbl.AutoSize = true;
-                lbl.ForeColor = System.Drawing.Color.Gainsboro;
-                lbl.Location = new System.Drawing.Point(15, y);
-                lbl.Name = "lbl" + texto;
-                lbl.Size = new System.Drawing.Size(70, 13);
-                lbl.Text = texto + ":";
-            }
-
-            private void ConfigurarTextBox(TextBox txt, int y)
-            {
-                txt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(44)))), ((int)(((byte)(85)))));
-                txt.ForeColor = System.Drawing.Color.Gainsboro;
-                txt.Location = new System.Drawing.Point(100, y);
-                txt.Name = "txt" + txt.Name;
-                txt.Size = new System.Drawing.Size(250, 20);
-            }
-
-            private void ConfigurarBoton(Button btn, string texto, int posicion)
-            {
-                btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(68)))));
-                btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                btn.FlatAppearance.BorderSize = 0;
-                btn.ForeColor = System.Drawing.Color.Gainsboro;
-                btn.Location = new System.Drawing.Point(15 + (posicion * 120), 10);
-                btn.Name = "btn" + texto;
-                btn.Size = new System.Drawing.Size(100, 30);
-                btn.Text = texto;
-                btn.UseVisualStyleBackColor = false;
-            }
-
-            private System.Windows.Forms.Panel panelDatos;
-            private System.Windows.Forms.Label lblTitulo;
-            private System.Windows.Forms.TextBox txtDireccion;
-            private System.Windows.Forms.TextBox txtApellido;
-            private System.Windows.Forms.TextBox txtNombre;
-            private System.Windows.Forms.TextBox txtDocumento;
-            private System.Windows.Forms.Label lblDireccion;
-            private System.Windows.Forms.Label lblApellido;
-            private System.Windows.Forms.Label lblNombre;
-            private System.Windows.Forms.Label lblDocumento;
-            private System.Windows.Forms.Panel panelBotones;
-            private System.Windows.Forms.Button btnLimpiar;
-            private System.Windows.Forms.Button btnEliminar;
-            private System.Windows.Forms.Button btnModificar;
-            private System.Windows.Forms.Button btnGuardar;
-            private System.Windows.Forms.Panel panelBusqueda;
-            private System.Windows.Forms.Label lblResultadoBusqueda;
-            private System.Windows.Forms.TextBox txtBuscar;
-            private System.Windows.Forms.Label lblBuscar;
-            private System.Windows.Forms.DataGridView dgvClientes;
-            private System.Windows.Forms.Panel panelContenedor;
+            base.Dispose(disposing);
         }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.panelSuperior = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblTitulo = new System.Windows.Forms.Label();
+            this.groupBoxDatos = new System.Windows.Forms.GroupBox();
+            this.btnActualizar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.txtDireccion = new System.Windows.Forms.TextBox();
+            this.txtApellido = new System.Windows.Forms.TextBox();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.txtDocumento = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBoxBusqueda = new System.Windows.Forms.GroupBox();
+            this.txtBuscarCliente = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnLimpiarBusqueda = new System.Windows.Forms.Button();
+            this.btnBuscarCliente = new System.Windows.Forms.Button();
+            this.dgvCliente = new System.Windows.Forms.DataGridView();
+            this.btnCerrar = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.panelSuperior.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBoxDatos.SuspendLayout();
+            this.groupBoxBusqueda.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCliente)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // panelSuperior
+            // 
+            this.panelSuperior.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.panelSuperior.Controls.Add(this.pictureBox1);
+            this.panelSuperior.Controls.Add(this.lblTitulo);
+            this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSuperior.Location = new System.Drawing.Point(0, 0);
+            this.panelSuperior.Name = "panelSuperior";
+            this.panelSuperior.Size = new System.Drawing.Size(1084, 70);
+            this.panelSuperior.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(45, 45);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitulo.ForeColor = System.Drawing.Color.White;
+            this.lblTitulo.Location = new System.Drawing.Point(63, 21);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(245, 25);
+            this.lblTitulo.TabIndex = 0;
+            this.lblTitulo.Text = "REGISTRO CLIENTES";
+            // 
+            // groupBoxDatos
+            // 
+            this.groupBoxDatos.Controls.Add(this.btnActualizar);
+            this.groupBoxDatos.Controls.Add(this.btnModificar);
+            this.groupBoxDatos.Controls.Add(this.btnEliminar);
+            this.groupBoxDatos.Controls.Add(this.btnGuardar);
+            this.groupBoxDatos.Controls.Add(this.txtDireccion);
+            this.groupBoxDatos.Controls.Add(this.txtApellido);
+            this.groupBoxDatos.Controls.Add(this.txtNombre);
+            this.groupBoxDatos.Controls.Add(this.txtDocumento);
+            this.groupBoxDatos.Controls.Add(this.label4);
+            this.groupBoxDatos.Controls.Add(this.label3);
+            this.groupBoxDatos.Controls.Add(this.label2);
+            this.groupBoxDatos.Controls.Add(this.label1);
+            this.groupBoxDatos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.groupBoxDatos.Location = new System.Drawing.Point(12, 88);
+            this.groupBoxDatos.Name = "groupBoxDatos";
+            this.groupBoxDatos.Size = new System.Drawing.Size(304, 461);
+            this.groupBoxDatos.TabIndex = 1;
+            this.groupBoxDatos.TabStop = false;
+            this.groupBoxDatos.Text = "DATOS DEL CLIENTE";
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActualizar.ForeColor = System.Drawing.Color.White;
+            this.btnActualizar.Location = new System.Drawing.Point(103, 410);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(120, 35);
+            this.btnActualizar.TabIndex = 11;
+            this.btnActualizar.Text = "ACTUALIZAR";
+            this.btnActualizar.UseVisualStyleBackColor = false;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificar.ForeColor = System.Drawing.Color.White;
+            this.btnModificar.Location = new System.Drawing.Point(159, 352);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(120, 35);
+            this.btnModificar.TabIndex = 10;
+            this.btnModificar.Text = "MODIFICAR";
+            this.btnModificar.UseVisualStyleBackColor = false;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminar.ForeColor = System.Drawing.Color.White;
+            this.btnEliminar.Location = new System.Drawing.Point(20, 352);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(120, 35);
+            this.btnEliminar.TabIndex = 9;
+            this.btnEliminar.Text = "ELIMINAR";
+            this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardar.ForeColor = System.Drawing.Color.White;
+            this.btnGuardar.Location = new System.Drawing.Point(20, 293);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(259, 35);
+            this.btnGuardar.TabIndex = 8;
+            this.btnGuardar.Text = "GUARDAR";
+            this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // txtDireccion
+            // 
+            this.txtDireccion.Location = new System.Drawing.Point(20, 245);
+            this.txtDireccion.Name = "txtDireccion";
+            this.txtDireccion.Size = new System.Drawing.Size(259, 22);
+            this.txtDireccion.TabIndex = 7;
+            // 
+            // txtApellido
+            // 
+            this.txtApellido.Location = new System.Drawing.Point(20, 184);
+            this.txtApellido.Name = "txtApellido";
+            this.txtApellido.Size = new System.Drawing.Size(259, 22);
+            this.txtApellido.TabIndex = 6;
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(20, 123);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(259, 22);
+            this.txtNombre.TabIndex = 5;
+            // 
+            // txtDocumento
+            // 
+            this.txtDocumento.Location = new System.Drawing.Point(20, 62);
+            this.txtDocumento.Name = "txtDocumento";
+            this.txtDocumento.Size = new System.Drawing.Size(259, 22);
+            this.txtDocumento.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(17, 226);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(93, 16);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "DIRECCIÓN:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 165);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(83, 16);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "APELLIDO:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(17, 104);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 16);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "NOMBRE:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(17, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(108, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "DOCUMENTO:";
+            // 
+            // groupBoxBusqueda
+            // 
+            this.groupBoxBusqueda.Controls.Add(this.txtBuscarCliente);
+            this.groupBoxBusqueda.Controls.Add(this.label5);
+            this.groupBoxBusqueda.Controls.Add(this.btnLimpiarBusqueda);
+            this.groupBoxBusqueda.Controls.Add(this.btnBuscarCliente);
+            this.groupBoxBusqueda.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.groupBoxBusqueda.Location = new System.Drawing.Point(322, 88);
+            this.groupBoxBusqueda.Name = "groupBoxBusqueda";
+            this.groupBoxBusqueda.Size = new System.Drawing.Size(750, 70);
+            this.groupBoxBusqueda.TabIndex = 2;
+            this.groupBoxBusqueda.TabStop = false;
+            this.groupBoxBusqueda.Text = "BÚSQUEDA";
+            // 
+            // txtBuscarCliente
+            // 
+            this.txtBuscarCliente.Location = new System.Drawing.Point(186, 28);
+            this.txtBuscarCliente.Name = "txtBuscarCliente";
+            this.txtBuscarCliente.Size = new System.Drawing.Size(380, 22);
+            this.txtBuscarCliente.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(19, 31);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(150, 16);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "BUSCAR CLIENTES:";
+            // 
+            // btnLimpiarBusqueda
+            // 
+            this.btnLimpiarBusqueda.Location = new System.Drawing.Point(654, 24);
+            this.btnLimpiarBusqueda.Name = "btnLimpiarBusqueda";
+            this.btnLimpiarBusqueda.Size = new System.Drawing.Size(90, 30);
+            this.btnLimpiarBusqueda.TabIndex = 14;
+            this.btnLimpiarBusqueda.Text = "LIMPIAR";
+            this.btnLimpiarBusqueda.UseVisualStyleBackColor = false;
+            this.btnLimpiarBusqueda.Click += new System.EventHandler(this.btnLimpiarBusqueda_Click);
+            // 
+            // btnBuscarCliente
+            // 
+            this.btnBuscarCliente.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnBuscarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscarCliente.ForeColor = System.Drawing.Color.White;
+            this.btnBuscarCliente.Location = new System.Drawing.Point(572, 24);
+            this.btnBuscarCliente.Name = "btnBuscarCliente";
+            this.btnBuscarCliente.Size = new System.Drawing.Size(76, 30);
+            this.btnBuscarCliente.TabIndex = 13;
+            this.btnBuscarCliente.Text = "BUSCAR";
+            this.btnBuscarCliente.UseVisualStyleBackColor = false;
+            this.btnBuscarCliente.Click += new System.EventHandler(this.btnBuscarCliente_Click);
+            // 
+            // dgvCliente
+            // 
+            this.dgvCliente.AllowUserToAddRows = false;
+            this.dgvCliente.AllowUserToDeleteRows = false;
+            this.dgvCliente.BackgroundColor = System.Drawing.Color.White;
+            this.dgvCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCliente.Location = new System.Drawing.Point(322, 164);
+            this.dgvCliente.MultiSelect = false;
+            this.dgvCliente.Name = "dgvCliente";
+            this.dgvCliente.ReadOnly = true;
+            this.dgvCliente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCliente.Size = new System.Drawing.Size(750, 385);
+            this.dgvCliente.TabIndex = 3;
+            // 
+            // btnCerrar
+            // 
+            this.btnCerrar.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnCerrar.ForeColor = System.Drawing.Color.Red;
+            this.btnCerrar.Location = new System.Drawing.Point(982, 555);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(90, 35);
+            this.btnCerrar.TabIndex = 4;
+            this.btnCerrar.Text = "CERRAR";
+            this.btnCerrar.UseVisualStyleBackColor = false;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
+            // 
+            // FormRegistroCliente
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LemonChiffon;
+            this.ClientSize = new System.Drawing.Size(1084, 602);
+            this.Controls.Add(this.btnCerrar);
+            this.Controls.Add(this.dgvCliente);
+            this.Controls.Add(this.groupBoxBusqueda);
+            this.Controls.Add(this.groupBoxDatos);
+            this.Controls.Add(this.panelSuperior);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Name = "FormRegistroCliente";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Registro de Clientes - Fresco Market";
+            this.Load += new System.EventHandler(this.FormRegistroCliente_Load);
+            this.panelSuperior.ResumeLayout(false);
+            this.panelSuperior.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBoxDatos.ResumeLayout(false);
+            this.groupBoxDatos.PerformLayout();
+            this.groupBoxBusqueda.ResumeLayout(false);
+            this.groupBoxBusqueda.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCliente)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Panel panelSuperior;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.GroupBox groupBoxDatos;
+        private System.Windows.Forms.Button btnActualizar;
+        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.TextBox txtDireccion;
+        private System.Windows.Forms.TextBox txtApellido;
+        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.TextBox txtDocumento;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBoxBusqueda;
+        private System.Windows.Forms.TextBox txtBuscarCliente;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnLimpiarBusqueda;
+        private System.Windows.Forms.Button btnBuscarCliente;
+        private System.Windows.Forms.DataGridView dgvCliente;
+        private System.Windows.Forms.Button btnCerrar;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
+}

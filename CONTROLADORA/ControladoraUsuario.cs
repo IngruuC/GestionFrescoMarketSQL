@@ -13,43 +13,67 @@ namespace CONTROLADORA
 {
     public class ControladoraUsuario
     {
-        private readonly Contexto _contexto;
+        private static ControladoraUsuario instancia;
+        private Contexto contexto;
 
-        public ControladoraUsuario()
+        private ControladoraUsuario()
         {
-            _contexto = new Contexto();
+            contexto = new Contexto();
         }
 
-        public bool ValidarUsuario(string username, string password)
+        public static ControladoraUsuario ObtenerInstancia()
         {
-            var usuario = _contexto.Usuarios
-                .FirstOrDefault(u => u.Username == username && u.Activo);
-
-            if (usuario == null) return false;
-
-            return BCrypt.Net.BCrypt.Verify(password, usuario.PasswordHash);
+            if (instancia == null)
+                instancia = new ControladoraUsuario();
+            return instancia;
         }
 
-        public void CrearUsuarioAdmin()
+        public bool ValidarCredenciales(string usuario, string contraseña)
         {
-            if (!_contexto.Usuarios.Any(u => u.Username == "admin"))
-            {
-                var passwordHash = BCrypt.Net.BCrypt.HashPassword("123456");
-                var usuario = new Usuario
-                {
-                    Username = "admin",
-                    PasswordHash = passwordHash,
-                    Rol = "Administrador",
-                    Activo = true
-                };
-                _contexto.Usuarios.Add(usuario);
-                _contexto.SaveChanges();
-            }
+            var usuarioEncontrado = contexto.Usuarios
+                .FirstOrDefault(u => u.NombreUsuario == usuario);
+
+            if (usuarioEncontrado == null)
+                return false;
+
+            return BCrypt.Net.BCrypt.Verify(contraseña, usuarioEncontrado.Contraseña);
         }
 
-        public Usuario ObtenerUsuarioPorUsername(string username)
+        public void AgregarUsuario(Usuario usuario)
         {
-            return _contexto.Usuarios.FirstOrDefault(u => u.Username == username);
+            if (contexto.Usuarios.Any(u => u.NombreUsuario == usuario.NombreUsuario))
+                throw new Exception("El nombre de usuario ya existe.");
+
+            usuario.Contraseña = BCrypt.Net.BCrypt.HashPassword(usuario.Contraseña);
+            contexto.Usuarios.Add(usuario);
+            contexto.SaveChanges();
+        }
+
+        public void ModificarUsuario(Usuario usuario)
+        {
+            var usuarioExistente = contexto.Usuarios.Find(usuario.Id);
+            if (usuarioExistente == null)
+                throw new Exception("Usuario no encontrado.");
+
+            if (contexto.Usuarios.Any(u => u.NombreUsuario == usuario.NombreUsuario && u.Id != usuario.Id))
+                throw new Exception("El nombre de usuario ya existe.");
+
+            usuarioExistente.NombreUsuario = usuario.NombreUsuario;
+            if (!string.IsNullOrEmpty(usuario.Contraseña))
+                usuarioExistente.Contraseña = BCrypt.Net.BCrypt.HashPassword(usuario.Contraseña);
+            usuarioExistente.Rol = usuario.Rol;
+
+            contexto.SaveChanges();
+        }
+
+        public void EliminarUsuario(int id)
+        {
+            var usuario = contexto.Usuarios.Find(id);
+            if (usuario == null)
+                throw new Exception("Usuario no encontrado.");
+
+            contexto.Usuarios.Remove(usuario);
+            contexto.SaveChanges();
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System.Windows.Forms;
-using System;
-using System.Drawing;
-
-namespace VISTA
+﻿namespace VISTA
 {
     partial class Inicio
     {
@@ -19,161 +15,167 @@ namespace VISTA
 
         private void InitializeComponent()
         {
-            this.panelMenu = new System.Windows.Forms.Panel();
+            this.panelSuperior = new System.Windows.Forms.Panel();
+            this.lblTitulo = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnRegistrarCliente = new System.Windows.Forms.Button();
+            this.btnRegistroProducto = new System.Windows.Forms.Button();
+            this.btnRealizarVenta = new System.Windows.Forms.Button();
+            this.btnVentasTotales = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.btnReportes = new System.Windows.Forms.Button();
-            this.btnVentas = new System.Windows.Forms.Button();
-            this.btnProductos = new System.Windows.Forms.Button();
-            this.btnClientes = new System.Windows.Forms.Button();
-            this.panelLogo = new System.Windows.Forms.Panel();
-            this.btnHome = new System.Windows.Forms.PictureBox();
-            this.panelTitleBar = new System.Windows.Forms.Panel();
-            this.lblTitleChildForm = new System.Windows.Forms.Label();
-            this.panelDesktop = new System.Windows.Forms.Panel();
-
+            this.panelSuperior.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.SuspendLayout();
             // 
-            // panelMenu
+            // panelSuperior
             // 
-            this.panelMenu.BackColor = System.Drawing.Color.FromArgb(31, 30, 68);
-            this.panelMenu.Controls.Add(this.btnSalir);
-            this.panelMenu.Controls.Add(this.btnReportes);
-            this.panelMenu.Controls.Add(this.btnVentas);
-            this.panelMenu.Controls.Add(this.btnProductos);
-            this.panelMenu.Controls.Add(this.btnClientes);
-            this.panelMenu.Controls.Add(this.panelLogo);
-            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelMenu.Location = new System.Drawing.Point(0, 0);
-            this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(220, 729);
-            this.panelMenu.TabIndex = 0;
-
-            // Configurar botones
-            ConfigurarBoton(btnClientes, "Clientes", 0);
-            ConfigurarBoton(btnProductos, "Productos", 1);
-            ConfigurarBoton(btnVentas, "Ventas", 2);
-            ConfigurarBoton(btnReportes, "Reportes", 3);
-            ConfigurarBoton(btnSalir, "Salir", 4);
-
+            this.panelSuperior.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.panelSuperior.Controls.Add(this.lblTitulo);
+            this.panelSuperior.Controls.Add(this.pictureBox1);
+            this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSuperior.Location = new System.Drawing.Point(0, 0);
+            this.panelSuperior.Name = "panelSuperior";
+            this.panelSuperior.Size = new System.Drawing.Size(884, 100);
+            this.panelSuperior.TabIndex = 0;
             // 
-            // panelLogo
+            // lblTitulo
             // 
-            this.panelLogo.Controls.Add(this.btnHome);
-            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelLogo.Location = new System.Drawing.Point(0, 0);
-            this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(220, 140);
-            this.panelLogo.TabIndex = 0;
-
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitulo.ForeColor = System.Drawing.Color.White;
+            this.lblTitulo.Location = new System.Drawing.Point(323, 31);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(279, 37);
+            this.lblTitulo.TabIndex = 1;
+            this.lblTitulo.Text = "FRESCO MARKET";
             // 
-            // btnHome
+            // pictureBox1
             // 
-            this.btnHome.BackColor = System.Drawing.Color.FromArgb(31, 30, 68);
-            this.btnHome.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnHome.Location = new System.Drawing.Point(0, 0);
-            this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(220, 140);
-            this.btnHome.TabIndex = 0;
-            this.btnHome.TabStop = false;
-            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
-
+            this.pictureBox1.Image = null;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 75);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
-            // panelTitleBar
+            // btnRegistrarCliente
             // 
-            this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(26, 25, 62);
-            this.panelTitleBar.Controls.Add(this.lblTitleChildForm);
-            this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitleBar.Location = new System.Drawing.Point(220, 0);
-            this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(964, 75);
-            this.panelTitleBar.TabIndex = 1;
-            this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
-
+            this.btnRegistrarCliente.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnRegistrarCliente.FlatAppearance.BorderSize = 0;
+            this.btnRegistrarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegistrarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistrarCliente.ForeColor = System.Drawing.Color.White;
+            this.btnRegistrarCliente.Image = null;
+            this.btnRegistrarCliente.Location = new System.Drawing.Point(100, 150);
+            this.btnRegistrarCliente.Name = "btnRegistrarCliente";
+            this.btnRegistrarCliente.Size = new System.Drawing.Size(200, 150);
+            this.btnRegistrarCliente.TabIndex = 1;
+            this.btnRegistrarCliente.Text = "REGISTRAR\r\nCLIENTE";
+            this.btnRegistrarCliente.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRegistrarCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRegistrarCliente.UseVisualStyleBackColor = false;
+            this.btnRegistrarCliente.Click += new System.EventHandler(this.btnRegistrarCliente_Click);
             // 
-            // lblTitleChildForm
+            // btnRegistroProducto
             // 
-            this.lblTitleChildForm.AutoSize = true;
-            this.lblTitleChildForm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitleChildForm.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblTitleChildForm.Location = new System.Drawing.Point(20, 25);
-            this.lblTitleChildForm.Name = "lblTitleChildForm";
-            this.lblTitleChildForm.Size = new System.Drawing.Size(56, 20);
-            this.lblTitleChildForm.TabIndex = 0;
-            this.lblTitleChildForm.Text = "Home";
-
+            this.btnRegistroProducto.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnRegistroProducto.FlatAppearance.BorderSize = 0;
+            this.btnRegistroProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegistroProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistroProducto.ForeColor = System.Drawing.Color.White;
+            this.btnRegistroProducto.Image = null;
+            this.btnRegistroProducto.Location = new System.Drawing.Point(342, 150);
+            this.btnRegistroProducto.Name = "btnRegistroProducto";
+            this.btnRegistroProducto.Size = new System.Drawing.Size(200, 150);
+            this.btnRegistroProducto.TabIndex = 2;
+            this.btnRegistroProducto.Text = "REGISTRAR\r\nPRODUCTO";
+            this.btnRegistroProducto.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRegistroProducto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRegistroProducto.UseVisualStyleBackColor = false;
+            this.btnRegistroProducto.Click += new System.EventHandler(this.btnRegistroProducto_Click);
             // 
-            // panelDesktop
+            // btnRealizarVenta
             // 
-            this.panelDesktop.BackColor = System.Drawing.Color.FromArgb(34, 33, 74);
-            this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDesktop.Location = new System.Drawing.Point(220, 75);
-            this.panelDesktop.Name = "panelDesktop";
-            this.panelDesktop.Size = new System.Drawing.Size(964, 654);
-            this.panelDesktop.TabIndex = 2;
-
+            this.btnRealizarVenta.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnRealizarVenta.FlatAppearance.BorderSize = 0;
+            this.btnRealizarVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRealizarVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRealizarVenta.ForeColor = System.Drawing.Color.White;
+            this.btnRealizarVenta.Image = null; // ACA
+            this.btnRealizarVenta.Location = new System.Drawing.Point(584, 150);
+            this.btnRealizarVenta.Name = "btnRealizarVenta";
+            this.btnRealizarVenta.Size = new System.Drawing.Size(200, 150);
+            this.btnRealizarVenta.TabIndex = 3;
+            this.btnRealizarVenta.Text = "REALIZAR\r\nVENTA";
+            this.btnRealizarVenta.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRealizarVenta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRealizarVenta.UseVisualStyleBackColor = false;
+            this.btnRealizarVenta.Click += new System.EventHandler(this.btnRealizarVenta_Click);
+            // 
+            // btnVentasTotales
+            // 
+            this.btnVentasTotales.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnVentasTotales.FlatAppearance.BorderSize = 0;
+            this.btnVentasTotales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVentasTotales.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVentasTotales.ForeColor = System.Drawing.Color.White;
+            this.btnVentasTotales.Image = null; //ACA VER
+            this.btnVentasTotales.Location = new System.Drawing.Point(342, 330);
+            this.btnVentasTotales.Name = "btnVentasTotales";
+            this.btnVentasTotales.Size = new System.Drawing.Size(200, 150);
+            this.btnVentasTotales.TabIndex = 4;
+            this.btnVentasTotales.Text = "VENTAS\r\nTOTALES";
+            this.btnVentasTotales.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnVentasTotales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnVentasTotales.UseVisualStyleBackColor = false;
+            this.btnVentasTotales.Click += new System.EventHandler(this.btnVentasTotales_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnSalir.FlatAppearance.BorderSize = 0;
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.ForeColor = System.Drawing.Color.Crimson;
+            this.btnSalir.Location = new System.Drawing.Point(771, 498);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(101, 41);
+            this.btnSalir.TabIndex = 5;
+            this.btnSalir.Text = "SALIR";
+            this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 729);
-            this.Controls.Add(this.panelDesktop);
-            this.Controls.Add(this.panelTitleBar);
-            this.Controls.Add(this.panelMenu);
+            this.BackColor = System.Drawing.Color.LemonChiffon;
+            this.ClientSize = new System.Drawing.Size(884, 551);
+            this.Controls.Add(this.btnSalir);
+            this.Controls.Add(this.btnVentasTotales);
+            this.Controls.Add(this.btnRealizarVenta);
+            this.Controls.Add(this.btnRegistroProducto);
+            this.Controls.Add(this.btnRegistrarCliente);
+            this.Controls.Add(this.panelSuperior);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Inicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Fresco Market";
-            this.panelMenu.ResumeLayout(false);
-            this.panelLogo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnHome)).EndInit();
-            this.panelTitleBar.ResumeLayout(false);
-            this.panelTitleBar.PerformLayout();
-            this.panelDesktop.ResumeLayout(false);
+            this.Text = "Inicio - Fresco Market";
+            this.panelSuperior.ResumeLayout(false);
+            this.panelSuperior.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
         }
 
-        private void ConfigurarBoton(Button btn, string text, int position)
-        {
-            btn.FlatStyle = FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            btn.ForeColor = System.Drawing.Color.Gainsboro;
-            btn.Text = text;
-            btn.Dock = DockStyle.Top;
-            btn.Height = 60;
-            btn.TextAlign = ContentAlignment.MiddleLeft;
-            btn.Padding = new Padding(10, 0, 0, 0);
-
-            switch (text)
-            {
-                case "Clientes":
-                    btn.Click += new System.EventHandler(this.btnClientes_Click);
-                    break;
-                case "Productos":
-                    btn.Click += new System.EventHandler(this.btnProductos_Click);
-                    break;
-                case "Ventas":
-                    btn.Click += new System.EventHandler(this.btnVentas_Click);
-                    break;
-                case "Reportes":
-                    btn.Click += new System.EventHandler(this.btnReportes_Click);
-                    break;
-                case "Salir":
-                    btn.Click += new System.EventHandler(this.btnSalir_Click);
-                    btn.Dock = DockStyle.Bottom;
-                    break;
-            }
-        }
-
-        private System.Windows.Forms.Panel panelMenu;
+        private System.Windows.Forms.Panel panelSuperior;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Button btnRegistrarCliente;
+        private System.Windows.Forms.Button btnRegistroProducto;
+        private System.Windows.Forms.Button btnRealizarVenta;
+        private System.Windows.Forms.Button btnVentasTotales;
         private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Button btnReportes;
-        private System.Windows.Forms.Button btnVentas;
-        private System.Windows.Forms.Button btnProductos;
-        private System.Windows.Forms.Button btnClientes;
-        private System.Windows.Forms.Panel panelLogo;
-        private System.Windows.Forms.PictureBox btnHome;
-        private System.Windows.Forms.Panel panelTitleBar;
-        private System.Windows.Forms.Label lblTitleChildForm;
-        private System.Windows.Forms.Panel panelDesktop;
     }
 }

@@ -12,52 +12,71 @@ namespace CONTROLADORA
 {
     public class ControladoraCliente
     {
-        private readonly Contexto _contexto;
+        private static ControladoraCliente instancia;
+        private Contexto contexto;
 
-        public ControladoraCliente()
+        private ControladoraCliente()
         {
-            _contexto = new Contexto();
+            contexto = new Contexto();
         }
 
-        public List<Cliente> ObtenerClientes()
+        public static ControladoraCliente ObtenerInstancia()
         {
-            return _contexto.Clientes.ToList();
+            if (instancia == null)
+                instancia = new ControladoraCliente();
+            return instancia;
         }
 
         public void AgregarCliente(Cliente cliente)
         {
-            if (string.IsNullOrEmpty(cliente.Documento))
-                throw new Exception("El documento es requerido");
+            if (string.IsNullOrWhiteSpace(cliente.Documento) || cliente.Documento.Length != 8)
+                throw new Exception("El documento debe tener 8 dígitos.");
 
-            if (_contexto.Clientes.Any(c => c.Documento == cliente.Documento))
-                throw new Exception("Ya existe un cliente con ese documento");
+            if (contexto.Clientes.Any(c => c.Documento == cliente.Documento))
+                throw new Exception("Ya existe un cliente con ese documento.");
 
-            _contexto.Clientes.Add(cliente);
-            _contexto.SaveChanges();
+            contexto.Clientes.Add(cliente);
+            contexto.SaveChanges();
         }
 
-        public void ActualizarCliente(Cliente cliente)
+        public void ModificarCliente(Cliente cliente)
         {
-            var clienteExistente = _contexto.Clientes.Find(cliente.Id);
+            var clienteExistente = contexto.Clientes.Find(cliente.Id);
             if (clienteExistente == null)
-                throw new Exception("Cliente no encontrado");
+                throw new Exception("Cliente no encontrado.");
 
-            if (_contexto.Clientes.Any(c => c.Documento == cliente.Documento && c.Id != cliente.Id))
-                throw new Exception("Ya existe otro cliente con ese documento");
+            if (contexto.Clientes.Any(c => c.Documento == cliente.Documento && c.Id != cliente.Id))
+                throw new Exception("Ya existe otro cliente con ese documento.");
 
-            _contexto.Entry(clienteExistente).CurrentValues.SetValues(cliente);
-            _contexto.SaveChanges();
+            clienteExistente.Documento = cliente.Documento;
+            clienteExistente.Nombre = cliente.Nombre;
+            clienteExistente.Apellido = cliente.Apellido;
+            clienteExistente.Direccion = cliente.Direccion;
+
+            contexto.SaveChanges();
         }
 
         public void EliminarCliente(int id)
         {
-            var cliente = _contexto.Clientes.Find(id);
-            if (cliente != null)
-            {
-                _contexto.Clientes.Remove(cliente);
-                _contexto.SaveChanges();
-            }
+            var cliente = contexto.Clientes.Find(id);
+            if (cliente == null)
+                throw new Exception("Cliente no encontrado.");
+
+            if (contexto.Ventas.Any(v => v.ClienteId == id))
+                throw new Exception("No se puede eliminar el cliente porque tiene ventas asociadas.");
+
+            contexto.Clientes.Remove(cliente);
+            contexto.SaveChanges();
         }
 
+        public List<Cliente> ObtenerClientes()
+        {
+            return contexto.Clientes.ToList();
+        }
+
+        public Cliente ObtenerClientePorId(int id)
+        {
+            return contexto.Clientes.Find(id);
+        }
     }
 }

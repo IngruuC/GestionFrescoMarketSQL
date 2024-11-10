@@ -14,48 +14,38 @@ namespace VISTA
 {
     public partial class Login : Form
     {
-        private readonly ControladoraUsuario _controladoraUsuario;
+        private ControladoraUsuario controladora;
 
         public Login()
         {
             InitializeComponent();
-            _controladoraUsuario = new ControladoraUsuario();
+            controladora = ControladoraUsuario.ObtenerInstancia();
             txtContraseña.PasswordChar = '*';
-            ConfigurarForm();
-        }
-
-        private void ConfigurarForm()
-        {
-            // Crear usuario admin por defecto
-            _controladoraUsuario.CrearUsuarioAdmin();
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
+            string usuario = txtUsuario.Text;
+            string contraseña = txtContraseña.Text;
+
+            if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(contraseña))
+            {
+                MessageBox.Show("Por favor, complete todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
-                string usuario = txtUsuario.Text.Trim();
-                string contraseña = txtContraseña.Text.Trim();
-
-                if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(contraseña))
+                if (controladora.ValidarCredenciales(usuario, contraseña))
                 {
-                    MessageBox.Show("Debe completar todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (_controladoraUsuario.ValidarUsuario(usuario, contraseña))
-                {
-                    MessageBox.Show("Inicio de sesión exitoso", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    var mainForm = new Inicio();
-                    mainForm.Show();
+                    Inicio formInicio = new Inicio();
                     this.Hide();
+                    formInicio.ShowDialog();
+                    this.Close();
                 }
                 else
                 {
                     MessageBox.Show("Usuario o contraseña incorrectos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtContraseña.Clear();
-                    txtContraseña.Focus();
                 }
             }
             catch (Exception ex)
@@ -64,16 +54,9 @@ namespace VISTA
             }
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
-            Application.Exit();
-        }
-
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
-            if (e.CloseReason == CloseReason.UserClosing)
-                Application.Exit();
+            this.Close();
         }
     }
 }
