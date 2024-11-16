@@ -33,11 +33,13 @@ namespace CONTROLADORA
             {
                 try
                 {
-                    // Validar cliente
-                    if (!contexto.Clientes.Any(c => c.Id == venta.ClienteId))
+                    // Validar y obtener cliente
+                    var cliente = contexto.Clientes.Find(venta.ClienteId);
+                    if (cliente == null)
                         throw new Exception("Cliente no encontrado.");
+                    venta.Cliente = cliente;
 
-                    // Validar y actualizar stock de productos
+                    // Procesar cada detalle
                     foreach (var detalle in venta.Detalles)
                     {
                         var producto = contexto.Productos.Find(detalle.ProductoId);
@@ -47,20 +49,23 @@ namespace CONTROLADORA
                         if (producto.Stock < detalle.Cantidad)
                             throw new Exception($"Stock insuficiente para el producto: {producto.Nombre}");
 
+                        detalle.ProductoNombre = producto.Nombre;
                         detalle.PrecioUnitario = producto.Precio;
                         detalle.Subtotal = detalle.PrecioUnitario * detalle.Cantidad;
+                        detalle.Venta = venta;
                         producto.Stock -= detalle.Cantidad;
+                        contexto.Entry(producto).State = EntityState.Modified;
                     }
 
-                    // Calcular total según forma de pago
+                    // Calcular total
                     decimal totalOriginal = venta.Detalles.Sum(d => d.Subtotal);
                     switch (venta.FormaPago)
                     {
                         case "Efectivo":
-                            venta.Total = totalOriginal * 0.85m; // 15% descuento
+                            venta.Total = totalOriginal * 0.85m;
                             break;
                         case "Tarjeta de Crédito":
-                            venta.Total = totalOriginal * 1.10m; // 10% recargo
+                            venta.Total = totalOriginal * 1.10m;
                             break;
                         default:
                             venta.Total = totalOriginal;
@@ -71,10 +76,10 @@ namespace CONTROLADORA
                     contexto.SaveChanges();
                     transaction.Commit();
                 }
-                catch
+                catch (Exception ex)
                 {
                     transaction.Rollback();
-                    throw;
+                    throw new Exception($"Error al realizar la venta: {ex.Message}");
                 }
             }
         }

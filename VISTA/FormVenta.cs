@@ -39,7 +39,7 @@ namespace VISTA
             });
             dgvVenta.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "CantidadProducto",
+                DataPropertyName = "Cantidad",
                 HeaderText = "Cantidad",
                 ReadOnly = true,
                 Width = 100

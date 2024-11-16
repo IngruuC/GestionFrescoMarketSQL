@@ -47,29 +47,16 @@ namespace MODELO
             modelBuilder.Entity<Producto>().Property(p => p.CodigoBarra).IsRequired().HasMaxLength(13);
             modelBuilder.Entity<Producto>().HasIndex(p => p.CodigoBarra).IsUnique();
 
-            // Configuración Venta
-            modelBuilder.Entity<Venta>().ToTable("Ventas");
-            modelBuilder.Entity<Venta>().HasKey(v => v.Id);
+            // Configuración Venta y DetalleVenta
             modelBuilder.Entity<Venta>()
-                .HasRequired(v => v.Cliente)
-                .WithMany(c => c.Ventas)
-                .HasForeignKey(v => v.ClienteId)
-                .WillCascadeOnDelete(false);
-
-            // Configuración DetalleVenta
-            modelBuilder.Entity<DetalleVenta>().ToTable("DetallesVenta");
-            modelBuilder.Entity<DetalleVenta>().HasKey(d => d.Id);
-            modelBuilder.Entity<DetalleVenta>()
-                .HasRequired(d => d.Venta)
-                .WithMany(v => v.Detalles)
-                .HasForeignKey(d => d.VentaId)
-                .WillCascadeOnDelete(true);
+        .HasMany(v => v.Detalles)
+        .WithOptional(d => d.Venta)
+        .HasForeignKey(d => d.VentaId);
 
             modelBuilder.Entity<DetalleVenta>()
                 .HasRequired(d => d.Producto)
-                .WithMany(p => p.DetallesVenta)
-                .HasForeignKey(d => d.ProductoId)
-                .WillCascadeOnDelete(false);
+                .WithMany()
+                .HasForeignKey(d => d.ProductoId);
 
             base.OnModelCreating(modelBuilder);
         }
