@@ -123,6 +123,47 @@ namespace CONTROLADORA
                 .FirstOrDefault(v => v.Id == id);
         }
 
+        public List<Venta> ObtenerVentasPorFecha(DateTime inicio, DateTime fin)
+        {
+            return contexto.Ventas
+                .Include(v => v.Cliente)
+                .Include(v => v.Detalles)
+                .Where(v => v.FechaVenta >= inicio && v.FechaVenta <= fin)
+                .OrderBy(v => v.FechaVenta)
+                .ToList();
+        }
+
+        public List<object> ObtenerProductosMasVendidos(DateTime inicio, DateTime fin, int top = 10)
+        {
+            return contexto.DetallesVenta
+                .Where(d => d.Venta.FechaVenta >= inicio && d.Venta.FechaVenta <= fin)
+                .GroupBy(d => new { d.ProductoId, d.ProductoNombre })
+                .Select(g => new
+                {
+                    Producto = g.Key.ProductoNombre,
+                    CantidadVendida = g.Sum(d => d.Cantidad),
+                    TotalVendido = g.Sum(d => d.Subtotal)
+                })
+                .OrderByDescending(x => x.CantidadVendida)
+                .Take(top)
+                .ToList<object>();
+        }
+
+        public List<object> ObtenerVentasPorFormaPago(DateTime inicio, DateTime fin)
+        {
+            return contexto.Ventas
+                .Where(v => v.FechaVenta >= inicio && v.FechaVenta <= fin)
+                .GroupBy(v => v.FormaPago)
+                .Select(g => new
+                {
+                    FormaPago = g.Key,
+                    TotalVentas = g.Count(),
+                    MontoTotal = g.Sum(v => v.Total)
+                })
+                .OrderByDescending(x => x.MontoTotal)
+                .ToList<object>();
+        }
+
         public void EliminarVenta(int id)
         {
             using (var transaction = contexto.Database.BeginTransaction())
