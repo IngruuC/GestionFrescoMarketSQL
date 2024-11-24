@@ -14,11 +14,25 @@ namespace ENTIDADES
     {
         [Key]
         public int Id { get; set; }
-        public int? VentaId { get; set; }
+
+        [Required]
+        public int VentaId { get; set; }
+
+        [Required]
         public int ProductoId { get; set; }
+
+        [Required]
         public int Cantidad { get; set; }
+
+        [Required]
+        [Column(TypeName = "decimal")]
         public decimal PrecioUnitario { get; set; }
+
+        [Required]
+        [Column(TypeName = "decimal")]
         public decimal Subtotal { get; set; }
+
+        [Required]
         public string ProductoNombre { get; set; }
 
         public virtual Venta Venta { get; set; }

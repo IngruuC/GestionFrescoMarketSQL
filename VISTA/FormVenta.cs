@@ -164,12 +164,13 @@ namespace VISTA
             {
                 var detalle = new DetalleVenta
                 {
-                    VentaId = ventaIdActual,
+                    // No asignar VentaId aquí
                     ProductoId = producto.Id,
                     ProductoNombre = producto.Nombre,
                     Cantidad = cantidad,
                     PrecioUnitario = producto.Precio,
-                    Subtotal = producto.Precio * cantidad
+                    Subtotal = producto.Precio * cantidad,
+                    Producto = producto  // Agregar esta línea
                 };
 
                 detallesVenta.Add(detalle);
@@ -269,13 +270,22 @@ namespace VISTA
             {
                 var venta = new Venta
                 {
-                    Id = ventaIdActual,
                     ClienteId = (int)cboClientes.SelectedValue,
-                    Cliente = (Cliente)cboClientes.SelectedItem,
                     FechaVenta = DateTime.Now,
-                    FormaPago = formaPago,
-                    Detalles = detallesVenta
+                    FormaPago = formaPago
                 };
+
+                foreach (var detalle in detallesVenta)
+                {
+                    venta.Detalles.Add(new DetalleVenta
+                    {
+                        ProductoId = detalle.ProductoId,
+                        Cantidad = detalle.Cantidad,
+                        PrecioUnitario = detalle.PrecioUnitario,
+                        ProductoNombre = detalle.ProductoNombre,
+                        Subtotal = detalle.Subtotal
+                    });
+                }
 
                 controladoraVenta.RealizarVenta(venta);
                 MessageBox.Show("Venta realizada con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);

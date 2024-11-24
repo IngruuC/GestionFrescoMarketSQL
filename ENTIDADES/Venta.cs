@@ -9,14 +9,23 @@ using System.Threading.Tasks;
 namespace ENTIDADES
 {
 
-    [Table("Ventas")]
+  
     public class Venta
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
         public int ClienteId { get; set; }
+
+        [Required]
         public DateTime FechaVenta { get; set; }
+
+        [Required]
+        [Column(TypeName = "decimal")]
         public decimal Total { get; set; }
+
+        [Required]
         public string FormaPago { get; set; }
 
         public virtual Cliente Cliente { get; set; }

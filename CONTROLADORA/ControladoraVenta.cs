@@ -37,9 +37,17 @@ namespace CONTROLADORA
                     var cliente = contexto.Clientes.Find(venta.ClienteId);
                     if (cliente == null)
                         throw new Exception("Cliente no encontrado.");
-                    venta.Cliente = cliente;
+
+                    // Crear una nueva venta
+                    var nuevaVenta = new Venta
+                    {
+                        ClienteId = venta.ClienteId,
+                        FechaVenta = DateTime.Now,
+                        FormaPago = venta.FormaPago
+                    };
 
                     // Procesar cada detalle
+                    decimal totalOriginal = 0;
                     foreach (var detalle in venta.Detalles)
                     {
                         var producto = contexto.Productos.Find(detalle.ProductoId);
@@ -49,32 +57,45 @@ namespace CONTROLADORA
                         if (producto.Stock < detalle.Cantidad)
                             throw new Exception($"Stock insuficiente para el producto: {producto.Nombre}");
 
-                        detalle.ProductoNombre = producto.Nombre;
-                        detalle.PrecioUnitario = producto.Precio;
-                        detalle.Subtotal = detalle.PrecioUnitario * detalle.Cantidad;
-                        detalle.Venta = venta;
+                        var nuevoDetalle = new DetalleVenta
+                        {
+                            ProductoId = producto.Id,
+                            Cantidad = detalle.Cantidad,
+                            PrecioUnitario = producto.Precio,
+                            ProductoNombre = producto.Nombre,
+                            Subtotal = producto.Precio * detalle.Cantidad
+                        };
+
+                        totalOriginal += nuevoDetalle.Subtotal;
+                        nuevaVenta.Detalles.Add(nuevoDetalle);
+
+                        // Actualizar stock
                         producto.Stock -= detalle.Cantidad;
                         contexto.Entry(producto).State = EntityState.Modified;
                     }
 
-                    // Calcular total
-                    decimal totalOriginal = venta.Detalles.Sum(d => d.Subtotal);
-                    switch (venta.FormaPago)
+                    // Calcular total con descuentos/recargos
+                    switch (nuevaVenta.FormaPago)
                     {
                         case "Efectivo":
-                            venta.Total = totalOriginal * 0.85m;
+                            nuevaVenta.Total = totalOriginal * 0.85m;
                             break;
                         case "Tarjeta de Crédito":
-                            venta.Total = totalOriginal * 1.10m;
+                            nuevaVenta.Total = totalOriginal * 1.10m;
                             break;
                         default:
-                            venta.Total = totalOriginal;
+                            nuevaVenta.Total = totalOriginal;
                             break;
                     }
 
-                    contexto.Ventas.Add(venta);
+                    // Guardar la venta
+                    contexto.Ventas.Add(nuevaVenta);
                     contexto.SaveChanges();
                     transaction.Commit();
+
+                    // Actualizar el ID de la venta original
+                    venta.Id = nuevaVenta.Id;
+                    venta.Total = nuevaVenta.Total;
                 }
                 catch (Exception ex)
                 {
