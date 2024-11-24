@@ -351,5 +351,22 @@ namespace VISTA
             {
                 CargarVentas();
             }
+
+        private void btnGenerarInforme_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                using (var formReportes = new FormReportes())
+                {
+                    formReportes.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al abrir el formulario de reportes: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+    }
     }

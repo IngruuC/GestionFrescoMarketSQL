@@ -15,8 +15,6 @@ namespace MODELO
     {
         public Contexto(): base(@"Data Source=.\SQLEXPRESS;Initial Catalog=SupermercadoDB;Integrated Security=True")
         {
-            // Esto eliminará y recreará la base de datos
-            Database.SetInitializer(new DropCreateDatabaseAlways<Contexto>());
             Configuration.LazyLoadingEnabled = true;
             Configuration.ProxyCreationEnabled = true;
         }
