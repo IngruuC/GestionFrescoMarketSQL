@@ -14,29 +14,56 @@ namespace VISTA
 {
     public partial class Login : Form
     {
-        private ControladoraUsuario controladora;
+        private readonly ControladoraUsuario controladora;
 
         public Login()
         {
             InitializeComponent();
-            controladora = ControladoraUsuario.ObtenerInstancia();
+            try
+            {
+                controladora = ControladoraUsuario.ObtenerInstancia();
+                ConfigurarFormulario();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al inicializar el formulario: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ConfigurarFormulario()
+        {
             txtContraseña.PasswordChar = '*';
+            txtUsuario.Text = "admin";
+            txtUsuario.Enabled = false;
+            txtContraseña.Select();
+
+            this.StartPosition = FormStartPosition.CenterScreen;
+
+            txtContraseña.KeyPress += (sender, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    e.Handled = true;
+                    btnIniciarSesion_Click(sender, e);
+                }
+            };
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
-            string usuario = txtUsuario.Text;
-            string contraseña = txtContraseña.Text;
-
-            if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(contraseña))
-            {
-                MessageBox.Show("Por favor, complete todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             try
             {
-                if (controladora.ValidarCredenciales(usuario, contraseña))
+                string contraseña = txtContraseña.Text;
+
+                if (string.IsNullOrEmpty(contraseña))
+                {
+                    MessageBox.Show("Por favor, ingrese la contraseña", "Advertencia",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtContraseña.Focus();
+                    return;
+                }
+
+                if (controladora.ValidarCredenciales("admin", contraseña))
                 {
                     Inicio formInicio = new Inicio();
                     this.Hide();
@@ -45,12 +72,16 @@ namespace VISTA
                 }
                 else
                 {
-                    MessageBox.Show("Usuario o contraseña incorrectos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Contraseña incorrecta", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtContraseña.Clear();
+                    txtContraseña.Focus();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al iniciar sesión: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error en el inicio de sesión: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
