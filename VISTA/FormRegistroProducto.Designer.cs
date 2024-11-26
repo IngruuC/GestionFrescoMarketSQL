@@ -20,6 +20,7 @@ namespace VISTA
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRegistroProducto));
             this.panelSuperior = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitulo = new System.Windows.Forms.Label();
@@ -38,7 +39,6 @@ namespace VISTA
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBoxBusqueda = new System.Windows.Forms.GroupBox();
             this.txtBuscarProducto = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -67,7 +67,7 @@ namespace VISTA
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = null;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(45, 45);
@@ -82,7 +82,7 @@ namespace VISTA
             this.lblTitulo.ForeColor = System.Drawing.Color.White;
             this.lblTitulo.Location = new System.Drawing.Point(63, 21);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(278, 25);
+            this.lblTitulo.Size = new System.Drawing.Size(277, 25);
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "REGISTRO PRODUCTOS";
             // 
@@ -102,11 +102,10 @@ namespace VISTA
             this.groupBoxDatos.Controls.Add(this.label4);
             this.groupBoxDatos.Controls.Add(this.label3);
             this.groupBoxDatos.Controls.Add(this.label2);
-            this.groupBoxDatos.Controls.Add(this.label1);
             this.groupBoxDatos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            this.groupBoxDatos.Location = new System.Drawing.Point(12, 88);
+            this.groupBoxDatos.Location = new System.Drawing.Point(12, 97);
             this.groupBoxDatos.Name = "groupBoxDatos";
-            this.groupBoxDatos.Size = new System.Drawing.Size(304, 461);
+            this.groupBoxDatos.Size = new System.Drawing.Size(304, 452);
             this.groupBoxDatos.TabIndex = 1;
             this.groupBoxDatos.TabStop = false;
             this.groupBoxDatos.Text = "DATOS DEL PRODUCTO";
@@ -124,7 +123,7 @@ namespace VISTA
             this.chkEsPerecedero.AutoSize = true;
             this.chkEsPerecedero.Location = new System.Drawing.Point(20, 220);
             this.chkEsPerecedero.Name = "chkEsPerecedero";
-            this.chkEsPerecedero.Size = new System.Drawing.Size(142, 20);
+            this.chkEsPerecedero.Size = new System.Drawing.Size(130, 20);
             this.chkEsPerecedero.TabIndex = 5;
             this.chkEsPerecedero.Text = "Es Perecedero";
             this.chkEsPerecedero.UseVisualStyleBackColor = true;
@@ -180,7 +179,6 @@ namespace VISTA
             this.btnGuardar.Text = "GUARDAR";
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-
             // 
             // txtStock
             // 
@@ -215,7 +213,7 @@ namespace VISTA
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(17, 165);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(63, 16);
+            this.label5.Size = new System.Drawing.Size(61, 16);
             this.label5.TabIndex = 4;
             this.label5.Text = "STOCK:";
             // 
@@ -224,7 +222,7 @@ namespace VISTA
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(17, 124);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 16);
+            this.label4.Size = new System.Drawing.Size(67, 16);
             this.label4.TabIndex = 3;
             this.label4.Text = "PRECIO:";
             // 
@@ -233,7 +231,7 @@ namespace VISTA
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(17, 83);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(165, 16);
+            this.label3.Size = new System.Drawing.Size(160, 16);
             this.label3.TabIndex = 2;
             this.label3.Text = "CÓDIGO DE BARRAS:";
             // 
@@ -242,7 +240,7 @@ namespace VISTA
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(17, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 16);
+            this.label2.Size = new System.Drawing.Size(76, 16);
             this.label2.TabIndex = 1;
             this.label2.Text = "NOMBRE:";
             // 
@@ -253,9 +251,9 @@ namespace VISTA
             this.groupBoxBusqueda.Controls.Add(this.btnLimpiarBusqueda);
             this.groupBoxBusqueda.Controls.Add(this.btnBuscarProducto);
             this.groupBoxBusqueda.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            this.groupBoxBusqueda.Location = new System.Drawing.Point(322, 88);
+            this.groupBoxBusqueda.Location = new System.Drawing.Point(322, 97);
             this.groupBoxBusqueda.Name = "groupBoxBusqueda";
-            this.groupBoxBusqueda.Size = new System.Drawing.Size(750, 70);
+            this.groupBoxBusqueda.Size = new System.Drawing.Size(750, 61);
             this.groupBoxBusqueda.TabIndex = 2;
             this.groupBoxBusqueda.TabStop = false;
             this.groupBoxBusqueda.Text = "BÚSQUEDA";
@@ -272,7 +270,7 @@ namespace VISTA
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(19, 31);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(174, 16);
+            this.label6.Size = new System.Drawing.Size(162, 16);
             this.label6.TabIndex = 12;
             this.label6.Text = "BUSCAR PRODUCTO:";
             // 
@@ -381,7 +379,6 @@ namespace VISTA
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBoxBusqueda;
         private System.Windows.Forms.TextBox txtBuscarProducto;
         private System.Windows.Forms.Label label6;

@@ -17,11 +17,10 @@
 
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormVenta));
             this.panelSuperior = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitulo = new System.Windows.Forms.Label();
-
             this.groupBoxVenta = new System.Windows.Forms.GroupBox();
             this.cboClientes = new System.Windows.Forms.ComboBox();
             this.cboProductos = new System.Windows.Forms.ComboBox();
@@ -33,16 +32,14 @@
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.lblTotal = new System.Windows.Forms.Label();
-
             this.dgvVenta = new System.Windows.Forms.DataGridView();
             this.btnFinalizarVenta = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-
+            this.panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBoxVenta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVenta)).BeginInit();
-            this.panelSuperior.SuspendLayout();
-            this.groupBoxVenta.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSuperior
@@ -58,7 +55,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = null;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(45, 45);
@@ -73,7 +70,7 @@
             this.lblTitulo.ForeColor = System.Drawing.Color.White;
             this.lblTitulo.Location = new System.Drawing.Point(63, 21);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(177, 25);
+            this.lblTitulo.Size = new System.Drawing.Size(171, 25);
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "NUEVA VENTA";
             // 
@@ -118,18 +115,26 @@
             // nudCantidad
             // 
             this.nudCantidad.Location = new System.Drawing.Point(20, 184);
-            this.nudCantidad.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            this.nudCantidad.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nudCantidad.Name = "nudCantidad";
             this.nudCantidad.Size = new System.Drawing.Size(120, 22);
             this.nudCantidad.TabIndex = 2;
-            this.nudCantidad.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            this.nudCantidad.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(17, 43);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 16);
+            this.label1.Size = new System.Drawing.Size(74, 16);
             this.label1.TabIndex = 3;
             this.label1.Text = "CLIENTE:";
             // 
@@ -138,7 +143,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(17, 104);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 16);
+            this.label2.Size = new System.Drawing.Size(96, 16);
             this.label2.TabIndex = 4;
             this.label2.Text = "PRODUCTO:";
             // 
@@ -147,7 +152,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(17, 165);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 16);
+            this.label3.Size = new System.Drawing.Size(88, 16);
             this.label3.TabIndex = 5;
             this.label3.Text = "CANTIDAD:";
             // 
@@ -220,7 +225,7 @@
             this.btnFinalizarVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFinalizarVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnFinalizarVenta.ForeColor = System.Drawing.Color.White;
-            this.btnFinalizarVenta.Location = new System.Drawing.Point(863, 555);
+            this.btnFinalizarVenta.Location = new System.Drawing.Point(845, 555);
             this.btnFinalizarVenta.Name = "btnFinalizarVenta";
             this.btnFinalizarVenta.Size = new System.Drawing.Size(113, 35);
             this.btnFinalizarVenta.TabIndex = 3;
@@ -234,9 +239,9 @@
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.ForeColor = System.Drawing.Color.Red;
-            this.btnCancelar.Location = new System.Drawing.Point(982, 555);
+            this.btnCancelar.Location = new System.Drawing.Point(964, 555);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(90, 35);
+            this.btnCancelar.Size = new System.Drawing.Size(108, 35);
             this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "CANCELAR";
             this.btnCancelar.UseVisualStyleBackColor = false;
@@ -253,7 +258,7 @@
             this.Controls.Add(this.dgvVenta);
             this.Controls.Add(this.groupBoxVenta);
             this.Controls.Add(this.panelSuperior);
-                this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FormVenta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -262,11 +267,12 @@
             this.panelSuperior.ResumeLayout(false);
             this.panelSuperior.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVenta)).EndInit();
             this.groupBoxVenta.ResumeLayout(false);
             this.groupBoxVenta.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVenta)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         #endregion

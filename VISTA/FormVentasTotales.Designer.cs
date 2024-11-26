@@ -19,6 +19,7 @@ namespace VISTA
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormVentasTotales));
             this.panelSuperior = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitulo = new System.Windows.Forms.Label();
@@ -32,18 +33,20 @@ namespace VISTA
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiarBusqueda = new System.Windows.Forms.Button();
             this.groupBoxAcciones = new System.Windows.Forms.GroupBox();
+            this.btnGenerarInforme = new System.Windows.Forms.Button();
             this.btnDetalleVenta = new System.Windows.Forms.Button();
             this.btnEliminarVenta = new System.Windows.Forms.Button();
             this.btnEstadisticas = new System.Windows.Forms.Button();
             this.lblTotalVentas = new System.Windows.Forms.Label();
             this.dgvVentas = new System.Windows.Forms.DataGridView();
             this.btnCerrar = new System.Windows.Forms.Button();
-            this.btnGenerarInforme = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBoxBusqueda.SuspendLayout();
             this.groupBoxAcciones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // panelSuperior
@@ -59,9 +62,10 @@ namespace VISTA
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(45, 45);
+            this.pictureBox1.Size = new System.Drawing.Size(56, 55);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -71,7 +75,7 @@ namespace VISTA
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
             this.lblTitulo.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo.Location = new System.Drawing.Point(63, 21);
+            this.lblTitulo.Location = new System.Drawing.Point(74, 27);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(212, 25);
             this.lblTitulo.TabIndex = 0;
@@ -173,6 +177,7 @@ namespace VISTA
             // 
             // groupBoxAcciones
             // 
+            this.groupBoxAcciones.Controls.Add(this.pictureBox2);
             this.groupBoxAcciones.Controls.Add(this.btnGenerarInforme);
             this.groupBoxAcciones.Controls.Add(this.btnDetalleVenta);
             this.groupBoxAcciones.Controls.Add(this.btnEliminarVenta);
@@ -186,12 +191,25 @@ namespace VISTA
             this.groupBoxAcciones.TabStop = false;
             this.groupBoxAcciones.Text = "ACCIONES";
             // 
+            // btnGenerarInforme
+            // 
+            this.btnGenerarInforme.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnGenerarInforme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerarInforme.ForeColor = System.Drawing.Color.White;
+            this.btnGenerarInforme.Location = new System.Drawing.Point(20, 351);
+            this.btnGenerarInforme.Name = "btnGenerarInforme";
+            this.btnGenerarInforme.Size = new System.Drawing.Size(180, 35);
+            this.btnGenerarInforme.TabIndex = 4;
+            this.btnGenerarInforme.Text = "GENERAR INFORME";
+            this.btnGenerarInforme.UseVisualStyleBackColor = false;
+            this.btnGenerarInforme.Click += new System.EventHandler(this.btnGenerarInforme_Click);
+            // 
             // btnDetalleVenta
             // 
             this.btnDetalleVenta.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnDetalleVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDetalleVenta.ForeColor = System.Drawing.Color.White;
-            this.btnDetalleVenta.Location = new System.Drawing.Point(20, 30);
+            this.btnDetalleVenta.Location = new System.Drawing.Point(20, 134);
             this.btnDetalleVenta.Name = "btnDetalleVenta";
             this.btnDetalleVenta.Size = new System.Drawing.Size(180, 35);
             this.btnDetalleVenta.TabIndex = 0;
@@ -204,7 +222,7 @@ namespace VISTA
             this.btnEliminarVenta.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnEliminarVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEliminarVenta.ForeColor = System.Drawing.Color.White;
-            this.btnEliminarVenta.Location = new System.Drawing.Point(20, 80);
+            this.btnEliminarVenta.Location = new System.Drawing.Point(20, 175);
             this.btnEliminarVenta.Name = "btnEliminarVenta";
             this.btnEliminarVenta.Size = new System.Drawing.Size(180, 35);
             this.btnEliminarVenta.TabIndex = 1;
@@ -217,7 +235,7 @@ namespace VISTA
             this.btnEstadisticas.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnEstadisticas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEstadisticas.ForeColor = System.Drawing.Color.White;
-            this.btnEstadisticas.Location = new System.Drawing.Point(20, 130);
+            this.btnEstadisticas.Location = new System.Drawing.Point(20, 216);
             this.btnEstadisticas.Name = "btnEstadisticas";
             this.btnEstadisticas.Size = new System.Drawing.Size(180, 35);
             this.btnEstadisticas.TabIndex = 2;
@@ -263,18 +281,14 @@ namespace VISTA
             this.btnCerrar.UseVisualStyleBackColor = false;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
-            // btnGenerarInforme
+            // pictureBox2
             // 
-            this.btnGenerarInforme.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnGenerarInforme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGenerarInforme.ForeColor = System.Drawing.Color.White;
-            this.btnGenerarInforme.Location = new System.Drawing.Point(20, 213);
-            this.btnGenerarInforme.Name = "btnGenerarInforme";
-            this.btnGenerarInforme.Size = new System.Drawing.Size(180, 35);
-            this.btnGenerarInforme.TabIndex = 4;
-            this.btnGenerarInforme.Text = "GENERAR INFORME";
-            this.btnGenerarInforme.UseVisualStyleBackColor = false;
-            this.btnGenerarInforme.Click += new System.EventHandler(this.btnGenerarInforme_Click);
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(42, 23);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(130, 105);
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
             // 
             // FormVentasTotales
             // 
@@ -301,6 +315,7 @@ namespace VISTA
             this.groupBoxAcciones.ResumeLayout(false);
             this.groupBoxAcciones.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -327,6 +342,7 @@ namespace VISTA
         private System.Windows.Forms.DataGridView dgvVentas;
         private System.Windows.Forms.Button btnCerrar;
         private Button btnGenerarInforme;
+        private PictureBox pictureBox2;
     }
 
 
