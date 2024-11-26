@@ -1,4 +1,6 @@
 ﻿// VISTA/FormReportes.Designer.cs
+using System.Windows.Forms;
+
 namespace VISTA
 {
     partial class FormReportes
@@ -115,8 +117,13 @@ namespace VISTA
             // 
             this.chartVentas.Location = new System.Drawing.Point(330, 76);
             this.chartVentas.Name = "chartVentas";
-            this.chartVentas.Size = new System.Drawing.Size(658, 462);
-            this.chartVentas.TabIndex = 3;
+            this.chartVentas.Size = new System.Drawing.Size(800, 400);
+            this.chartVentas.BackColor = System.Drawing.Color.White;
+            this.chartVentas.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+
+            // Configuración del formulario
+            this.BackColor = System.Drawing.Color.LemonChiffon;
+            this.ClientSize = new System.Drawing.Size(1200, 600); // Formulario más grande
             // 
             // FormReportes
             // 
@@ -149,6 +156,5 @@ namespace VISTA
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnGenerarPDF;
-        private LiveCharts.WinForms.CartesianChart chartVentas;
     }
 }

@@ -14,6 +14,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Rectangle = System.Drawing.Rectangle;
+using System.Windows.Media;
 
 namespace VISTA
 {
@@ -21,16 +23,20 @@ namespace VISTA
     {
         private ControladoraReporte controladoraReporte;
         private ControladoraVenta controladoraVenta;
+        private LiveCharts.WinForms.CartesianChart chartVentas;
 
         public FormReportes()
         {
             InitializeComponent();
             controladoraReporte = ControladoraReporte.ObtenerInstancia();
             controladoraVenta = ControladoraVenta.ObtenerInstancia();
+            
 
             // Configurar fechas iniciales
             dtpFechaInicio.Value = DateTime.Today.AddDays(-30);
             dtpFechaFin.Value = DateTime.Today;
+
+            InicializarGrafico();  // Agregar esta llamada
         }
 
         private void FormReportes_Load(object sender, EventArgs e)
@@ -42,44 +48,79 @@ namespace VISTA
         {
             try
             {
-                var ventas = controladoraVenta.ObtenerVentasPorFecha(dtpFechaInicio.Value, dtpFechaFin.Value);
+                var ventas = controladoraVenta.ObtenerVentasPorFecha(dtpFechaInicio.Value.Date, dtpFechaFin.Value.Date.AddDays(1).AddSeconds(-1));
+
+                if (ventas == null || !ventas.Any())
+                {
+                    MessageBox.Show("No hay datos de ventas para mostrar en el período seleccionado.",
+                        "Sin datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
 
                 var ventasPorDia = ventas.GroupBy(v => v.FechaVenta.Date)
-                                        .Select(g => new { Fecha = g.Key, Total = g.Sum(v => v.Total) })
-                                        .OrderBy(x => x.Fecha)
-                                        .ToList();
+                                       .Select(g => new {
+                                           Fecha = g.Key,
+                                           Total = g.Sum(v => v.Total)
+                                       })
+                                       .OrderBy(x => x.Fecha)
+                                       .ToList();
 
-                chartVentas.Series = new SeriesCollection
-            {
-                new LineSeries
+                // Configurar el gráfico
+                chartVentas.Series.Clear();
+                chartVentas.AxisX.Clear();
+                chartVentas.AxisY.Clear();
+
+                var series = new LineSeries
                 {
                     Title = "Ventas Diarias",
                     Values = new ChartValues<decimal>(ventasPorDia.Select(v => v.Total)),
                     PointGeometry = DefaultGeometries.Circle,
-                    PointGeometrySize = 15
-                }
-            };
+                    PointGeometrySize = 15,
+                    LineSmoothness = 0.5,
+                    StrokeThickness = 4,
+                    Stroke = new System.Windows.Media.SolidColorBrush(
+                        System.Windows.Media.Color.FromRgb(184, 134, 11)),
+                    Fill = new System.Windows.Media.LinearGradientBrush
+                    {
+                        GradientStops = new System.Windows.Media.GradientStopCollection
+                    {
+                        new System.Windows.Media.GradientStop(
+                            System.Windows.Media.Color.FromArgb(100, 184, 134, 11), 0),
+                        new System.Windows.Media.GradientStop(
+                            System.Windows.Media.Color.FromArgb(0, 184, 134, 11), 1)
+                    }
+                    }
+                };
 
-                chartVentas.AxisX.Clear();
-                chartVentas.AxisY.Clear();
+                chartVentas.Series = new SeriesCollection { series };
 
                 chartVentas.AxisX.Add(new Axis
                 {
                     Title = "Fecha",
-                    Labels = ventasPorDia.Select(v => v.Fecha.ToShortDateString()).ToList(),
+                    Labels = ventasPorDia.Select(v => v.Fecha.ToString("dd/MM")).ToList(),
+                    LabelsRotation = 20,
                     Separator = new Separator
                     {
-                        Step = Math.Max(1, ventasPorDia.Count / 10) // Mostrar máximo 10 etiquetas
+                        Step = Math.Max(1, ventasPorDia.Count / 10),
+                        StrokeThickness = 1,
+                        StrokeDashArray = new DoubleCollection { 2 }
                     }
                 });
 
                 chartVentas.AxisY.Add(new Axis
                 {
-                    Title = "Total Ventas ($)",
-                    LabelFormatter = value => value.ToString("C2")
+                    Title = "Ventas Totales ($)",
+                    LabelFormatter = value => value.ToString("C0"),
+                    MinValue = 0
                 });
 
-                chartVentas.LegendLocation = LegendLocation.Right;
+                chartVentas.LegendLocation = LegendLocation.Top;
+
+                // Configurar tooltip personalizado
+                chartVentas.DataTooltip = new DefaultTooltip
+                {
+                    SelectionMode = TooltipSelectionMode.SharedYValues
+                };
             }
             catch (Exception ex)
             {
@@ -109,11 +150,25 @@ namespace VISTA
                 if (saveDialog.ShowDialog() == DialogResult.OK)
                 {
                     Cursor = Cursors.WaitCursor;
+
+                    // Convertir el gráfico actual a imagen
+                    byte[] imagenGrafico = null;
+                    using (var ms = new MemoryStream())
+                    {
+                        var bitmap = new Bitmap(chartVentas.Width, chartVentas.Height);
+                        chartVentas.DrawToBitmap(bitmap, new Rectangle(0, 0, chartVentas.Width, chartVentas.Height));
+                        bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                        imagenGrafico = ms.ToArray();
+                    }
+
+                    // Generar el reporte con la imagen del gráfico
                     controladoraReporte.GenerarReporteVentas(
                         dtpFechaInicio.Value.Date,
                         dtpFechaFin.Value.Date.AddDays(1).AddSeconds(-1),
-                        saveDialog.FileName
+                        saveDialog.FileName,
+                        imagenGrafico
                     );
+
                     Cursor = Cursors.Default;
 
                     if (MessageBox.Show("Reporte generado exitosamente. ¿Desea abrirlo ahora?",
@@ -131,14 +186,29 @@ namespace VISTA
             }
         }
 
-        private void dtpFechaInicio_ValueChanged(object sender, EventArgs e)
+
+
+
+
+        private void InicializarGrafico()
         {
+            // Crear y configurar el gráfico
+            chartVentas = new LiveCharts.WinForms.CartesianChart
+            {
+                Location = new System.Drawing.Point(330, 76),
+                Name = "chartVentas",
+                Size = new System.Drawing.Size(800, 400),
+                BackColor = System.Drawing.Color.White,
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom
+            };
+            this.Controls.Add(chartVentas);
+
+            // Llamar a ActualizarGrafico después de agregar el control
             ActualizarGrafico();
         }
 
-        private void dtpFechaFin_ValueChanged(object sender, EventArgs e)
-        {
-            ActualizarGrafico();
-        }
+
+
+
     }
 }

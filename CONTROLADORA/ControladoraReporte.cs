@@ -7,6 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace CONTROLADORA
 {
@@ -27,7 +29,7 @@ namespace CONTROLADORA
             return instancia;
         }
 
-        public void GenerarReporteVentas(DateTime fechaInicio, DateTime fechaFin, string rutaGuardado)
+        public void GenerarReporteVentas(DateTime fechaInicio, DateTime fechaFin, string rutaGuardado, byte[] imagenGrafico)
         {
             var ventas = controladoraVenta.ObtenerVentasPorFecha(fechaInicio, fechaFin);
 
@@ -66,28 +68,7 @@ namespace CONTROLADORA
                 }
                 document.Add(new Paragraph("\n"));
 
-                // Productos más vendidos
-                document.Add(new Paragraph("Top 5 Productos Más Vendidos", subtitleFont));
-                var productosMasVendidos = ventas.SelectMany(v => v.Detalles)
-                    .GroupBy(d => d.ProductoNombre)
-                    .Select(g => new
-                    {
-                        Producto = g.Key,
-                        Cantidad = g.Sum(d => d.Cantidad),
-                        Total = g.Sum(d => d.Subtotal)
-                    })
-                    .OrderByDescending(x => x.Cantidad)
-                    .Take(5);
-
-                foreach (var producto in productosMasVendidos)
-                {
-                    document.Add(new Paragraph(
-                        $"{producto.Producto}: {producto.Cantidad} unidades - ${producto.Total:N2}",
-                        normalFont));
-                }
-                document.Add(new Paragraph("\n"));
-
-                // Tabla de ventas
+                // Tabla de detalles de ventas
                 document.Add(new Paragraph("Detalle de Ventas", subtitleFont));
                 PdfPTable table = new PdfPTable(5);
                 float[] widths = new float[] { 20f, 25f, 20f, 15f, 20f };
@@ -117,49 +98,27 @@ namespace CONTROLADORA
                     table.AddCell(venta.Detalles.Sum(d => d.Cantidad).ToString());
                     table.AddCell($"${venta.Total:N2}");
                 }
-
                 document.Add(table);
+
+                // Agregar gráfico si se proporcionó uno
+                if (imagenGrafico != null && imagenGrafico.Length > 0)
+                {
+                    document.NewPage(); // Nueva página para el gráfico
+                    document.Add(new Paragraph("Gráfico de Ventas", subtitleFont));
+                    document.Add(new Paragraph("\n"));
+
+                    var chartImage = iTextSharp.text.Image.GetInstance(imagenGrafico);
+                    chartImage.ScalePercent(75);
+                    chartImage.Alignment = iTextSharp.text.Image.ALIGN_CENTER;
+                    document.Add(chartImage);
+                }
 
                 document.Close();
             }
         }
 
-        public List<Venta> ObtenerVentasPorFecha(DateTime inicio, DateTime fin)
-        {
-            return controladoraVenta.ObtenerVentasPorFecha(inicio, fin);
-        }
 
-        // Puedes agregar más métodos para diferentes tipos de reportes
-        public List<object> ObtenerProductosMasVendidos(DateTime inicio, DateTime fin, int top = 5)
-        {
-            var ventas = controladoraVenta.ObtenerVentasPorFecha(inicio, fin);
-            return ventas.SelectMany(v => v.Detalles)
-                .GroupBy(d => new { d.ProductoId, d.ProductoNombre })
-                .Select(g => new
-                {
-                    Producto = g.Key.ProductoNombre,
-                    Cantidad = g.Sum(d => d.Cantidad),
-                    Total = g.Sum(d => d.Subtotal)
-                })
-                .OrderByDescending(x => x.Cantidad)
-                .Take(top)
-                .Cast<object>()
-                .ToList();
-        }
 
-        public List<object> ObtenerVentasPorFormaPago(DateTime inicio, DateTime fin)
-        {
-            var ventas = controladoraVenta.ObtenerVentasPorFecha(inicio, fin);
-            return ventas.GroupBy(v => v.FormaPago)
-                .Select(g => new
-                {
-                    FormaPago = g.Key,
-                    Cantidad = g.Count(),
-                    Total = g.Sum(v => v.Total)
-                })
-                .OrderByDescending(x => x.Total)
-                .Cast<object>()
-                .ToList();
-        }
+
     }
 }
