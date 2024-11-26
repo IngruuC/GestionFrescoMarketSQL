@@ -13,7 +13,7 @@ namespace ENTIDADES
     public class DetalleVenta
     {
         [Key]
-        public int Id { get; set; }
+        public int Id { get; set; } //
 
         [Required]
         public int VentaId { get; set; }

@@ -34,12 +34,12 @@ namespace VISTA
             txtCodigoBarra.MaxLength = 8;
             ConfigurarDataGridView();
 
-            // Configurar controles de producto perecedero
+
             chkEsPerecedero.Checked = false;
             dtpFechaVencimiento.Enabled = false;
             dtpFechaVencimiento.MinDate = DateTime.Now.AddDays(1);
 
-            // Asignar eventos
+
             txtPrecio.KeyPress += TxtPrecio_KeyPress;
             txtStock.KeyPress += TxtStock_KeyPress;
             chkEsPerecedero.CheckedChanged += ChkEsPerecedero_CheckedChanged;
@@ -112,14 +112,14 @@ namespace VISTA
 
         private void TxtPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Permitir solo números, punto decimal y teclas de control
+            
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
                 e.Handled = true;
                 return;
             }
 
-            // Permitir solo un punto decimal
+            
             if (e.KeyChar == '.' && (sender as TextBox).Text.Contains('.'))
             {
                 e.Handled = true;
@@ -128,7 +128,7 @@ namespace VISTA
 
         private void TxtStock_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Permitir solo números y teclas de control
+          
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;

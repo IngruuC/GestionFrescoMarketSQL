@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ENTIDADES
 {
-    public class ReporteVenta
+    public class ReporteVenta           //REVISAR
     {
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }

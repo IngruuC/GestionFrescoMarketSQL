@@ -25,11 +25,9 @@ namespace VISTA
             // Configurar DateTimePickers
             dtpFechaDesde.Value = DateTime.Today.AddDays(-30);
             dtpFechaHasta.Value = DateTime.Today;
-
-            // Configurar DataGridView
+         
             ConfigurarDataGridView();
-
-            // Cargar datos iniciales
+         
             CargarVentas();
         }
 

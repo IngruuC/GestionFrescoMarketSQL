@@ -74,9 +74,5 @@ namespace CONTROLADORA
             return contexto.Clientes.ToList();
         }
 
-        public Cliente ObtenerClientePorId(int id)
-        {
-            return contexto.Clientes.Find(id);
-        }
     }
 }

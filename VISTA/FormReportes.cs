@@ -32,11 +32,11 @@ namespace VISTA
             controladoraVenta = ControladoraVenta.ObtenerInstancia();
             
 
-            // Configurar fechas iniciales
+            // Fechas iniciales conf
             dtpFechaInicio.Value = DateTime.Today.AddDays(-30);
             dtpFechaFin.Value = DateTime.Today;
 
-            InicializarGrafico();  // Agregar esta llamada
+            InicializarGrafico();  
         }
 
         private void FormReportes_Load(object sender, EventArgs e)
@@ -116,7 +116,7 @@ namespace VISTA
 
                 chartVentas.LegendLocation = LegendLocation.Top;
 
-                // Configurar tooltip personalizado
+ 
                 chartVentas.DataTooltip = new DefaultTooltip
                 {
                     SelectionMode = TooltipSelectionMode.SharedYValues
@@ -192,7 +192,7 @@ namespace VISTA
 
         private void InicializarGrafico()
         {
-            // Crear y configurar el gráfico
+  
             chartVentas = new LiveCharts.WinForms.CartesianChart
             {
                 Location = new System.Drawing.Point(330, 76),
@@ -203,7 +203,7 @@ namespace VISTA
             };
             this.Controls.Add(chartVentas);
 
-            // Llamar a ActualizarGrafico después de agregar el control
+           
             ActualizarGrafico();
         }
 

@@ -40,7 +40,7 @@ namespace CONTROLADORA
 
                 document.Open();
 
-                // Agregar título
+                // Titulo
                 var titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
                 var subtitleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14);
                 var normalFont = FontFactory.GetFont(FontFactory.HELVETICA, 12);
@@ -75,14 +75,14 @@ namespace CONTROLADORA
                 table.SetWidths(widths);
                 table.WidthPercentage = 100;
 
-                // Estilo para encabezados
+                // Estilo
                 var cellStyle = new PdfPCell
                 {
                     BackgroundColor = BaseColor.LIGHT_GRAY,
                     Padding = 5
                 };
 
-                // Encabezados
+                // Encabezado
                 table.AddCell(new PdfPCell(new Phrase("Fecha", subtitleFont)) { BackgroundColor = BaseColor.LIGHT_GRAY });
                 table.AddCell(new PdfPCell(new Phrase("Cliente", subtitleFont)) { BackgroundColor = BaseColor.LIGHT_GRAY });
                 table.AddCell(new PdfPCell(new Phrase("Forma de Pago", subtitleFont)) { BackgroundColor = BaseColor.LIGHT_GRAY });
@@ -100,7 +100,7 @@ namespace CONTROLADORA
                 }
                 document.Add(table);
 
-                // Agregar gráfico si se proporcionó uno
+                // Agregar grafico
                 if (imagenGrafico != null && imagenGrafico.Length > 0)
                 {
                     document.NewPage(); // Nueva página para el gráfico

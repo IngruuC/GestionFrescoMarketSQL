@@ -23,5 +23,10 @@ namespace ENTIDADES
             Ventas = new List<Venta>();
         }
 
+        public string DatosCompletos  //Es para mostrar los datos en el combobox del formVenta
+        {
+            get { return $"{Id} - {Nombre} {Apellido}"; }
+        }
+
     }
 }

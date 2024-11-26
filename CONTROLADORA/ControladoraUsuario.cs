@@ -79,7 +79,7 @@ namespace CONTROLADORA
                 if (usuarioEncontrado == null)
                     return false;
 
-                // Para propósitos de prueba, vamos a forzar la creación del hash con la misma contraseña
+                
                 if (contraseña == DEFAULT_PASSWORD)
                 {
                     string nuevoHash = BCrypt.Net.BCrypt.HashPassword(DEFAULT_PASSWORD);
@@ -87,7 +87,7 @@ namespace CONTROLADORA
 
                     if (!verificacion)
                     {
-                        // Si la verificación falla, actualizar la contraseña
+                 
                         usuarioEncontrado.Contraseña = nuevoHash;
                         contexto.SaveChanges();
                     }

@@ -28,7 +28,7 @@ namespace VISTA
 
         private void ConfigurarControles()
         {
-            // Configurar DataGridView
+            // Configuracion DataGridView
             dgvVenta.AutoGenerateColumns = false;
             dgvVenta.Columns.Add(new DataGridViewTextBoxColumn
             {
@@ -65,7 +65,7 @@ namespace VISTA
             CargarClientes();
             CargarProductos();
 
-            // Configurar NumericUpDown
+            
             nudCantidad.Minimum = 1;
             nudCantidad.Maximum = 9999;
             nudCantidad.Value = 1;
@@ -73,15 +73,25 @@ namespace VISTA
             // Estado inicial de botones
             btnModificar.Enabled = false;
             btnEliminar.Enabled = false;
+            dgvVenta.SelectionChanged += dgvVenta_SelectionChanged;
+
+            cboClientes.SelectedIndexChanged += cboClientes_SelectedIndexChanged;
         }
 
+        private void cboClientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboClientes.SelectedIndex != -1)
+            {
+                cboClientes.Enabled = false;  // Bloquea el ComboBox para realizar venta a un unico cliente
+            }
+        }
         private void CargarClientes()
         {
             try
             {
                 cboClientes.DataSource = null;
                 cboClientes.DataSource = controladoraCliente.ObtenerClientes();
-                cboClientes.DisplayMember = "ToString";
+                cboClientes.DisplayMember = "DatosCompletos";
                 cboClientes.ValueMember = "Id";
                 cboClientes.SelectedIndex = -1;
             }
@@ -164,13 +174,13 @@ namespace VISTA
             {
                 var detalle = new DetalleVenta
                 {
-                    // No asignar VentaId aquí
+                    
                     ProductoId = producto.Id,
                     ProductoNombre = producto.Nombre,
                     Cantidad = cantidad,
                     PrecioUnitario = producto.Precio,
                     Subtotal = producto.Precio * cantidad,
-                    Producto = producto  // Agregar esta línea
+                    Producto = producto  
                 };
 
                 detallesVenta.Add(detalle);
@@ -290,6 +300,8 @@ namespace VISTA
                 controladoraVenta.RealizarVenta(venta);
                 MessageBox.Show("Venta realizada con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+
+                cboClientes.Enabled = true;  // Desbloquea el ComboBox
                 // Limpiar todo
                 cboClientes.SelectedIndex = -1;
                 detallesVenta.Clear();
