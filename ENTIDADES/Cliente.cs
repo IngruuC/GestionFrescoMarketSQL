@@ -23,9 +23,5 @@ namespace ENTIDADES
             Ventas = new List<Venta>();
         }
 
-        public override string ToString()
-        {
-            return $"{Nombre} {Apellido} - {Documento}";
-        }
     }
 }
