@@ -27,6 +27,9 @@ namespace ENTIDADES
         {
             get { return $"{Id} - {Nombre} {Apellido}"; }
         }
-
+        public override string ToString()
+        {
+            return $"{Nombre} {Apellido}".Trim();
+        }
     }
 }

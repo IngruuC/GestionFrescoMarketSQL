@@ -39,7 +39,7 @@ namespace VISTA
             dgvVentas.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "Id",
-                DataPropertyName = "VentaId",
+                DataPropertyName = "Id",
                 HeaderText = "ID",
                 Width = 80,
                 ReadOnly = true
