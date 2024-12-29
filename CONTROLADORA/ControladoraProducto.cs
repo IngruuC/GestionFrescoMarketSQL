@@ -82,7 +82,19 @@ namespace CONTROLADORA
 
         public List<Producto> ObtenerProductos()
         {
-            return contexto.Productos.ToList();
+            try
+            {
+                var query = contexto.Productos.ToList();
+                return query;
+            }
+            catch (Exception ex)
+            {
+                // Capturar el error interno si existe
+                var innerException = ex.InnerException != null ?
+                    $"\nError interno: {ex.InnerException.Message}" : "";
+
+                throw new Exception($"Error al obtener los productos: {ex.Message}{innerException}");
+            }
         }
 
         public Producto ObtenerProductoPorId(int id)

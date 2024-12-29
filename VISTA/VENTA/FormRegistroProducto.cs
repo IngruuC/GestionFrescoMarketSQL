@@ -61,12 +61,22 @@ namespace VISTA
         {
             try
             {
+                // Agrega esta línea para debug
+                var productos = controladora.ObtenerProductos();
+                Console.WriteLine($"Productos obtenidos: {productos.Count}");
+
                 dgvProductos.DataSource = null;
                 dgvProductos.DataSource = controladora.ObtenerProductos();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al cargar los datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Esto nos mostrará el error completo
+                string errorMessage = $"Error al cargar los datos: {ex.Message}";
+                if (ex.InnerException != null)
+                    errorMessage += $"\nError detallado: {ex.InnerException.Message}";
+
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 

@@ -77,8 +77,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControladoraCliente.cs" />
+    <Compile Include="ControladoraCompra.cs" />
     <Compile Include="ControladoraProducto.cs" />
+    <Compile Include="ControladoraProveedor.cs" />
     <Compile Include="ControladoraReporte.cs" />
+    <Compile Include="ControladoraReporteCompra.cs" />
     <Compile Include="ControladoraUsuario.cs" />
     <Compile Include="ControladoraVenta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

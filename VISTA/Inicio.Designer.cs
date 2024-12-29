@@ -15,152 +15,37 @@
 
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
-            this.btnRegistrarCliente = new System.Windows.Forms.Button();
-            this.btnRegistroProducto = new System.Windows.Forms.Button();
-            this.btnRealizarVenta = new System.Windows.Forms.Button();
-            this.btnVentasTotales = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // btnRegistrarCliente
-            // 
-            this.btnRegistrarCliente.BackColor = System.Drawing.Color.LemonChiffon;
-            this.btnRegistrarCliente.FlatAppearance.BorderSize = 0;
-            this.btnRegistrarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistrarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegistrarCliente.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnRegistrarCliente.Location = new System.Drawing.Point(50, 374);
-            this.btnRegistrarCliente.Name = "btnRegistrarCliente";
-            this.btnRegistrarCliente.Size = new System.Drawing.Size(132, 86);
-            this.btnRegistrarCliente.TabIndex = 1;
-            this.btnRegistrarCliente.Text = "REGISTRAR\r\nCLIENTE";
-            this.btnRegistrarCliente.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnRegistrarCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnRegistrarCliente.UseVisualStyleBackColor = false;
-            this.btnRegistrarCliente.Click += new System.EventHandler(this.btnRegistrarCliente_Click);
-            // 
-            // btnRegistroProducto
-            // 
-            this.btnRegistroProducto.BackColor = System.Drawing.Color.LemonChiffon;
-            this.btnRegistroProducto.FlatAppearance.BorderSize = 0;
-            this.btnRegistroProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistroProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegistroProducto.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnRegistroProducto.Location = new System.Drawing.Point(257, 374);
-            this.btnRegistroProducto.Name = "btnRegistroProducto";
-            this.btnRegistroProducto.Size = new System.Drawing.Size(132, 86);
-            this.btnRegistroProducto.TabIndex = 2;
-            this.btnRegistroProducto.Text = "REGISTRAR\r\nPRODUCTO";
-            this.btnRegistroProducto.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnRegistroProducto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnRegistroProducto.UseVisualStyleBackColor = false;
-            this.btnRegistroProducto.Click += new System.EventHandler(this.btnRegistroProducto_Click);
-            // 
-            // btnRealizarVenta
-            // 
-            this.btnRealizarVenta.BackColor = System.Drawing.Color.LemonChiffon;
-            this.btnRealizarVenta.FlatAppearance.BorderSize = 0;
-            this.btnRealizarVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRealizarVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRealizarVenta.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnRealizarVenta.Location = new System.Drawing.Point(498, 374);
-            this.btnRealizarVenta.Name = "btnRealizarVenta";
-            this.btnRealizarVenta.Size = new System.Drawing.Size(132, 86);
-            this.btnRealizarVenta.TabIndex = 3;
-            this.btnRealizarVenta.Text = "REALIZAR\r\nVENTA";
-            this.btnRealizarVenta.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnRealizarVenta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnRealizarVenta.UseVisualStyleBackColor = false;
-            this.btnRealizarVenta.Click += new System.EventHandler(this.btnRealizarVenta_Click);
-            // 
-            // btnVentasTotales
-            // 
-            this.btnVentasTotales.BackColor = System.Drawing.Color.LemonChiffon;
-            this.btnVentasTotales.FlatAppearance.BorderSize = 0;
-            this.btnVentasTotales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVentasTotales.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVentasTotales.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnVentasTotales.Location = new System.Drawing.Point(257, 476);
-            this.btnVentasTotales.Name = "btnVentasTotales";
-            this.btnVentasTotales.Size = new System.Drawing.Size(132, 85);
-            this.btnVentasTotales.TabIndex = 4;
-            this.btnVentasTotales.Text = "VENTAS\r\nTOTALES";
-            this.btnVentasTotales.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnVentasTotales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnVentasTotales.UseVisualStyleBackColor = false;
-            this.btnVentasTotales.Click += new System.EventHandler(this.btnVentasTotales_Click);
             // 
             // btnSalir
             // 
-            this.btnSalir.BackColor = System.Drawing.Color.LemonChiffon;
+            this.btnSalir.BackColor = System.Drawing.Color.Transparent;
             this.btnSalir.FlatAppearance.BorderSize = 0;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.ForeColor = System.Drawing.Color.Crimson;
-            this.btnSalir.Location = new System.Drawing.Point(541, 531);
+            this.btnSalir.ForeColor = System.Drawing.Color.Transparent;
+            this.btnSalir.Image = global::VISTA.Properties.Resources.icons8_salida;
+            this.btnSalir.Location = new System.Drawing.Point(551, 519);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(89, 30);
+            this.btnSalir.Size = new System.Drawing.Size(121, 42);
             this.btnSalir.TabIndex = 5;
-            this.btnSalir.Text = "SALIR";
+            this.btnSalir.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // pictureBox1
+            // button1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(300, 476);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(41, 40);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(541, 374);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(42, 41);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 7;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(92, 374);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(44, 41);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 8;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(300, 374);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(45, 45);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 9;
-            this.pictureBox4.TabStop = false;
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.Image = global::VISTA.Properties.Resources.icons8_doble_derecha;
+            this.button1.Location = new System.Drawing.Point(588, 246);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(51, 89);
+            this.button1.TabIndex = 6;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Inicio
             // 
@@ -169,36 +54,17 @@
             this.BackColor = System.Drawing.Color.LemonChiffon;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(642, 573);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnSalir);
-            this.Controls.Add(this.btnVentasTotales);
-            this.Controls.Add(this.btnRealizarVenta);
-            this.Controls.Add(this.btnRegistroProducto);
-            this.Controls.Add(this.btnRegistrarCliente);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Inicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio - Fresco Market";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
 
         }
-        private System.Windows.Forms.Button btnRegistrarCliente;
-        private System.Windows.Forms.Button btnRegistroProducto;
-        private System.Windows.Forms.Button btnRealizarVenta;
-        private System.Windows.Forms.Button btnVentasTotales;
         private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -25,9 +25,16 @@ namespace MODELO
         public DbSet<Venta> Ventas { get; set; }
         public DbSet<DetalleVenta> DetallesVenta { get; set; }
 
+        // Nuevos DBSets para Compras
+        public DbSet<Proveedor> Proveedores { get; set; } //
+        public DbSet<Compra> Compras { get; set; } //
+        public DbSet<DetalleCompra> DetallesCompra { get; set; } //
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Entity<Producto>().ToTable("Producto");
 
             // Configuración Usuario
             modelBuilder.Entity<Usuario>().ToTable("Usuarios");
@@ -83,8 +90,54 @@ namespace MODELO
                 .HasForeignKey(d => d.ProductoId)
                 .WillCascadeOnDelete(false);
 
+
+
+            // Nuevas configuraciones para Compras
+
+            // Configuración Proveedor
+            modelBuilder.Entity<Proveedor>().ToTable("Proveedores");
+            modelBuilder.Entity<Proveedor>().HasKey(p => p.Id);
+            modelBuilder.Entity<Proveedor>().Property(p => p.Cuit).IsRequired().HasMaxLength(11);
+            modelBuilder.Entity<Proveedor>().HasIndex(p => p.Cuit).IsUnique();
+
+
+            // Configuración para Total en Compra
+            modelBuilder.Entity<Compra>()
+                .Property(c => c.Total)
+                .HasColumnType("decimal")
+                .HasPrecision(18, 2);
+
+            // Configuración para PrecioUnitario y Subtotal en DetalleCompra
+            modelBuilder.Entity<DetalleCompra>()
+                .Property(d => d.PrecioUnitario)
+                .HasColumnType("decimal")
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<DetalleCompra>()
+                .Property(d => d.Subtotal)
+                .HasColumnType("decimal")
+                .HasPrecision(18, 2);
+
+            // Configuración de relaciones
+            modelBuilder.Entity<Compra>()
+                .HasRequired(c => c.Proveedor)
+                .WithMany(p => p.Compras)
+                .HasForeignKey(c => c.ProveedorId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Compra>()
+                .HasMany(c => c.Detalles)
+                .WithRequired(d => d.Compra)
+                .HasForeignKey(d => d.CompraId)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<DetalleCompra>()
+                .HasRequired(d => d.Producto)
+                .WithMany(p => p.DetallesCompra)
+                .HasForeignKey(d => d.ProductoId)
+                .WillCascadeOnDelete(false);
+
             base.OnModelCreating(modelBuilder);
-        
         }
     }
 }

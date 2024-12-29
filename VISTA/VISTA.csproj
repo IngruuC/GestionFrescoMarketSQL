@@ -39,6 +39,41 @@
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
       <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Charts.v24.1.Core, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.CodeParser.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.Desktop.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.DataAccess.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.DataAccess.v24.1.UI, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Drawing.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v24.1.Core, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.PivotGrid.v24.1.Core, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v24.1.Core, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v24.1.Core, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v24.1.Core, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.SpellChecker.v24.1.Core, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v24.1.UI, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v24.1.Extensions, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v24.1.Wizard, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGauges.v24.1.Core, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGrid.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraLayout.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraNavBar.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPivotGrid.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v24.1.Extensions, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraRichEdit.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraScheduler.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraScheduler.v24.1.Core, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraScheduler.v24.1.Core.Desktop, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraSpellChecker.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraTreeList.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraVerticalGrid.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -64,7 +99,12 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -79,34 +119,75 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormRegistroCliente.cs">
+    <Compile Include="COMPRA\FormCompra.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormRegistroCliente.Designer.cs">
+    <Compile Include="COMPRA\FormCompra.Designer.cs">
+      <DependentUpon>FormCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="COMPRA\FormComprasTotales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="COMPRA\FormComprasTotales.Designer.cs">
+      <DependentUpon>FormComprasTotales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="COMPRA\FormReportesCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="COMPRA\FormReportesCompras.Designer.cs">
+      <DependentUpon>FormReportesCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPrincipal.Designer.cs">
+      <DependentUpon>FormPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="VENTA\FormRegistroCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VENTA\FormRegistroCliente.Designer.cs">
       <DependentUpon>FormRegistroCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormRegistroProducto.cs">
+    <Compile Include="VENTA\FormRegistroProducto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormRegistroProducto.Designer.cs">
+    <Compile Include="VENTA\FormRegistroProducto.Designer.cs">
       <DependentUpon>FormRegistroProducto.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormReportes.cs">
+    <Compile Include="COMPRA\FormRegistroProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormReportes.Designer.cs">
+    <Compile Include="COMPRA\FormRegistroProveedor.Designer.cs">
+      <DependentUpon>FormRegistroProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VENTA\FormReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VENTA\FormReportes.Designer.cs">
       <DependentUpon>FormReportes.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormVenta.cs">
+    <Compile Include="VENTA\FormVenta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormVenta.Designer.cs">
+    <Compile Include="VENTA\FormVenta.Designer.cs">
       <DependentUpon>FormVenta.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormVentasTotales.cs">
+    <Compile Include="VENTA\FormVentasTotales.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormVentasTotales.Designer.cs">
+    <Compile Include="VENTA\FormVentasTotales.Designer.cs">
       <DependentUpon>FormVentasTotales.cs</DependentUpon>
     </Compile>
     <Compile Include="Inicio.cs">
@@ -123,16 +204,31 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormRegistroCliente.resx">
+    <EmbeddedResource Include="COMPRA\FormComprasTotales.resx">
+      <DependentUpon>FormComprasTotales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="COMPRA\FormReportesCompras.resx">
+      <DependentUpon>FormReportesCompras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPrincipal.resx">
+      <DependentUpon>FormPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VENTA\FormRegistroCliente.resx">
       <DependentUpon>FormRegistroCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormRegistroProducto.resx">
+    <EmbeddedResource Include="VENTA\FormRegistroProducto.resx">
       <DependentUpon>FormRegistroProducto.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormVenta.resx">
+    <EmbeddedResource Include="COMPRA\FormRegistroProveedor.resx">
+      <DependentUpon>FormRegistroProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VENTA\FormVenta.resx">
       <DependentUpon>FormVenta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormVentasTotales.resx">
+    <EmbeddedResource Include="VENTA\FormVentasTotales.resx">
       <DependentUpon>FormVentasTotales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
@@ -141,15 +237,12 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -177,6 +270,18 @@
       <Project>{8206a08a-c807-48a9-8ae8-6fb912372ab4}</Project>
       <Name>MODELO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\icons8-casa.gif" />
+    <Content Include="Resources\icons8-clients-64.png" />
+    <Content Include="Resources\icons8-doble-derecha.gif" />
+    <Content Include="Resources\icons8-inventory-64 %281%29.png" />
+    <Content Include="Resources\icons8-low-sales-64.png" />
+    <Content Include="Resources\icons8-product-64.png" />
+    <Content Include="Resources\icons8-salida.gif" />
+    <Content Include="Resources\icons8-supplier-60.png" />
+    <Content Include="Resources\icons8-supplier-64.png" />
+    <Content Include="Resources\icons8-upselling-64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

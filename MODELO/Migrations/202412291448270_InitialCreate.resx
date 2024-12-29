@@ -117,50 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="icons8-supplier-641" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-supplier-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Target" xml:space="preserve">
+    <value>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</value>
   </data>
-  <data name="icons8-low-sales-64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-low-sales-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-inventory-64 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-inventory-64 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-supplier-64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-supplier-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-clients-641" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-clients-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-clients-64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-clients-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-salida" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-salida.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-upselling-641" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-upselling-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-inventory-64 (1)2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-inventory-64 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-inventory-64 (1)1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-inventory-64 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-doble-derecha" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-doble-derecha.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-supplier-60" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-supplier-60.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-upselling-64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-upselling-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-product-64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-product-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-doble-derecha1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-doble-derecha.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DefaultSchema" xml:space="preserve">
+    <value>dbo</value>
   </data>
 </root>

@@ -33,6 +33,7 @@ namespace VISTA
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiarBusqueda = new System.Windows.Forms.Button();
             this.groupBoxAcciones = new System.Windows.Forms.GroupBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnGenerarInforme = new System.Windows.Forms.Button();
             this.btnDetalleVenta = new System.Windows.Forms.Button();
             this.btnEliminarVenta = new System.Windows.Forms.Button();
@@ -40,13 +41,12 @@ namespace VISTA
             this.lblTotalVentas = new System.Windows.Forms.Label();
             this.dgvVentas = new System.Windows.Forms.DataGridView();
             this.btnCerrar = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBoxBusqueda.SuspendLayout();
             this.groupBoxAcciones.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             this.SuspendLayout();
             // 
             // panelSuperior
@@ -191,6 +191,15 @@ namespace VISTA
             this.groupBoxAcciones.TabStop = false;
             this.groupBoxAcciones.Text = "ACCIONES";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(42, 23);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(130, 105);
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
+            // 
             // btnGenerarInforme
             // 
             this.btnGenerarInforme.BackColor = System.Drawing.Color.DarkGoldenrod;
@@ -281,15 +290,6 @@ namespace VISTA
             this.btnCerrar.UseVisualStyleBackColor = false;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(42, 23);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(130, 105);
-            this.pictureBox2.TabIndex = 5;
-            this.pictureBox2.TabStop = false;
-            // 
             // FormVentasTotales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -314,8 +314,8 @@ namespace VISTA
             this.groupBoxBusqueda.PerformLayout();
             this.groupBoxAcciones.ResumeLayout(false);
             this.groupBoxAcciones.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).EndInit();
             this.ResumeLayout(false);
 
         }
