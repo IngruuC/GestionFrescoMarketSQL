@@ -88,11 +88,10 @@ namespace VISTA
         {
             try
             {
-                var ventas = controladoraVenta.ObtenerVentas()
-                    .Where(v => v.FechaVenta.Date >= dtpFechaDesde.Value.Date &&
-                               v.FechaVenta.Date <= dtpFechaHasta.Value.Date)
-                    .OrderByDescending(v => v.FechaVenta)
-                    .ToList();
+
+
+                var ventas = controladoraVenta.ObtenerVentas();                  
+                Console.WriteLine($"Ventas encontradas: {ventas?.Count ?? 0}");
 
                 dgvVentas.DataSource = null;
                 dgvVentas.DataSource = ventas;
@@ -106,6 +105,7 @@ namespace VISTA
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"Error completo: {ex.ToString()}");
                 MessageBox.Show($"Error al cargar las ventas: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
