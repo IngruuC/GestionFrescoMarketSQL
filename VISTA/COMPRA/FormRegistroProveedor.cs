@@ -125,12 +125,133 @@ namespace VISTA
         }
 
 
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (!ValidarDatos()) return;
+
+            try
+            {
+                var proveedor = new Proveedor
+                {
+                    Cuit = txtCuit.Text.Trim(),
+                    RazonSocial = txtRazonSocial.Text.Trim(),
+                    Telefono = txtTelefono.Text.Trim(),
+                    Email = txtEmail.Text.Trim(),
+                    Direccion = txtDireccion.Text.Trim()
+                };
+
+                controladora.AgregarProveedor(proveedor);
+                MessageBox.Show("Proveedor guardado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LimpiarCampos();
+                CargarDatosEnDataGridView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar el proveedor: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dgvProveedores.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Por favor, seleccione un proveedor para eliminar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var proveedor = (Proveedor)dgvProveedores.SelectedRows[0].DataBoundItem;
+            var confirmacion = MessageBox.Show($"¿Está seguro que desea eliminar al proveedor {proveedor.RazonSocial}?",
+                                             "Confirmar eliminación",
+                                             MessageBoxButtons.YesNo,
+                                             MessageBoxIcon.Question);
+
+            if (confirmacion == DialogResult.Yes)
+            {
+                try
+                {
+                    controladora.EliminarProveedor(proveedor.Id);
+                    MessageBox.Show("Proveedor eliminado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimpiarCampos();
+                    CargarDatosEnDataGridView();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al eliminar el proveedor: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dgvProveedores.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Por favor, seleccione un proveedor para modificar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var proveedor = (Proveedor)dgvProveedores.SelectedRows[0].DataBoundItem;
+            txtCuit.Text = proveedor.Cuit;
+            txtRazonSocial.Text = proveedor.RazonSocial;
+            txtTelefono.Text = proveedor.Telefono;
+            txtEmail.Text = proveedor.Email;
+            txtDireccion.Text = proveedor.Direccion;
+            btnGuardar.Tag = proveedor.Id;
+        }
+
+        private void btnLimpiarBusqueda_Click(object sender, EventArgs e)
+        {
+            txtBuscarProveedor.Clear();
+            CargarDatosEnDataGridView();
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnBuscarProducto_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btnActualizar_Click(object sender, EventArgs e)
+        private void btnBuscarProveedor_Click_1(object sender, EventArgs e)
+        {
+            string criterio = txtBuscarProveedor.Text.Trim().ToLower();
+            if (string.IsNullOrEmpty(criterio))
+            {
+                CargarDatosEnDataGridView();
+                return;
+            }
+
+            try
+            {
+                var proveedores = controladora.ObtenerProveedores();
+                var proveedoresFiltrados = proveedores.Where(p =>
+                    p.Cuit.ToLower().Contains(criterio) ||
+                    p.RazonSocial.ToLower().Contains(criterio) ||
+                    p.Email.ToLower().Contains(criterio) ||
+                    p.Telefono.ToLower().Contains(criterio) ||
+                    p.Direccion.ToLower().Contains(criterio)
+                ).ToList();
+
+                dgvProveedores.DataSource = null;
+                dgvProveedores.DataSource = proveedoresFiltrados;
+
+                if (proveedoresFiltrados.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron proveedores que coincidan con el criterio de búsqueda.",
+                                  "Búsqueda",
+                                  MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al buscar proveedores: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnActualizar_Click_1(object sender, EventArgs e)
         {
             if (btnGuardar.Tag == null)
             {
@@ -162,65 +283,5 @@ namespace VISTA
                 MessageBox.Show($"Error al actualizar el proveedor: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-       
-
-        private void btnBuscarProveedor_Click(object sender, EventArgs e)
-        {
-            string criterio = txtBuscarProveedor.Text.Trim().ToLower();
-            if (string.IsNullOrEmpty(criterio))
-            {
-                CargarDatosEnDataGridView();
-                return;
-            }
-
-            try
-            {
-                var proveedores = controladora.ObtenerProveedores();
-                var proveedoresFiltrados = proveedores.Where(p =>
-                    p.Cuit.ToLower().Contains(criterio) ||
-                    p.RazonSocial.ToLower().Contains(criterio) ||
-                    p.Email.ToLower().Contains(criterio) ||
-                    p.Telefono.ToLower().Contains(criterio)
-                ).ToList();
-
-                dgvProveedores.DataSource = null;
-                dgvProveedores.DataSource = proveedoresFiltrados;
-
-                if (proveedoresFiltrados.Count == 0)
-                {
-                    MessageBox.Show("No se encontraron proveedores que coincidan con el criterio de búsqueda.",
-                                  "Búsqueda",
-                                  MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al buscar proveedores: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        } 
-
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        
-       private void FormRegistroProveedor_Load(object sender, EventArgs e)
-        {
-            CargarDatosEnDataGridView();
-        }
-
-        private void btnGuardar_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLimpiarBusqueda_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
     }
 }

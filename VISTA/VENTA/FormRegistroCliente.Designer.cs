@@ -367,9 +367,9 @@
         private System.Windows.Forms.TextBox txtBuscarCliente;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnLimpiarBusqueda;
-        private System.Windows.Forms.Button btnBuscarCliente;
         private System.Windows.Forms.DataGridView dgvCliente;
         private System.Windows.Forms.Button btnCerrar;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnBuscarCliente;
     }
 }

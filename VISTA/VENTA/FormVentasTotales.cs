@@ -340,10 +340,6 @@ namespace VISTA
                 MostrarEstadisticas();
             }
 
-            private void btnCerrar_Click(object sender, EventArgs e)
-            {
-                this.Close();
-            }
 
             private void FormVentasTotales_Load(object sender, EventArgs e)
             {

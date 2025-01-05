@@ -18,7 +18,7 @@ namespace VISTA
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Menu formMenu = new Menu();
+            FormPrincipal formMenu = new FormPrincipal();
             this.Hide();
             formMenu.ShowDialog();
             this.Close();

@@ -42,7 +42,9 @@ namespace VISTA
             this.txtBuscarProveedor = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnLimpiarBusqueda = new System.Windows.Forms.Button();
-            this.btnBuscarProducto = new System.Windows.Forms.Button();
+            this.btnCerrar = new System.Windows.Forms.Button();
+            this.btnBuscarProveedor = new System.Windows.Forms.Button();
+            this.btnActualizar = new System.Windows.Forms.Button();
             this.panelSuperior.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -82,6 +84,7 @@ namespace VISTA
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnActualizar);
             this.groupBox1.Controls.Add(this.txtCuit);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtTelefono);
@@ -194,6 +197,7 @@ namespace VISTA
             this.btnModificar.TabIndex = 11;
             this.btnModificar.Text = "MODIFICAR";
             this.btnModificar.UseVisualStyleBackColor = false;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
             // 
@@ -206,6 +210,7 @@ namespace VISTA
             this.btnEliminar.TabIndex = 10;
             this.btnEliminar.Text = "ELIMINAR";
             this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnGuardar
             // 
@@ -218,6 +223,7 @@ namespace VISTA
             this.btnGuardar.TabIndex = 9;
             this.btnGuardar.Text = "GUARDAR";
             this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // dgvProveedores
             // 
@@ -235,10 +241,10 @@ namespace VISTA
             // 
             // groupBoxBusqueda
             // 
+            this.groupBoxBusqueda.Controls.Add(this.btnBuscarProveedor);
             this.groupBoxBusqueda.Controls.Add(this.txtBuscarProveedor);
             this.groupBoxBusqueda.Controls.Add(this.label6);
             this.groupBoxBusqueda.Controls.Add(this.btnLimpiarBusqueda);
-            this.groupBoxBusqueda.Controls.Add(this.btnBuscarProducto);
             this.groupBoxBusqueda.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.groupBoxBusqueda.Location = new System.Drawing.Point(311, 76);
             this.groupBoxBusqueda.Name = "groupBoxBusqueda";
@@ -274,23 +280,53 @@ namespace VISTA
             this.btnLimpiarBusqueda.TabIndex = 14;
             this.btnLimpiarBusqueda.Text = "LIMPIAR";
             this.btnLimpiarBusqueda.UseVisualStyleBackColor = false;
+            this.btnLimpiarBusqueda.Click += new System.EventHandler(this.btnLimpiarBusqueda_Click);
             // 
-            // btnBuscarProducto
+            // btnCerrar
             // 
-            this.btnBuscarProducto.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnBuscarProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscarProducto.ForeColor = System.Drawing.Color.White;
-            this.btnBuscarProducto.Location = new System.Drawing.Point(478, 24);
-            this.btnBuscarProducto.Name = "btnBuscarProducto";
-            this.btnBuscarProducto.Size = new System.Drawing.Size(76, 30);
-            this.btnBuscarProducto.TabIndex = 13;
-            this.btnBuscarProducto.Text = "BUSCAR";
-            this.btnBuscarProducto.UseVisualStyleBackColor = false;
+            this.btnCerrar.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnCerrar.ForeColor = System.Drawing.Color.Red;
+            this.btnCerrar.Location = new System.Drawing.Point(891, 530);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(90, 35);
+            this.btnCerrar.TabIndex = 6;
+            this.btnCerrar.Text = "CERRAR";
+            this.btnCerrar.UseVisualStyleBackColor = false;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+            // 
+            // btnBuscarProveedor
+            // 
+            this.btnBuscarProveedor.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnBuscarProveedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscarProveedor.ForeColor = System.Drawing.Color.White;
+            this.btnBuscarProveedor.Location = new System.Drawing.Point(478, 24);
+            this.btnBuscarProveedor.Name = "btnBuscarProveedor";
+            this.btnBuscarProveedor.Size = new System.Drawing.Size(76, 30);
+            this.btnBuscarProveedor.TabIndex = 14;
+            this.btnBuscarProveedor.Text = "BUSCAR";
+            this.btnBuscarProveedor.UseVisualStyleBackColor = false;
+            this.btnBuscarProveedor.Click += new System.EventHandler(this.btnBuscarProveedor_Click_1);
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActualizar.ForeColor = System.Drawing.Color.White;
+            this.btnActualizar.Location = new System.Drawing.Point(13, 410);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(259, 35);
+            this.btnActualizar.TabIndex = 22;
+            this.btnActualizar.Text = "ACTUALIZAR";
+            this.btnActualizar.UseVisualStyleBackColor = false;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click_1);
             // 
             // FormRegistroProveedor
             // 
             this.BackColor = System.Drawing.Color.LemonChiffon;
             this.ClientSize = new System.Drawing.Size(993, 577);
+            this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.groupBoxBusqueda);
             this.Controls.Add(this.dgvProveedores);
             this.Controls.Add(this.panel2);
@@ -321,7 +357,6 @@ namespace VISTA
         private TextBox txtBuscarProveedor;
         private Label label6;
         private Button btnLimpiarBusqueda;
-        private Button btnBuscarProducto;
         private TextBox txtDireccion;
         private Label label2;
         private TextBox txtEmail;
@@ -331,5 +366,8 @@ namespace VISTA
         private TextBox txtCuit;
         private Label label4;
         private GroupBox groupBox1;
+        private Button btnCerrar;
+        private Button btnBuscarProveedor;
+        private Button btnActualizar;
     }
 }

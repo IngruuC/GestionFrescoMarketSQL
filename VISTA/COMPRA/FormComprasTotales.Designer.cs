@@ -288,9 +288,9 @@
             this.lblTitulo.ForeColor = System.Drawing.Color.White;
             this.lblTitulo.Location = new System.Drawing.Point(74, 27);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(212, 25);
+            this.lblTitulo.Size = new System.Drawing.Size(235, 25);
             this.lblTitulo.TabIndex = 0;
-            this.lblTitulo.Text = "VENTAS TOTALES";
+            this.lblTitulo.Text = "COMPRAS TOTALES";
             // 
             // FormComprasTotales
             // 

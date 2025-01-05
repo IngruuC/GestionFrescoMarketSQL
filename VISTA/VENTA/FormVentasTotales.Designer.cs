@@ -40,7 +40,6 @@ namespace VISTA
             this.btnEstadisticas = new System.Windows.Forms.Button();
             this.lblTotalVentas = new System.Windows.Forms.Label();
             this.dgvVentas = new System.Windows.Forms.DataGridView();
-            this.btnCerrar = new System.Windows.Forms.Button();
             this.panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBoxBusqueda.SuspendLayout();
@@ -276,27 +275,12 @@ namespace VISTA
             this.dgvVentas.Size = new System.Drawing.Size(834, 355);
             this.dgvVentas.TabIndex = 3;
             // 
-            // btnCerrar
-            // 
-            this.btnCerrar.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCerrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnCerrar.ForeColor = System.Drawing.Color.Red;
-            this.btnCerrar.Location = new System.Drawing.Point(982, 555);
-            this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(90, 35);
-            this.btnCerrar.TabIndex = 4;
-            this.btnCerrar.Text = "CERRAR";
-            this.btnCerrar.UseVisualStyleBackColor = false;
-            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
-            // 
             // FormVentasTotales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LemonChiffon;
             this.ClientSize = new System.Drawing.Size(1084, 602);
-            this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.dgvVentas);
             this.Controls.Add(this.groupBoxAcciones);
             this.Controls.Add(this.groupBoxBusqueda);
@@ -340,7 +324,6 @@ namespace VISTA
         private System.Windows.Forms.Button btnEstadisticas;
         private System.Windows.Forms.Label lblTotalVentas;
         private System.Windows.Forms.DataGridView dgvVentas;
-        private System.Windows.Forms.Button btnCerrar;
         private Button btnGenerarInforme;
         private PictureBox pictureBox2;
     }
