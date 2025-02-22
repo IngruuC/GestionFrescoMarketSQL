@@ -24,6 +24,7 @@ namespace VISTA
             this.lblTitulo = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnActualizar = new System.Windows.Forms.Button();
             this.txtCuit = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtTelefono = new System.Windows.Forms.TextBox();
@@ -39,12 +40,11 @@ namespace VISTA
             this.btnGuardar = new System.Windows.Forms.Button();
             this.dgvProveedores = new System.Windows.Forms.DataGridView();
             this.groupBoxBusqueda = new System.Windows.Forms.GroupBox();
+            this.btnBuscarProveedor = new System.Windows.Forms.Button();
             this.txtBuscarProveedor = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnLimpiarBusqueda = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
-            this.btnBuscarProveedor = new System.Windows.Forms.Button();
-            this.btnActualizar = new System.Windows.Forms.Button();
             this.panelSuperior.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -106,9 +106,22 @@ namespace VISTA
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "DATOS DEL PROVEEDOR";
             // 
+            // btnActualizar
+            // 
+            this.btnActualizar.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActualizar.ForeColor = System.Drawing.Color.White;
+            this.btnActualizar.Location = new System.Drawing.Point(13, 410);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(259, 35);
+            this.btnActualizar.TabIndex = 22;
+            this.btnActualizar.Text = "ACTUALIZAR";
+            this.btnActualizar.UseVisualStyleBackColor = false;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click_1);
+            // 
             // txtCuit
             // 
-            this.txtCuit.Location = new System.Drawing.Point(13, 74);
+            this.txtCuit.Location = new System.Drawing.Point(13, 45);
             this.txtCuit.Name = "txtCuit";
             this.txtCuit.Size = new System.Drawing.Size(259, 22);
             this.txtCuit.TabIndex = 20;
@@ -116,7 +129,7 @@ namespace VISTA
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 55);
+            this.label4.Location = new System.Drawing.Point(10, 26);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 16);
             this.label4.TabIndex = 21;
@@ -124,7 +137,7 @@ namespace VISTA
             // 
             // txtTelefono
             // 
-            this.txtTelefono.Location = new System.Drawing.Point(13, 116);
+            this.txtTelefono.Location = new System.Drawing.Point(13, 87);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(259, 22);
             this.txtTelefono.TabIndex = 18;
@@ -132,7 +145,7 @@ namespace VISTA
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 97);
+            this.label3.Location = new System.Drawing.Point(10, 68);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 16);
             this.label3.TabIndex = 19;
@@ -140,7 +153,7 @@ namespace VISTA
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Location = new System.Drawing.Point(13, 162);
+            this.txtDireccion.Location = new System.Drawing.Point(13, 133);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(259, 22);
             this.txtDireccion.TabIndex = 16;
@@ -148,7 +161,7 @@ namespace VISTA
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 143);
+            this.label2.Location = new System.Drawing.Point(10, 114);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 16);
             this.label2.TabIndex = 17;
@@ -156,7 +169,7 @@ namespace VISTA
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(13, 209);
+            this.txtEmail.Location = new System.Drawing.Point(13, 180);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(259, 22);
             this.txtEmail.TabIndex = 14;
@@ -164,7 +177,7 @@ namespace VISTA
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 190);
+            this.label1.Location = new System.Drawing.Point(10, 161);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 16);
             this.label1.TabIndex = 15;
@@ -172,7 +185,7 @@ namespace VISTA
             // 
             // txtRazonSocial
             // 
-            this.txtRazonSocial.Location = new System.Drawing.Point(13, 256);
+            this.txtRazonSocial.Location = new System.Drawing.Point(13, 227);
             this.txtRazonSocial.Name = "txtRazonSocial";
             this.txtRazonSocial.Size = new System.Drawing.Size(259, 22);
             this.txtRazonSocial.TabIndex = 12;
@@ -180,7 +193,7 @@ namespace VISTA
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 237);
+            this.label5.Location = new System.Drawing.Point(10, 208);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(120, 16);
             this.label5.TabIndex = 13;
@@ -191,7 +204,7 @@ namespace VISTA
             this.btnModificar.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificar.ForeColor = System.Drawing.Color.White;
-            this.btnModificar.Location = new System.Drawing.Point(152, 360);
+            this.btnModificar.Location = new System.Drawing.Point(152, 369);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(120, 35);
             this.btnModificar.TabIndex = 11;
@@ -204,7 +217,7 @@ namespace VISTA
             this.btnEliminar.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEliminar.ForeColor = System.Drawing.Color.White;
-            this.btnEliminar.Location = new System.Drawing.Point(13, 360);
+            this.btnEliminar.Location = new System.Drawing.Point(13, 369);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(120, 35);
             this.btnEliminar.TabIndex = 10;
@@ -217,7 +230,7 @@ namespace VISTA
             this.btnGuardar.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.ForeColor = System.Drawing.Color.White;
-            this.btnGuardar.Location = new System.Drawing.Point(13, 293);
+            this.btnGuardar.Location = new System.Drawing.Point(13, 328);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(259, 35);
             this.btnGuardar.TabIndex = 9;
@@ -231,12 +244,12 @@ namespace VISTA
             this.dgvProveedores.AllowUserToDeleteRows = false;
             this.dgvProveedores.BackgroundColor = System.Drawing.Color.White;
             this.dgvProveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProveedores.Location = new System.Drawing.Point(378, 143);
+            this.dgvProveedores.Location = new System.Drawing.Point(311, 143);
             this.dgvProveedores.MultiSelect = false;
             this.dgvProveedores.Name = "dgvProveedores";
             this.dgvProveedores.ReadOnly = true;
             this.dgvProveedores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProveedores.Size = new System.Drawing.Size(534, 244);
+            this.dgvProveedores.Size = new System.Drawing.Size(670, 244);
             this.dgvProveedores.TabIndex = 4;
             // 
             // groupBoxBusqueda
@@ -252,6 +265,19 @@ namespace VISTA
             this.groupBoxBusqueda.TabIndex = 5;
             this.groupBoxBusqueda.TabStop = false;
             this.groupBoxBusqueda.Text = "BÚSQUEDA";
+            // 
+            // btnBuscarProveedor
+            // 
+            this.btnBuscarProveedor.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnBuscarProveedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscarProveedor.ForeColor = System.Drawing.Color.White;
+            this.btnBuscarProveedor.Location = new System.Drawing.Point(478, 24);
+            this.btnBuscarProveedor.Name = "btnBuscarProveedor";
+            this.btnBuscarProveedor.Size = new System.Drawing.Size(76, 30);
+            this.btnBuscarProveedor.TabIndex = 14;
+            this.btnBuscarProveedor.Text = "BUSCAR";
+            this.btnBuscarProveedor.UseVisualStyleBackColor = false;
+            this.btnBuscarProveedor.Click += new System.EventHandler(this.btnBuscarProveedor_Click_1);
             // 
             // txtBuscarProveedor
             // 
@@ -295,32 +321,6 @@ namespace VISTA
             this.btnCerrar.Text = "CERRAR";
             this.btnCerrar.UseVisualStyleBackColor = false;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
-            // 
-            // btnBuscarProveedor
-            // 
-            this.btnBuscarProveedor.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnBuscarProveedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscarProveedor.ForeColor = System.Drawing.Color.White;
-            this.btnBuscarProveedor.Location = new System.Drawing.Point(478, 24);
-            this.btnBuscarProveedor.Name = "btnBuscarProveedor";
-            this.btnBuscarProveedor.Size = new System.Drawing.Size(76, 30);
-            this.btnBuscarProveedor.TabIndex = 14;
-            this.btnBuscarProveedor.Text = "BUSCAR";
-            this.btnBuscarProveedor.UseVisualStyleBackColor = false;
-            this.btnBuscarProveedor.Click += new System.EventHandler(this.btnBuscarProveedor_Click_1);
-            // 
-            // btnActualizar
-            // 
-            this.btnActualizar.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnActualizar.ForeColor = System.Drawing.Color.White;
-            this.btnActualizar.Location = new System.Drawing.Point(13, 410);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(259, 35);
-            this.btnActualizar.TabIndex = 22;
-            this.btnActualizar.Text = "ACTUALIZAR";
-            this.btnActualizar.UseVisualStyleBackColor = false;
-            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click_1);
             // 
             // FormRegistroProveedor
             // 

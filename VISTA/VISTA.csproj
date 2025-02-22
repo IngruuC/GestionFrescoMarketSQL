@@ -198,6 +198,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="COMPRA\FormCompra.resx">
+      <DependentUpon>FormCompra.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="COMPRA\FormComprasTotales.resx">
       <DependentUpon>FormComprasTotales.cs</DependentUpon>
     </EmbeddedResource>

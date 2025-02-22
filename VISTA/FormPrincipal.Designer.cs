@@ -72,13 +72,14 @@
             this.btnComprasTotales.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnComprasTotales.Image = global::VISTA.Properties.Resources.icons8_supplier_60;
             this.btnComprasTotales.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnComprasTotales.Location = new System.Drawing.Point(7, 478);
+            this.btnComprasTotales.Location = new System.Drawing.Point(11, 571);
             this.btnComprasTotales.Name = "btnComprasTotales";
             this.btnComprasTotales.Size = new System.Drawing.Size(194, 87);
             this.btnComprasTotales.TabIndex = 10;
             this.btnComprasTotales.Text = "COMPRAS TOTALES";
             this.btnComprasTotales.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnComprasTotales.UseVisualStyleBackColor = false;
+            this.btnComprasTotales.Click += new System.EventHandler(this.btnComprasTotales_Click);
             // 
             // btnRealizarVenta
             // 
@@ -131,13 +132,14 @@
             this.btnRealizarCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRealizarCompra.Image = global::VISTA.Properties.Resources.icons8_inventory_64__1_2;
             this.btnRealizarCompra.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnRealizarCompra.Location = new System.Drawing.Point(4, 656);
+            this.btnRealizarCompra.Location = new System.Drawing.Point(7, 478);
             this.btnRealizarCompra.Name = "btnRealizarCompra";
             this.btnRealizarCompra.Size = new System.Drawing.Size(194, 87);
             this.btnRealizarCompra.TabIndex = 9;
             this.btnRealizarCompra.Text = "NUEVA COMPRA";
             this.btnRealizarCompra.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnRealizarCompra.UseVisualStyleBackColor = false;
+            this.btnRealizarCompra.Click += new System.EventHandler(this.btnRealizarCompra_Click);
             // 
             // btnVentasTotales
             // 

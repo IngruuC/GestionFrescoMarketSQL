@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VISTA.COMPRA;
 
 namespace VISTA
 {
@@ -46,8 +47,8 @@ namespace VISTA
 
         private void btnRegistrarProveedor_Click(object sender, EventArgs e)
         {
-            FormRegistroProveedor formRegistroProveedor = new FormRegistroProveedor();
-            formRegistroProveedor.ShowDialog();
+            FormRegistroProveedor frm = new FormRegistroProveedor();
+            AbrirFormEnPanel(frm);
         }
 
 
@@ -73,7 +74,16 @@ namespace VISTA
             formHijo.BringToFront();
         }
 
+        private void btnComprasTotales_Click(object sender, EventArgs e)
+        {
+            FormComprasTotales frm = new FormComprasTotales();
+            AbrirFormEnPanel(frm);
+        }
 
-       
+        private void btnRealizarCompra_Click(object sender, EventArgs e)
+        {
+               FormCompra frm = new FormCompra();
+            AbrirFormEnPanel(frm);
+        }
     }
 }
