@@ -35,10 +35,12 @@ namespace ENTIDADES
         public virtual ICollection<DetalleCompra> DetallesCompra { get; set; } //
 
 
+
         public Producto()
         {
             DetallesVenta = new List<DetalleVenta>();
-           DetallesCompra = new List<DetalleCompra>(); //
+           DetallesCompra = new List<DetalleCompra>();
+
         }
     }
 }

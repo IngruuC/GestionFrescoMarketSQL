@@ -45,11 +45,15 @@ namespace VISTA
             this.label6 = new System.Windows.Forms.Label();
             this.btnLimpiarBusqueda = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
+            this.btnQuitarProducto = new System.Windows.Forms.Button();
+            this.btnAsignarProductos = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panelSuperior.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).BeginInit();
             this.groupBoxBusqueda.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSuperior
@@ -249,7 +253,7 @@ namespace VISTA
             this.dgvProveedores.Name = "dgvProveedores";
             this.dgvProveedores.ReadOnly = true;
             this.dgvProveedores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProveedores.Size = new System.Drawing.Size(670, 244);
+            this.dgvProveedores.Size = new System.Drawing.Size(670, 349);
             this.dgvProveedores.TabIndex = 4;
             // 
             // groupBoxBusqueda
@@ -310,11 +314,11 @@ namespace VISTA
             // 
             // btnCerrar
             // 
-            this.btnCerrar.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnCerrar.BackColor = System.Drawing.Color.LemonChiffon;
             this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnCerrar.ForeColor = System.Drawing.Color.Red;
-            this.btnCerrar.Location = new System.Drawing.Point(891, 530);
+            this.btnCerrar.Location = new System.Drawing.Point(588, 35);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(90, 35);
             this.btnCerrar.TabIndex = 6;
@@ -322,11 +326,51 @@ namespace VISTA
             this.btnCerrar.UseVisualStyleBackColor = false;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
+            // btnQuitarProducto
+            // 
+            this.btnQuitarProducto.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnQuitarProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuitarProducto.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.btnQuitarProducto.Location = new System.Drawing.Point(23, 21);
+            this.btnQuitarProducto.Name = "btnQuitarProducto";
+            this.btnQuitarProducto.Size = new System.Drawing.Size(104, 49);
+            this.btnQuitarProducto.TabIndex = 10;
+            this.btnQuitarProducto.Text = "QUITAR";
+            this.btnQuitarProducto.UseVisualStyleBackColor = false;
+            this.btnQuitarProducto.Click += new System.EventHandler(this.btnQuitarProducto_Click);
+            // 
+            // btnAsignarProductos
+            // 
+            this.btnAsignarProductos.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnAsignarProductos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAsignarProductos.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.btnAsignarProductos.Location = new System.Drawing.Point(133, 21);
+            this.btnAsignarProductos.Name = "btnAsignarProductos";
+            this.btnAsignarProductos.Size = new System.Drawing.Size(101, 49);
+            this.btnAsignarProductos.TabIndex = 11;
+            this.btnAsignarProductos.Text = "ASIGNAR";
+            this.btnAsignarProductos.UseVisualStyleBackColor = false;
+            this.btnAsignarProductos.Click += new System.EventHandler(this.btnAsignarProductos_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.groupBox2.Controls.Add(this.btnAsignarProductos);
+            this.groupBox2.Controls.Add(this.btnCerrar);
+            this.groupBox2.Controls.Add(this.btnQuitarProducto);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(297, 498);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(696, 80);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "PRODUCTOS POR VENDEDOR:";
+            // 
             // FormRegistroProveedor
             // 
             this.BackColor = System.Drawing.Color.LemonChiffon;
             this.ClientSize = new System.Drawing.Size(993, 577);
-            this.Controls.Add(this.btnCerrar);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBoxBusqueda);
             this.Controls.Add(this.dgvProveedores);
             this.Controls.Add(this.panel2);
@@ -340,6 +384,7 @@ namespace VISTA
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).EndInit();
             this.groupBoxBusqueda.ResumeLayout(false);
             this.groupBoxBusqueda.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
     }
@@ -369,5 +414,8 @@ namespace VISTA
         private Button btnCerrar;
         private Button btnBuscarProveedor;
         private Button btnActualizar;
+        private Button btnQuitarProducto;
+        private Button btnAsignarProductos;
+        private GroupBox groupBox2;
     }
 }

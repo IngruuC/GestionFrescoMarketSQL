@@ -101,11 +101,10 @@ namespace VISTA.COMPRA
         {
             try
             {
-                var compras = controladoraCompra.ObtenerCompras()
-                    .Where(c => c.FechaCompra.Date >= dtpFechaDesde.Value.Date &&
-                               c.FechaCompra.Date <= dtpFechaHasta.Value.Date)
-                    .OrderByDescending(c => c.FechaCompra)
-                    .ToList();
+                // Intentar obtener compras mediante la controladora
+                var compras = controladoraCompra.ObtenerCompras();
+
+                Console.WriteLine($"Compras encontradas: {compras?.Count ?? 0}");
 
                 dgvCompras.DataSource = null;
                 dgvCompras.DataSource = compras;
@@ -119,7 +118,26 @@ namespace VISTA.COMPRA
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al cargar las compras: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Mostrar un mensaje con todos los detalles posibles del error
+                StringBuilder errorMsg = new StringBuilder();
+                errorMsg.AppendLine($"Error principal: {ex.Message}");
+
+                // Obtener detalles de la excepción interna
+                Exception innerEx = ex;
+                int level = 0;
+
+                while (innerEx.InnerException != null)
+                {
+                    level++;
+                    innerEx = innerEx.InnerException;
+                    errorMsg.AppendLine($"Error interno nivel {level}: {innerEx.Message}");
+                }
+
+                // Agregar StackTrace para tener información más detallada
+                errorMsg.AppendLine("\nStack Trace:");
+                errorMsg.AppendLine(ex.StackTrace);
+
+                MessageBox.Show(errorMsg.ToString(), "Error detallado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

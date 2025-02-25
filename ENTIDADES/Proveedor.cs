@@ -19,9 +19,14 @@ namespace ENTIDADES
         public string Direccion { get; set; }
         public List<Compra> Compras { get; set; }
 
+        // Nuevas propiedades para la relación con Usuario
+        public int? UsuarioId { get; set; }
+        public virtual Usuario Usuario { get; set; }
+
         public Proveedor()
         {
             Compras = new List<Compra>();
+
         }
 
         public string DatosCompletos  //Para mostrar en combobox

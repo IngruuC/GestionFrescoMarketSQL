@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.0.3\lib\net472\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
       <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
@@ -98,12 +101,25 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -119,6 +135,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarritoTemporal.cs" />
     <Compile Include="COMPRA\FormCompra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,17 +154,78 @@
     <Compile Include="COMPRA\FormReportesCompras.Designer.cs">
       <DependentUpon>FormReportesCompras.cs</DependentUpon>
     </Compile>
+    <Compile Include="COMPRA\FormAsignarProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="COMPRA\FormAsignarProductos.Designer.cs">
+      <DependentUpon>FormAsignarProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormBackupRestauracionBD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBackupRestauracionBD.Designer.cs">
+      <DependentUpon>FormBackupRestauracionBD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VENTA\FormCarritoCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VENTA\FormCarritoCompra.Designer.cs">
+      <DependentUpon>FormCarritoCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VENTA\FormComprasCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VENTA\FormComprasCliente.Designer.cs">
+      <DependentUpon>FormComprasCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VENTA\FormFavoritosCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VENTA\FormFavoritosCliente.Designer.cs">
+      <DependentUpon>FormFavoritosCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VENTA\FormPerfilCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VENTA\FormPerfilCliente.Designer.cs">
+      <DependentUpon>FormPerfilCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormPrincipal.Designer.cs">
       <DependentUpon>FormPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="VENTA\FormVistaCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VENTA\FormVistaCliente.Designer.cs">
+      <DependentUpon>FormVistaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VENTA\FormVistaPrincipalCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VENTA\FormVistaPrincipalCliente.Designer.cs">
+      <DependentUpon>FormVistaPrincipalCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="COMPRA\FormVistaProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="COMPRA\FormVistaProveedor.Designer.cs">
+      <DependentUpon>FormVistaProveedor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SEGURIDAD\RegistroUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SEGURIDAD\RegistroUsuario.Designer.cs">
+      <DependentUpon>RegistroUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SEGURIDAD\SesionActual.cs" />
     <Compile Include="VENTA\FormRegistroCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,10 +268,10 @@
     <Compile Include="Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs">
+    <Compile Include="SEGURIDAD\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
+    <Compile Include="SEGURIDAD\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -207,8 +285,29 @@
     <EmbeddedResource Include="COMPRA\FormReportesCompras.resx">
       <DependentUpon>FormReportesCompras.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="COMPRA\FormAsignarProductos.resx">
+      <DependentUpon>FormAsignarProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBackupRestauracionBD.resx">
+      <DependentUpon>FormBackupRestauracionBD.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormPrincipal.resx">
       <DependentUpon>FormPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VENTA\FormComprasCliente.resx">
+      <DependentUpon>FormComprasCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VENTA\FormFavoritosCliente.resx">
+      <DependentUpon>FormFavoritosCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VENTA\FormPerfilCliente.resx">
+      <DependentUpon>FormPerfilCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VENTA\FormVistaCliente.resx">
+      <DependentUpon>FormVistaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SEGURIDAD\RegistroUsuario.resx">
+      <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VENTA\FormRegistroCliente.resx">
       <DependentUpon>FormRegistroCliente.cs</DependentUpon>
@@ -228,7 +327,7 @@
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
+    <EmbeddedResource Include="SEGURIDAD\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -236,6 +335,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VENTA\FormVistaPrincipalCliente.resx">
+      <DependentUpon>FormVistaPrincipalCliente.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

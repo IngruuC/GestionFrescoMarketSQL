@@ -18,6 +18,12 @@ namespace ENTIDADES
         public string Direccion { get; set; }
         public List<Venta> Ventas { get; set; }
 
+
+        // Nuevas propiedades para la relación con Usuario
+        public int? UsuarioId { get; set; }
+        public virtual Usuario Usuario { get; set; }
+
+
         public Cliente()
         {
             Ventas = new List<Venta>();

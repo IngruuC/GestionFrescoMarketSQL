@@ -18,10 +18,19 @@ namespace VISTA
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FormPrincipal formMenu = new FormPrincipal();
+            Login formLogin = new Login();
             this.Hide();
-            formMenu.ShowDialog();
-            this.Close();
+            if (formLogin.ShowDialog() == DialogResult.OK)
+            {
+                // Si el login fue exitoso, el formulario Inicio se cierra
+                this.Close();
+            }
+            else
+            {
+                // Si canceló o cerró el login, volvemos a mostrar el Inicio
+                this.Show();
+            }
         }
     }
+    
 }

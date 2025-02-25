@@ -180,6 +180,7 @@ namespace VISTA
             this.btnAgregarProducto.TabIndex = 8;
             this.btnAgregarProducto.Text = "AGREGAR PRODUCTO";
             this.btnAgregarProducto.UseVisualStyleBackColor = false;
+            this.btnAgregarProducto.Click += new System.EventHandler(this.btnAgregarProducto_Click_1);
             // 
             // btnModificar
             // 
@@ -192,6 +193,7 @@ namespace VISTA
             this.btnModificar.TabIndex = 9;
             this.btnModificar.Text = "MODIFICAR";
             this.btnModificar.UseVisualStyleBackColor = false;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click_1);
             // 
             // btnEliminar
             // 
@@ -204,6 +206,7 @@ namespace VISTA
             this.btnEliminar.TabIndex = 10;
             this.btnEliminar.Text = "ELIMINAR";
             this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click_1);
             // 
             // lblTotal
             // 
@@ -240,6 +243,7 @@ namespace VISTA
             this.btnFinalizarCompra.TabIndex = 1;
             this.btnFinalizarCompra.Text = "FINALIZAR";
             this.btnFinalizarCompra.UseVisualStyleBackColor = false;
+            this.btnFinalizarCompra.Click += new System.EventHandler(this.btnFinalizarCompra_Click_1);
             // 
             // btnCancelar
             // 
@@ -253,6 +257,7 @@ namespace VISTA
             this.btnCancelar.TabIndex = 0;
             this.btnCancelar.Text = "CANCELAR";
             this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
             // 
             // FormCompra
             // 

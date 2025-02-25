@@ -16,9 +16,11 @@ namespace ENTIDADES
         public int Id { get; set; }
 
         [Required]
+        [Column("ClienteId")] // Especificar el nombre exacto de la columna
         public int ClienteId { get; set; }
 
         [Required]
+        [Column("Fecha")] // Cambiar a "Fecha" en lugar de "FechaVenta"
         public DateTime FechaVenta { get; set; }
 
         [Required]
@@ -28,6 +30,7 @@ namespace ENTIDADES
         [Required]
         public string FormaPago { get; set; }
 
+        [ForeignKey("ClienteId")]
         public virtual Cliente Cliente { get; set; }
         public virtual ICollection<DetalleVenta> Detalles { get; set; }
 

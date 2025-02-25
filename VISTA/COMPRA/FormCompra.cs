@@ -15,6 +15,8 @@ namespace VISTA
         private ControladoraCompra controladoraCompra;
         private List<DetalleCompra> detallesCompra = new List<DetalleCompra>();
         private int compraIdActual;
+        private GestorRelacionProveedorProducto gestorRelacion;
+
 
         public FormCompra()
         {
@@ -24,6 +26,8 @@ namespace VISTA
             controladoraCompra = ControladoraCompra.ObtenerInstancia();
             ConfigurarControles();
             compraIdActual = GenerarNuevaCompraId();
+            gestorRelacion = GestorRelacionProveedorProducto.ObtenerInstancia();
+
         }
 
         private void ConfigurarControles()
@@ -76,13 +80,65 @@ namespace VISTA
             dgvCompra.SelectionChanged += dgvCompra_SelectionChanged;
 
             cboProveedores.SelectedIndexChanged += cboProveedores_SelectedIndexChanged;
+            cboProductos.SelectedIndexChanged += cboProductos_SelectedIndexChanged;
+
         }
 
         private void cboProveedores_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboProveedores.SelectedIndex != -1)
             {
-                cboProveedores.Enabled = false;  // Bloquea el ComboBox para realizar compra a un único proveedor
+                cboProveedores.Enabled = false;  // Bloquea el ComboBox
+                int proveedorId = (int)cboProveedores.SelectedValue;
+                CargarProductosDelProveedor(proveedorId);
+            }
+        }
+
+        private void SimularFiltroProductosPorProveedor(Proveedor proveedor)
+        {
+            try
+            {
+                // Esta es una lógica simple de filtrado. Puedes adaptarla según tu necesidad
+                // Por ejemplo, podríamos filtrar productos que empiecen con la misma letra que el proveedor
+                // O usar otras reglas de negocio que tengan sentido en tu contexto
+
+                var productos = controladoraProducto.ObtenerProductos().ToList();
+
+                // Simulamos un filtro basado en alguna regla arbitraria 
+                // (puedes cambiar esta lógica por algo más relacionado a tu negocio)
+                var productosDelProveedor = productos;
+
+                // Si quieres aplicar algún filtro específico, puedes descomentar esto y ajustarlo:
+                /*
+                // Por ejemplo, si los productos comienzan con la primera letra de la razón social del proveedor
+                char letraInicial = proveedor.RazonSocial.ToUpper()[0];
+                var productosDelProveedor = productos.Where(p => p.Nombre.ToUpper().StartsWith(letraInicial.ToString())).ToList();
+                */
+
+                cboProductos.DataSource = null;
+                cboProductos.DataSource = productosDelProveedor;
+                cboProductos.DisplayMember = "Nombre";
+                cboProductos.ValueMember = "Id";
+                cboProductos.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar los productos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void cboProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboProductos.SelectedIndex != -1)
+            {
+                Producto productoSeleccionado = (Producto)cboProductos.SelectedItem;
+                // Usamos el precio actual del producto como precio de compra sugerido
+                // Quizás podrías aplicar un descuento
+                decimal precioSugerido = productoSeleccionado.Precio * 0.8m; // 20% menos que el precio de venta
+                txtPrecioUnitario.Text = precioSugerido.ToString("N2");
+            }
+            else
+            {
+                txtPrecioUnitario.Clear();
             }
         }
 
@@ -109,6 +165,37 @@ namespace VISTA
                 var productos = controladoraProducto.ObtenerProductos().ToList();
                 cboProductos.DataSource = null;
                 cboProductos.DataSource = productos;
+                cboProductos.DisplayMember = "Nombre";
+                cboProductos.ValueMember = "Id";
+                cboProductos.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar los productos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CargarProductosDelProveedor(int proveedorId)
+        {
+            try
+            {
+                var todosLosProductos = controladoraProducto.ObtenerProductos();
+                var productosProveedor = gestorRelacion.ObtenerProductosDeProveedor(proveedorId, todosLosProductos);
+
+                if (productosProveedor.Count == 0)
+                {
+                    MessageBox.Show("Este proveedor no tiene productos asignados. Se mostrarán todos los productos disponibles.",
+                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    cboProductos.DataSource = null;
+                    cboProductos.DataSource = todosLosProductos;
+                }
+                else
+                {
+                    cboProductos.DataSource = null;
+                    cboProductos.DataSource = productosProveedor;
+                }
+
                 cboProductos.DisplayMember = "Nombre";
                 cboProductos.ValueMember = "Id";
                 cboProductos.SelectedIndex = -1;
@@ -170,65 +257,6 @@ namespace VISTA
             return true;
         }
 
-        private void btnAgregarProducto_Click(object sender, EventArgs e)
-        {
-            if (!ValidarDatos()) return;
-
-            try
-            {
-                var producto = (Producto)cboProductos.SelectedItem;
-                int cantidad = (int)nudCantidad.Value;
-                decimal precioUnitario = decimal.Parse(txtPrecioUnitario.Text);
-
-                var detalle = new DetalleCompra
-                {
-                    ProductoId = producto.Id,
-                    ProductoNombre = producto.Nombre,
-                    Cantidad = cantidad,
-                    PrecioUnitario = precioUnitario,
-                    Subtotal = precioUnitario * cantidad,
-                    Producto = producto
-                };
-
-                detallesCompra.Add(detalle);
-                ActualizarDataGridView();
-                LimpiarControles();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al agregar el producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnModificar_Click(object sender, EventArgs e)
-        {
-            if (dgvCompra.SelectedRows.Count == 0) return;
-
-            var detalle = (DetalleCompra)dgvCompra.SelectedRows[0].DataBoundItem;
-            var producto = controladoraProducto.ObtenerProductoPorId(detalle.ProductoId);
-
-            if (producto == null)
-            {
-                MessageBox.Show("No se pudo encontrar el producto seleccionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            cboProductos.SelectedValue = producto.Id;
-            nudCantidad.Value = detalle.Cantidad;
-            txtPrecioUnitario.Text = detalle.PrecioUnitario.ToString();
-            detallesCompra.Remove(detalle);
-            ActualizarDataGridView();
-        }
-
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            if (dgvCompra.SelectedRows.Count == 0) return;
-
-            var detalle = (DetalleCompra)dgvCompra.SelectedRows[0].DataBoundItem;
-            detallesCompra.Remove(detalle);
-            ActualizarDataGridView();
-        }
-
         private string MostrarDialogoFormaPago()
         {
             using (var form = new Form())
@@ -267,7 +295,95 @@ namespace VISTA
             }
         }
 
-        private void btnFinalizarCompra_Click(object sender, EventArgs e)
+
+
+
+        private void dgvCompra_SelectionChanged(object sender, EventArgs e)
+        {
+            btnModificar.Enabled = dgvCompra.SelectedRows.Count > 0;
+            btnEliminar.Enabled = dgvCompra.SelectedRows.Count > 0;
+        }
+
+        private void FormCompra_Load(object sender, EventArgs e)
+        {
+            ActualizarDataGridView();
+        }
+
+        private void btnAgregarProducto_Click_1(object sender, EventArgs e)
+        {
+            if (!ValidarDatos()) return;
+
+            try
+            {
+                var producto = (Producto)cboProductos.SelectedItem;
+                int cantidad = (int)nudCantidad.Value;
+                decimal precioUnitario = decimal.Parse(txtPrecioUnitario.Text);
+
+                var detalle = new DetalleCompra
+                {
+                    ProductoId = producto.Id,
+                    ProductoNombre = producto.Nombre,
+                    Cantidad = cantidad,
+                    PrecioUnitario = precioUnitario,
+                    Subtotal = precioUnitario * cantidad,
+                    Producto = producto
+                };
+
+                detallesCompra.Add(detalle);
+                ActualizarDataGridView();
+                LimpiarControles();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al agregar el producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnModificar_Click_1(object sender, EventArgs e)
+        {
+            if (dgvCompra.SelectedRows.Count == 0) return;
+
+            var detalle = (DetalleCompra)dgvCompra.SelectedRows[0].DataBoundItem;
+            var producto = controladoraProducto.ObtenerProductoPorId(detalle.ProductoId);
+
+            if (producto == null)
+            {
+                MessageBox.Show("No se pudo encontrar el producto seleccionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            cboProductos.SelectedValue = producto.Id;
+            nudCantidad.Value = detalle.Cantidad;
+            txtPrecioUnitario.Text = detalle.PrecioUnitario.ToString();
+            detallesCompra.Remove(detalle);
+            ActualizarDataGridView();
+        }
+
+        private void btnEliminar_Click_1(object sender, EventArgs e)
+        {
+            if (dgvCompra.SelectedRows.Count == 0) return;
+
+            var detalle = (DetalleCompra)dgvCompra.SelectedRows[0].DataBoundItem;
+            detallesCompra.Remove(detalle);
+            ActualizarDataGridView();
+        }
+
+        private void btnCancelar_Click_1(object sender, EventArgs e)
+        {
+            if (detallesCompra.Count > 0)
+            {
+                var resultado = MessageBox.Show("¿Está seguro que desea cancelar la compra?",
+                    "Confirmar cancelación",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (resultado == DialogResult.No) return;
+            }
+
+            this.Close();
+        }
+
+        private void btnFinalizarCompra_Click_1(object sender, EventArgs e)
         {
             if (cboProveedores.SelectedIndex == -1)
             {
@@ -353,32 +469,6 @@ namespace VISTA
             {
                 MessageBox.Show($"Error al realizar la compra: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            if (detallesCompra.Count > 0)
-            {
-                var resultado = MessageBox.Show("¿Está seguro que desea cancelar la compra?",
-                    "Confirmar cancelación",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (resultado == DialogResult.No) return;
-            }
-
-            this.Close();
-        }
-
-        private void dgvCompra_SelectionChanged(object sender, EventArgs e)
-        {
-            btnModificar.Enabled = dgvCompra.SelectedRows.Count > 0;
-            btnEliminar.Enabled = dgvCompra.SelectedRows.Count > 0;
-        }
-
-        private void FormCompra_Load(object sender, EventArgs e)
-        {
-            ActualizarDataGridView();
         }
     }
 }

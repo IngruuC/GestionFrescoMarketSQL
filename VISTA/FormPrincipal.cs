@@ -85,5 +85,19 @@ namespace VISTA
                FormCompra frm = new FormCompra();
             AbrirFormEnPanel(frm);
         }
+
+        private void btnGestionBackup_Click(object sender, EventArgs e)
+        {
+            if (SesionActual.EsAdministrador())
+            {
+                FormBackupRestauracionBD frm = new FormBackupRestauracionBD();
+                AbrirFormEnPanel(frm);
+            }
+            else
+            {
+                MessageBox.Show("Solo los administradores pueden acceder a esta función.",
+                    "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }

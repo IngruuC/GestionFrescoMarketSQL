@@ -84,6 +84,7 @@
     <Compile Include="ControladoraReporteCompra.cs" />
     <Compile Include="ControladoraUsuario.cs" />
     <Compile Include="ControladoraVenta.cs" />
+    <Compile Include="GestorRelacionProveedorProducto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

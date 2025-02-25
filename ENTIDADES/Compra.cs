@@ -9,7 +9,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ENTIDADES
 {
-   public class Compra
+    [Table("Compra")]
+    public class Compra
     {
         [Key]
         public int Id { get; set; }
@@ -30,6 +31,7 @@ namespace ENTIDADES
         [Required]
         public string NumeroFactura { get; set; }
 
+        [ForeignKey("ProveedorId")]
         public virtual Proveedor Proveedor { get; set; }
         public virtual ICollection<DetalleCompra> Detalles { get; set; }
 

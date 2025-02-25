@@ -14,9 +14,13 @@ namespace VISTA
 {
     public partial class FormRegistroProveedor : Form
     {
-       
-         private ControladoraProveedor controladora;
         
+        private ControladoraProveedor controladora;
+        private ControladoraProducto controladoraProducto;
+
+        private List<Producto> productosDisponibles = new List<Producto>();
+        private List<Producto> productosAsignados = new List<Producto>();
+
         public FormRegistroProveedor()
         {
             InitializeComponent();
@@ -34,6 +38,8 @@ namespace VISTA
             dgvProveedores.AllowUserToDeleteRows = false;
             dgvProveedores.MultiSelect = false;
             dgvProveedores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            controladoraProducto = ControladoraProducto.ObtenerInstancia();
+
         }
 
         private void ConfigurarControles()
@@ -281,6 +287,36 @@ namespace VISTA
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al actualizar el proveedor: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnQuitarProducto_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Esta funcionalidad se implementará en una futura versión.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnAsignarProductos_Click(object sender, EventArgs e)
+        {
+            if (dgvProveedores.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Seleccione un proveedor para asignar productos.",
+                    "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var proveedor = (Proveedor)dgvProveedores.SelectedRows[0].DataBoundItem;
+
+            try
+            {
+                using (var formAsignar = new FormAsignarProductos(proveedor.Id, proveedor.RazonSocial))
+                {
+                    formAsignar.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al abrir el formulario de asignación: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

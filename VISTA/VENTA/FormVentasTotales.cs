@@ -105,8 +105,8 @@ namespace VISTA
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error completo: {ex.ToString()}");
-                MessageBox.Show($"Error al cargar las ventas: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al cargar las ventas: {ex.Message}\n\nExcepción interna: {ex.InnerException?.Message}",
+                       "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

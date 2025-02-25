@@ -36,6 +36,8 @@ namespace ENTIDADES
         public string ProductoNombre { get; set; }
 
         public virtual Venta Venta { get; set; }
+
+        [ForeignKey("ProductoId")]
         public virtual Producto Producto { get; set; }
     }
 }
