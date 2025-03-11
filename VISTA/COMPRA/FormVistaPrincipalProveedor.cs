@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ENTIDADES;
+using ENTIDADES.SEGURIDAD;
 using CONTROLADORA;
 using VISTA;
 using VISTA.COMPRA;

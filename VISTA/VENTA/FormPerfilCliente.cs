@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CONTROLADORA;
 using ENTIDADES;
+using ENTIDADES.SEGURIDAD;
 
 namespace VISTA
 {
@@ -153,9 +154,9 @@ namespace VISTA
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(txtNuevaContraseña.Text) || txtNuevaContraseña.Text.Length < 6)
+            if (string.IsNullOrWhiteSpace(txtNuevaContraseña.Text))
             {
-                MessageBox.Show("La nueva contraseña debe tener al menos 6 caracteres.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Ingrese la nueva contraseña.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNuevaContraseña.Focus();
                 return false;
             }
@@ -164,6 +165,15 @@ namespace VISTA
             {
                 MessageBox.Show("Las contraseñas no coinciden.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtConfirmarContraseña.Focus();
+                return false;
+            }
+
+            // Validar complejidad de la nueva contraseña
+            string mensajeError;
+            if (!ENTIDADES.SEGURIDAD.ValidadorContraseña.ValidarComplejidad(txtNuevaContraseña.Text, out mensajeError))
+            {
+                MessageBox.Show(mensajeError, "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNuevaContraseña.Focus();
                 return false;
             }
 
@@ -186,8 +196,7 @@ namespace VISTA
                 }
 
                 // Actualizar contraseña
-                usuarioActual.Contraseña = txtNuevaContraseña.Text;
-                controladoraUsuario.ModificarUsuario(usuarioActual);
+                controladoraUsuario.CambiarContrasena(usuarioActual.Id, txtNuevaContraseña.Text);
 
                 MessageBox.Show("Contraseña actualizada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();

@@ -166,6 +166,18 @@
     <Compile Include="COMPRA\FormReportesProveedor.Designer.cs">
       <DependentUpon>FormReportesProveedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAuditoriaSesion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAuditoriaSesion.Designer.cs">
+      <DependentUpon>FormAuditoriaSesion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SEGURIDAD.FORMS\FormRecuperarContraseña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SEGURIDAD.FORMS\FormRecuperarContraseña.Designer.cs">
+      <DependentUpon>FormRecuperarContraseña.cs</DependentUpon>
+    </Compile>
     <Compile Include="VENTA\CarritoTemporal.cs" />
     <Compile Include="COMPRA\FormCompra.cs">
       <SubType>Form</SubType>
@@ -191,10 +203,10 @@
     <Compile Include="COMPRA\FormAsignarProductos.Designer.cs">
       <DependentUpon>FormAsignarProductos.cs</DependentUpon>
     </Compile>
-    <Compile Include="SEGURIDAD\FormBackupRestauracionBD.cs">
+    <Compile Include="SEGURIDAD.FORMS\FormBackupRestauracionBD.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SEGURIDAD\FormBackupRestauracionBD.Designer.cs">
+    <Compile Include="SEGURIDAD.FORMS\FormBackupRestauracionBD.Designer.cs">
       <DependentUpon>FormBackupRestauracionBD.cs</DependentUpon>
     </Compile>
     <Compile Include="VENTA\FormCarritoCompra.cs">
@@ -244,13 +256,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SEGURIDAD\RegistroUsuario.cs">
+    <Compile Include="SEGURIDAD.FORMS\RegistroUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SEGURIDAD\RegistroUsuario.Designer.cs">
+    <Compile Include="SEGURIDAD.FORMS\RegistroUsuario.Designer.cs">
       <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="SEGURIDAD\SesionActual.cs" />
     <Compile Include="VENTA\FormRegistroCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,16 +298,16 @@
     <Compile Include="VENTA\FormVentasTotales.Designer.cs">
       <DependentUpon>FormVentasTotales.cs</DependentUpon>
     </Compile>
-    <Compile Include="SEGURIDAD\Inicio.cs">
+    <Compile Include="SEGURIDAD.FORMS\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SEGURIDAD\Inicio.Designer.cs">
+    <Compile Include="SEGURIDAD.FORMS\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="SEGURIDAD\Login.cs">
+    <Compile Include="SEGURIDAD.FORMS\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SEGURIDAD\Login.Designer.cs">
+    <Compile Include="SEGURIDAD.FORMS\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -325,7 +336,13 @@
     <EmbeddedResource Include="COMPRA\FormReportesProveedor.resx">
       <DependentUpon>FormReportesProveedor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SEGURIDAD\FormBackupRestauracionBD.resx">
+    <EmbeddedResource Include="FormAuditoriaSesion.resx">
+      <DependentUpon>FormAuditoriaSesion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SEGURIDAD.FORMS\FormRecuperarContraseña.resx">
+      <DependentUpon>FormRecuperarContraseña.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SEGURIDAD.FORMS\FormBackupRestauracionBD.resx">
       <DependentUpon>FormBackupRestauracionBD.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VENTA\FormPrincipal.resx">
@@ -346,7 +363,7 @@
     <EmbeddedResource Include="VENTA\FormVistaCliente.resx">
       <DependentUpon>FormVistaCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SEGURIDAD\RegistroUsuario.resx">
+    <EmbeddedResource Include="SEGURIDAD.FORMS\RegistroUsuario.resx">
       <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VENTA\FormRegistroCliente.resx">
@@ -364,10 +381,10 @@
     <EmbeddedResource Include="VENTA\FormVentasTotales.resx">
       <DependentUpon>FormVentasTotales.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SEGURIDAD\Inicio.resx">
+    <EmbeddedResource Include="SEGURIDAD.FORMS\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SEGURIDAD\Login.resx">
+    <EmbeddedResource Include="SEGURIDAD.FORMS\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />

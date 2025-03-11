@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using VISTA.VENTA;
+using ENTIDADES.SEGURIDAD;
 
 namespace VISTA
 {

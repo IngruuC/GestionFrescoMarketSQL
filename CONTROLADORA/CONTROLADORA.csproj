@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControladoraAuditoria.cs" />
     <Compile Include="ControladoraCliente.cs" />
     <Compile Include="ControladoraCompra.cs" />
     <Compile Include="ControladoraProducto.cs" />

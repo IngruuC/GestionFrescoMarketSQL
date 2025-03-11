@@ -24,6 +24,7 @@ namespace MODELO
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Venta> Ventas { get; set; }
         public DbSet<DetalleVenta> DetallesVenta { get; set; }
+    //  public DbSet<AuditoriaSesion> AuditoriasSesion { get; set; } //
 
         public DbSet<Grupo> Grupos { get; set; }
         public DbSet<Permiso> Permisos { get; set; }
@@ -209,6 +210,10 @@ namespace MODELO
                 .HasIndex(pp => new { pp.ProveedorId, pp.ProductoId })
                 .IsUnique();
 
+
+            // Auditoria
+         // modelBuilder.Entity<AuditoriaSesion>().ToTable("AuditoriasSesion");
+
             base.OnModelCreating(modelBuilder);
 
             // Configurar la relación muchos a muchos entre Usuarios y Grupos
@@ -232,6 +237,7 @@ namespace MODELO
                     m.MapLeftKey("GrupoId");
                     m.MapRightKey("PermisoId");
                 });
+
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using CONTROLADORA;
 using ENTIDADES;
+using ENTIDADES.SEGURIDAD;
 
 namespace VISTA
 {

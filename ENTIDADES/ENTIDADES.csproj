@@ -60,20 +60,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cliente.cs" />
-    <Compile Include="Compra.cs" />
-    <Compile Include="DetalleCompra.cs" />
-    <Compile Include="DetalleVenta.cs" />
-    <Compile Include="Grupo.cs" />
-    <Compile Include="Permiso.cs" />
-    <Compile Include="Producto.cs" />
+    <Compile Include="SEGURIDAD\AuditoriaSesion.cs" />
+    <Compile Include="SEGURIDAD\EmailService.cs" />
+    <Compile Include="SEGURIDAD\SesionActual.cs" />
+    <Compile Include="SEGURIDAD\ValidadorContraseña.cs" />
+    <Compile Include="VENTA\Cliente.cs" />
+    <Compile Include="COMPRA\Compra.cs" />
+    <Compile Include="COMPRA\DetalleCompra.cs" />
+    <Compile Include="VENTA\DetalleVenta.cs" />
+    <Compile Include="SEGURIDAD\Grupo.cs" />
+    <Compile Include="SEGURIDAD\Permiso.cs" />
+    <Compile Include="VENTA\Producto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Proveedor.cs" />
-    <Compile Include="ProveedorProducto.cs" />
-    <Compile Include="ReporteVenta.cs" />
-    <Compile Include="ResultadoLogin.cs" />
-    <Compile Include="Usuario.cs" />
-    <Compile Include="Venta.cs" />
+    <Compile Include="COMPRA\Proveedor.cs" />
+    <Compile Include="COMPRA\ProveedorProducto.cs" />
+    <Compile Include="VENTA\ReporteVenta.cs" />
+    <Compile Include="SEGURIDAD\ResultadoLogin.cs" />
+    <Compile Include="SEGURIDAD\Usuario.cs" />
+    <Compile Include="VENTA\Venta.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

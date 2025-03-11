@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VISTA.COMPRA;
+using ENTIDADES;
+using ENTIDADES.SEGURIDAD;
 
 namespace VISTA
 {
@@ -123,6 +125,23 @@ namespace VISTA
             {
                 MessageBox.Show($"Error al cerrar sesión: {ex.Message}",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void AuditoriasSesion_Click(object sender, EventArgs e)
+        {
+            if (SesionActual.EsAdministrador())
+            {
+                FormAuditoriaSesion formAuditoria = new FormAuditoriaSesion();
+                AbrirFormEnPanel(formAuditoria);
+            }
+            else
+            {
+                MessageBox.Show("Solo los administradores pueden acceder a la auditoría de sesiones.",
+                    "Acceso Denegado",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
             }
         }
     }

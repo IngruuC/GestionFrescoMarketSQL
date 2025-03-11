@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VISTA
+namespace ENTIDADES.SEGURIDAD
 {
     public static class SesionActual
     {

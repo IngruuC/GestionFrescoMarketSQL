@@ -39,12 +39,13 @@
             this.btnVentasTotales = new System.Windows.Forms.Button();
             this.btnRegistrarProveedor = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panelContenedor = new System.Windows.Forms.Panel();
             this.lblFrescoMarket = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnSalir = new System.Windows.Forms.Button();
+            this.AuditoriasSesion = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panelContenedor.SuspendLayout();
@@ -191,12 +192,29 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.panel3.Controls.Add(this.AuditoriasSesion);
             this.panel3.Controls.Add(this.btnSalir);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Location = new System.Drawing.Point(207, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1114, 114);
             this.panel3.TabIndex = 12;
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.BackColor = System.Drawing.Color.Transparent;
+            this.btnSalir.FlatAppearance.BorderSize = 0;
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.ForeColor = System.Drawing.Color.Transparent;
+            this.btnSalir.Image = global::VISTA.Properties.Resources.icons8_salida;
+            this.btnSalir.Location = new System.Drawing.Point(1051, 72);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(63, 42);
+            this.btnSalir.TabIndex = 6;
+            this.btnSalir.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // label2
             // 
@@ -246,21 +264,21 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // btnSalir
+            // AuditoriasSesion
             // 
-            this.btnSalir.BackColor = System.Drawing.Color.Transparent;
-            this.btnSalir.FlatAppearance.BorderSize = 0;
-            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.ForeColor = System.Drawing.Color.Transparent;
-            this.btnSalir.Image = global::VISTA.Properties.Resources.icons8_salida;
-            this.btnSalir.Location = new System.Drawing.Point(1051, 72);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(63, 42);
-            this.btnSalir.TabIndex = 6;
-            this.btnSalir.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSalir.UseVisualStyleBackColor = false;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            this.AuditoriasSesion.BackColor = System.Drawing.Color.Transparent;
+            this.AuditoriasSesion.FlatAppearance.BorderSize = 0;
+            this.AuditoriasSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AuditoriasSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AuditoriasSesion.ForeColor = System.Drawing.Color.Transparent;
+            this.AuditoriasSesion.Image = ((System.Drawing.Image)(resources.GetObject("AuditoriasSesion.Image")));
+            this.AuditoriasSesion.Location = new System.Drawing.Point(994, 65);
+            this.AuditoriasSesion.Name = "AuditoriasSesion";
+            this.AuditoriasSesion.Size = new System.Drawing.Size(63, 49);
+            this.AuditoriasSesion.TabIndex = 8;
+            this.AuditoriasSesion.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.AuditoriasSesion.UseVisualStyleBackColor = false;
+            this.AuditoriasSesion.Click += new System.EventHandler(this.AuditoriasSesion_Click);
             // 
             // FormPrincipal
             // 
@@ -302,5 +320,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnGestionBackup;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button AuditoriasSesion;
     }
 }

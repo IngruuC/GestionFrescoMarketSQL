@@ -25,6 +25,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnRegistrar = new System.Windows.Forms.Button();
+            this.lnkOlvideContraseña = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -124,6 +125,14 @@
             this.btnRegistrar.UseVisualStyleBackColor = false;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
+            // lnkOlvideContraseña
+            // 
+            this.lnkOlvideContraseña.AutoSize = true;
+            this.lnkOlvideContraseña.Location = new System.Drawing.Point(691, 315);
+            this.lnkOlvideContraseña.Name = "lnkOlvideContraseña";
+            this.lnkOlvideContraseña.Size = new System.Drawing.Size(0, 13);
+            this.lnkOlvideContraseña.TabIndex = 11;
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -131,6 +140,7 @@
             this.BackColor = System.Drawing.Color.LemonChiffon;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(804, 454);
+            this.Controls.Add(this.lnkOlvideContraseña);
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -161,5 +171,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btnRegistrar;
+        private System.Windows.Forms.LinkLabel lnkOlvideContraseña;
     }
 }
