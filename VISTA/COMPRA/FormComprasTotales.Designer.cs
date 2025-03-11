@@ -32,7 +32,6 @@
             this.btnCerrar = new System.Windows.Forms.Button();
             this.dgvCompras = new System.Windows.Forms.DataGridView();
             this.groupBoxAcciones = new System.Windows.Forms.GroupBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnGenerarInforme = new System.Windows.Forms.Button();
             this.btnDetalleCompra = new System.Windows.Forms.Button();
             this.btnEliminarCompra = new System.Windows.Forms.Button();
@@ -48,13 +47,14 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiarBusqueda = new System.Windows.Forms.Button();
             this.panelSuperior = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).BeginInit();
             this.groupBoxAcciones.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBoxBusqueda.SuspendLayout();
             this.panelSuperior.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,6 +70,7 @@
             this.btnCerrar.TabIndex = 9;
             this.btnCerrar.Text = "CERRAR";
             this.btnCerrar.UseVisualStyleBackColor = false;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click_1);
             // 
             // dgvCompras
             // 
@@ -101,15 +102,6 @@
             this.groupBoxAcciones.TabStop = false;
             this.groupBoxAcciones.Text = "ACCIONES";
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(42, 23);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(130, 105);
-            this.pictureBox2.TabIndex = 5;
-            this.pictureBox2.TabStop = false;
-            // 
             // btnGenerarInforme
             // 
             this.btnGenerarInforme.BackColor = System.Drawing.Color.DarkGoldenrod;
@@ -121,6 +113,7 @@
             this.btnGenerarInforme.TabIndex = 4;
             this.btnGenerarInforme.Text = "GENERAR INFORME";
             this.btnGenerarInforme.UseVisualStyleBackColor = false;
+            this.btnGenerarInforme.Click += new System.EventHandler(this.btnGenerarInforme_Click_1);
             // 
             // btnDetalleCompra
             // 
@@ -133,6 +126,7 @@
             this.btnDetalleCompra.TabIndex = 0;
             this.btnDetalleCompra.Text = "VER DETALLE";
             this.btnDetalleCompra.UseVisualStyleBackColor = false;
+            this.btnDetalleCompra.Click += new System.EventHandler(this.btnDetalleCompra_Click_1);
             // 
             // btnEliminarCompra
             // 
@@ -145,6 +139,7 @@
             this.btnEliminarCompra.TabIndex = 1;
             this.btnEliminarCompra.Text = "ELIMINAR";
             this.btnEliminarCompra.UseVisualStyleBackColor = false;
+            this.btnEliminarCompra.Click += new System.EventHandler(this.btnEliminarCompra_Click_1);
             // 
             // btnEstadisticas
             // 
@@ -157,6 +152,7 @@
             this.btnEstadisticas.TabIndex = 2;
             this.btnEstadisticas.Text = "ESTADÍSTICAS";
             this.btnEstadisticas.UseVisualStyleBackColor = false;
+            this.btnEstadisticas.Click += new System.EventHandler(this.btnEstadisticas_Click_1);
             // 
             // lblTotalCompras
             // 
@@ -247,6 +243,7 @@
             this.btnBuscar.TabIndex = 6;
             this.btnBuscar.Text = "BUSCAR";
             this.btnBuscar.UseVisualStyleBackColor = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click_1);
             // 
             // btnLimpiarBusqueda
             // 
@@ -259,6 +256,7 @@
             this.btnLimpiarBusqueda.TabIndex = 7;
             this.btnLimpiarBusqueda.Text = "LIMPIAR";
             this.btnLimpiarBusqueda.UseVisualStyleBackColor = false;
+            this.btnLimpiarBusqueda.Click += new System.EventHandler(this.btnLimpiarBusqueda_Click_1);
             // 
             // panelSuperior
             // 
@@ -271,16 +269,6 @@
             this.panelSuperior.Size = new System.Drawing.Size(1086, 70);
             this.panelSuperior.TabIndex = 5;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(56, 55);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
@@ -291,6 +279,25 @@
             this.lblTitulo.Size = new System.Drawing.Size(235, 25);
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "COMPRAS TOTALES";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(42, 23);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(130, 105);
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(56, 55);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
             // 
             // FormComprasTotales
             // 
@@ -305,14 +312,15 @@
             this.Controls.Add(this.panelSuperior);
             this.Name = "FormComprasTotales";
             this.Text = "FormComprasTotales";
+            this.Load += new System.EventHandler(this.FormComprasTotales_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).EndInit();
             this.groupBoxAcciones.ResumeLayout(false);
             this.groupBoxAcciones.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBoxBusqueda.ResumeLayout(false);
             this.groupBoxBusqueda.PerformLayout();
             this.panelSuperior.ResumeLayout(false);
             this.panelSuperior.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

@@ -24,22 +24,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnGenerarPDF = new System.Windows.Forms.Button();
+            this.chartCompras = new LiveCharts.WinForms.CartesianChart();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-
-            // Configuración del cartesianChart
-            this.chartCompras = new LiveCharts.WinForms.CartesianChart();
-            this.chartCompras.Location = new System.Drawing.Point(330, 76);
-            this.chartCompras.Name = "chartCompras";
-            this.chartCompras.Size = new System.Drawing.Size(650, 450);
-            this.chartCompras.TabIndex = 5;
-            this.chartCompras.BackColor = System.Drawing.Color.White;
-            this.chartCompras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-
-            // Agregar al formulario
-            this.Controls.Add(this.chartCompras);
-
             // 
             // panel1
             // 
@@ -124,12 +112,24 @@
             this.btnGenerarPDF.UseVisualStyleBackColor = false;
             this.btnGenerarPDF.Click += new System.EventHandler(this.btnGenerarPDF_Click);
             // 
+            // chartCompras
+            // 
+            this.chartCompras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chartCompras.BackColor = System.Drawing.Color.White;
+            this.chartCompras.Location = new System.Drawing.Point(330, 76);
+            this.chartCompras.Name = "chartCompras";
+            this.chartCompras.Size = new System.Drawing.Size(658, 453);
+            this.chartCompras.TabIndex = 5;
+            // 
             // FormReportesCompras
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LemonChiffon;
             this.ClientSize = new System.Drawing.Size(1000, 550);
+            this.Controls.Add(this.chartCompras);
             this.Controls.Add(this.btnGenerarPDF);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
@@ -144,7 +144,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-
 
         }
 

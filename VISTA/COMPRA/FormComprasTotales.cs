@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CONTROLADORA;
 using ENTIDADES;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using LiveCharts.Wpf;
+using LiveCharts;
 
 namespace VISTA.COMPRA
 {
@@ -283,18 +288,43 @@ namespace VISTA.COMPRA
             }
         }
 
-        // Eventos de los botones
-        private void btnBuscar_Click(object sender, EventArgs e)
+ 
+
+
+
+
+
+
+
+
+
+        private void btnGenerarInforme_Click_1(object sender, EventArgs e)
+        {
+            FormReportesCompras formReportesCompras = new FormReportesCompras();
+            formReportesCompras.ShowDialog();
+        }
+
+        private void btnCerrar_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnBuscar_Click_1(object sender, EventArgs e)
         {
             FiltrarCompras();
         }
 
-        private void btnLimpiarBusqueda_Click(object sender, EventArgs e)
+        private void btnLimpiarBusqueda_Click_1(object sender, EventArgs e)
         {
+            // Restablecer campos de búsqueda
+            txtBuscarCompra.Clear();
+            dtpFechaDesde.Value = DateTime.Today.AddDays(-30);
+            dtpFechaHasta.Value = DateTime.Today;
 
+            CargarCompras();
         }
 
-        private void btnDetalleCompra_Click(object sender, EventArgs e)
+        private void btnDetalleCompra_Click_1(object sender, EventArgs e)
         {
             if (dgvCompras.SelectedRows.Count == 0)
             {
@@ -306,7 +336,7 @@ namespace VISTA.COMPRA
             MostrarDetalleCompra(compra);
         }
 
-        private void btnEliminarCompra_Click(object sender, EventArgs e)
+        private void btnEliminarCompra_Click_1(object sender, EventArgs e)
         {
             if (dgvCompras.SelectedRows.Count == 0)
             {
@@ -336,19 +366,9 @@ namespace VISTA.COMPRA
             }
         }
 
-        private void btnEstadisticas_Click(object sender, EventArgs e)
+        private void btnEstadisticas_Click_1(object sender, EventArgs e)
         {
             MostrarEstadisticas();
-        }
-
-        private void btnGenerarInforme_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void FormComprasTotales_Load(object sender, EventArgs e)
