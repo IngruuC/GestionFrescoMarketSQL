@@ -52,6 +52,7 @@ namespace CONTROLADORA
             clienteExistente.Nombre = cliente.Nombre;
             clienteExistente.Apellido = cliente.Apellido;
             clienteExistente.Direccion = cliente.Direccion;
+            clienteExistente.UsuarioId = cliente.UsuarioId; // Asegurar que se actualiza este campo
 
             contexto.SaveChanges();
         }
@@ -71,8 +72,23 @@ namespace CONTROLADORA
 
         public List<Cliente> ObtenerClientes()
         {
-            return contexto.Clientes.ToList();
+            return contexto.Clientes
+                .Include(c => c.Usuario)  // Esto carga explícitamente el objeto Usuario
+                .ToList();
         }
 
+
+        public void ActualizarUsuarioEnCliente(int clienteId, int usuarioId)
+        {
+            using (var contexto = new Contexto())
+            {
+                var cliente = contexto.Clientes.Find(clienteId);
+                if (cliente == null)
+                    throw new Exception("Cliente no encontrado");
+
+                cliente.UsuarioId = usuarioId;
+                contexto.SaveChanges();
+            }
+        }
     }
 }

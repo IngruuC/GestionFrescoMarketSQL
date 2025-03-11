@@ -38,5 +38,6 @@ namespace ENTIDADES
         {
             return RazonSocial.Trim();
         }
+
     }
 }

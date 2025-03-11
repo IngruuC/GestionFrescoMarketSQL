@@ -30,12 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPrincipal));
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panelContenedor = new System.Windows.Forms.Panel();
-            this.lblFrescoMarket = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnGestionBackup = new System.Windows.Forms.Button();
             this.btnComprasTotales = new System.Windows.Forms.Button();
             this.btnRealizarVenta = new System.Windows.Forms.Button();
             this.btnRegistrarCliente = new System.Windows.Forms.Button();
@@ -43,7 +38,13 @@
             this.btnRealizarCompra = new System.Windows.Forms.Button();
             this.btnVentasTotales = new System.Windows.Forms.Button();
             this.btnRegistrarProveedor = new System.Windows.Forms.Button();
-            this.btnGestionBackup = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panelContenedor = new System.Windows.Forms.Panel();
+            this.lblFrescoMarket = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panelContenedor.SuspendLayout();
@@ -68,62 +69,19 @@
             this.panelMenu.Size = new System.Drawing.Size(225, 632);
             this.panelMenu.TabIndex = 3;
             // 
-            // panel3
+            // btnGestionBackup
             // 
-            this.panel3.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(207, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1114, 114);
-            this.panel3.TabIndex = 12;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("MingLiU-ExtB", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(377, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(236, 96);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Menú";
-            // 
-            // panelContenedor
-            // 
-            this.panelContenedor.Controls.Add(this.lblFrescoMarket);
-            this.panelContenedor.Location = new System.Drawing.Point(232, 120);
-            this.panelContenedor.Name = "panelContenedor";
-            this.panelContenedor.Size = new System.Drawing.Size(1089, 610);
-            this.panelContenedor.TabIndex = 13;
-            // 
-            // lblFrescoMarket
-            // 
-            this.lblFrescoMarket.AutoSize = true;
-            this.lblFrescoMarket.Font = new System.Drawing.Font("MingLiU-ExtB", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFrescoMarket.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblFrescoMarket.Location = new System.Drawing.Point(221, 202);
-            this.lblFrescoMarket.Name = "lblFrescoMarket";
-            this.lblFrescoMarket.Size = new System.Drawing.Size(628, 96);
-            this.lblFrescoMarket.TabIndex = 0;
-            this.lblFrescoMarket.Text = "FrescoMarket";
-            this.lblFrescoMarket.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(1, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(213, 114);
-            this.panel1.TabIndex = 14;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(45, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(126, 131);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.btnGestionBackup.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnGestionBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnGestionBackup.Image = ((System.Drawing.Image)(resources.GetObject("btnGestionBackup.Image")));
+            this.btnGestionBackup.Location = new System.Drawing.Point(7, 664);
+            this.btnGestionBackup.Name = "btnGestionBackup";
+            this.btnGestionBackup.Size = new System.Drawing.Size(194, 87);
+            this.btnGestionBackup.TabIndex = 1;
+            this.btnGestionBackup.Text = "BACKUP";
+            this.btnGestionBackup.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnGestionBackup.UseVisualStyleBackColor = false;
+            this.btnGestionBackup.Click += new System.EventHandler(this.btnGestionBackup_Click);
             // 
             // btnComprasTotales
             // 
@@ -230,19 +188,79 @@
             this.btnRegistrarProveedor.UseVisualStyleBackColor = false;
             this.btnRegistrarProveedor.Click += new System.EventHandler(this.btnRegistrarProveedor_Click);
             // 
-            // btnGestionBackup
+            // panel3
             // 
-            this.btnGestionBackup.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnGestionBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnGestionBackup.Image = ((System.Drawing.Image)(resources.GetObject("btnGestionBackup.Image")));
-            this.btnGestionBackup.Location = new System.Drawing.Point(7, 664);
-            this.btnGestionBackup.Name = "btnGestionBackup";
-            this.btnGestionBackup.Size = new System.Drawing.Size(194, 87);
-            this.btnGestionBackup.TabIndex = 1;
-            this.btnGestionBackup.Text = "BACKUP";
-            this.btnGestionBackup.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnGestionBackup.UseVisualStyleBackColor = false;
-            this.btnGestionBackup.Click += new System.EventHandler(this.btnGestionBackup_Click);
+            this.panel3.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.panel3.Controls.Add(this.btnSalir);
+            this.panel3.Controls.Add(this.label2);
+            this.panel3.Location = new System.Drawing.Point(207, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1114, 114);
+            this.panel3.TabIndex = 12;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("MingLiU-ExtB", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(377, 3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(236, 96);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Menú";
+            // 
+            // panelContenedor
+            // 
+            this.panelContenedor.Controls.Add(this.lblFrescoMarket);
+            this.panelContenedor.Location = new System.Drawing.Point(232, 120);
+            this.panelContenedor.Name = "panelContenedor";
+            this.panelContenedor.Size = new System.Drawing.Size(1089, 610);
+            this.panelContenedor.TabIndex = 13;
+            // 
+            // lblFrescoMarket
+            // 
+            this.lblFrescoMarket.AutoSize = true;
+            this.lblFrescoMarket.Font = new System.Drawing.Font("MingLiU-ExtB", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFrescoMarket.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblFrescoMarket.Location = new System.Drawing.Point(221, 202);
+            this.lblFrescoMarket.Name = "lblFrescoMarket";
+            this.lblFrescoMarket.Size = new System.Drawing.Size(628, 96);
+            this.lblFrescoMarket.TabIndex = 0;
+            this.lblFrescoMarket.Text = "FrescoMarket";
+            this.lblFrescoMarket.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Location = new System.Drawing.Point(1, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(213, 114);
+            this.panel1.TabIndex = 14;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(45, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(126, 131);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.BackColor = System.Drawing.Color.Transparent;
+            this.btnSalir.FlatAppearance.BorderSize = 0;
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.ForeColor = System.Drawing.Color.Transparent;
+            this.btnSalir.Image = global::VISTA.Properties.Resources.icons8_salida;
+            this.btnSalir.Location = new System.Drawing.Point(1051, 72);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(63, 42);
+            this.btnSalir.TabIndex = 6;
+            this.btnSalir.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // FormPrincipal
             // 
@@ -283,5 +301,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnGestionBackup;
+        private System.Windows.Forms.Button btnSalir;
     }
 }

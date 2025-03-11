@@ -48,6 +48,7 @@ namespace VISTA
             this.btnQuitarProducto = new System.Windows.Forms.Button();
             this.btnAsignarProductos = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnAsignarUsuarios = new System.Windows.Forms.Button();
             this.panelSuperior.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -355,6 +356,7 @@ namespace VISTA
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.groupBox2.Controls.Add(this.btnAsignarUsuarios);
             this.groupBox2.Controls.Add(this.btnAsignarProductos);
             this.groupBox2.Controls.Add(this.btnCerrar);
             this.groupBox2.Controls.Add(this.btnQuitarProducto);
@@ -365,6 +367,17 @@ namespace VISTA
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "PRODUCTOS POR VENDEDOR:";
+            // 
+            // btnAsignarUsuarios
+            // 
+            this.btnAsignarUsuarios.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnAsignarUsuarios.Location = new System.Drawing.Point(414, 35);
+            this.btnAsignarUsuarios.Name = "btnAsignarUsuarios";
+            this.btnAsignarUsuarios.Size = new System.Drawing.Size(168, 35);
+            this.btnAsignarUsuarios.TabIndex = 12;
+            this.btnAsignarUsuarios.Text = "ASIGNAR USUARIOS";
+            this.btnAsignarUsuarios.UseVisualStyleBackColor = false;
+            this.btnAsignarUsuarios.Click += new System.EventHandler(this.btnAsignarUsuarios_Click);
             // 
             // FormRegistroProveedor
             // 
@@ -417,5 +430,6 @@ namespace VISTA
         private Button btnQuitarProducto;
         private Button btnAsignarProductos;
         private GroupBox groupBox2;
+        private Button btnAsignarUsuarios;
     }
 }

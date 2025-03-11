@@ -70,12 +70,28 @@ namespace CONTROLADORA
 
         public List<Proveedor> ObtenerProveedores()
         {
-            return contexto.Proveedores.ToList();
+
+            return contexto.Proveedores
+                .Include("Usuario")  // Usar string en lugar de expresión lambda
+                .ToList();
         }
 
         public Proveedor ObtenerProveedorPorId(int id)
         {
             return contexto.Proveedores.Find(id);
+        }
+
+        public void ActualizarUsuarioEnProveedor(int proveedorId, int usuarioId)
+        {
+            using (var ctx = new Contexto())
+            {
+                var proveedor = ctx.Proveedores.Find(proveedorId);
+                if (proveedor == null)
+                    throw new Exception("Proveedor no encontrado");
+
+                proveedor.UsuarioId = usuarioId;
+                ctx.SaveChanges();
+            }
         }
     }
 }

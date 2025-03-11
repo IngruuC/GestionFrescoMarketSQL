@@ -54,6 +54,7 @@
             this.dgvCliente = new System.Windows.Forms.DataGridView();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnAsignarUsuarios = new System.Windows.Forms.Button();
             this.panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBoxDatos.SuspendLayout();
@@ -316,12 +317,24 @@
             // 
             this.toolTip1.IsBalloon = true;
             // 
+            // btnAsignarUsuarios
+            // 
+            this.btnAsignarUsuarios.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnAsignarUsuarios.Location = new System.Drawing.Point(801, 555);
+            this.btnAsignarUsuarios.Name = "btnAsignarUsuarios";
+            this.btnAsignarUsuarios.Size = new System.Drawing.Size(168, 35);
+            this.btnAsignarUsuarios.TabIndex = 5;
+            this.btnAsignarUsuarios.Text = "ASIGNAR USUARIOS";
+            this.btnAsignarUsuarios.UseVisualStyleBackColor = false;
+            this.btnAsignarUsuarios.Click += new System.EventHandler(this.btnAsignarUsuarios_Click);
+            // 
             // FormRegistroCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LemonChiffon;
             this.ClientSize = new System.Drawing.Size(1084, 602);
+            this.Controls.Add(this.btnAsignarUsuarios);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.dgvCliente);
             this.Controls.Add(this.groupBoxBusqueda);
@@ -371,5 +384,6 @@
         private System.Windows.Forms.Button btnCerrar;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button btnBuscarCliente;
+        private System.Windows.Forms.Button btnAsignarUsuarios;
     }
 }

@@ -32,14 +32,98 @@ namespace VISTA
 
         private void InicializarDataGridView()
         {
-            dgvProveedores.AutoGenerateColumns = true;
+            dgvProveedores.AutoGenerateColumns = false;
             dgvProveedores.ReadOnly = true;
             dgvProveedores.AllowUserToAddRows = false;
             dgvProveedores.AllowUserToDeleteRows = false;
             dgvProveedores.MultiSelect = false;
             dgvProveedores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            controladoraProducto = ControladoraProducto.ObtenerInstancia();
 
+            // Columnas para los datos básicos del proveedor
+            dgvProveedores.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Cuit",
+                HeaderText = "CUIT",
+                Width = 120
+            });
+
+            dgvProveedores.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "RazonSocial",
+                HeaderText = "Razón Social",
+                Width = 180
+            });
+
+            dgvProveedores.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Telefono",
+                HeaderText = "Teléfono",
+                Width = 120
+            });
+
+            dgvProveedores.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Email",
+                HeaderText = "Email",
+                Width = 150
+            });
+
+            dgvProveedores.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Direccion",
+                HeaderText = "Dirección",
+                Width = 180
+            });
+
+            // Columnas para la información del usuario
+            dgvProveedores.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "UsuarioId",
+                HeaderText = "UsuarioId",
+                Width = 80
+            });
+
+            // Columna especial para el nombre de usuario
+            dgvProveedores.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "NombreUsuario",  // Nombre interno de la columna
+                HeaderText = "Nombre de Usuario",
+                Width = 150
+            });
+
+            // Columna para los datos completos (si la tienes)
+            dgvProveedores.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "DatosCompletos",
+                HeaderText = "Datos Completos",
+                Width = 200
+            });
+
+            // Agregar el evento CellFormatting
+            dgvProveedores.CellFormatting += DgvProveedores_CellFormatting;
+        }
+
+
+        private void DgvProveedores_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Si es la columna "NombreUsuario" y el valor de la celda no está formateado aún
+            if (dgvProveedores.Columns[e.ColumnIndex].Name == "NombreUsuario" && e.RowIndex >= 0)
+            {
+                // Obtener el proveedor de la fila actual
+                var proveedor = (Proveedor)dgvProveedores.Rows[e.RowIndex].DataBoundItem;
+
+                // Verificar si tiene un usuario asignado
+                if (proveedor.Usuario != null)
+                {
+                    e.Value = proveedor.Usuario.NombreUsuario;
+                }
+                else
+                {
+                    e.Value = "No asignado";
+                }
+
+                e.FormattingApplied = true;
+            }
         }
 
         private void ConfigurarControles()
@@ -317,6 +401,121 @@ namespace VISTA
             {
                 MessageBox.Show($"Error al abrir el formulario de asignación: {ex.Message}",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnAsignarUsuarios_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                var controladora = ControladoraProveedor.ObtenerInstancia();
+                var controladoraUsuario = ControladoraUsuario.ObtenerInstancia();
+
+                // Obtener todos los proveedores
+                var proveedores = controladora.ObtenerProveedores();
+
+                // Filtrar proveedores sin usuario
+                var proveedoresSinUsuario = proveedores.Where(p => p.UsuarioId == null).ToList();
+
+                if (proveedoresSinUsuario.Count == 0)
+                {
+                    MessageBox.Show("Todos los proveedores ya tienen usuarios asignados.",
+                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Confirmar la operación
+                var resultado = MessageBox.Show(
+                    $"Se encontraron {proveedoresSinUsuario.Count} proveedores sin usuario asignado.\n" +
+                    "¿Desea crear usuarios automáticamente para estos proveedores?\n\n" +
+                    "- Se usará el formato proveedor_CUIT como nombre de usuario\n" +
+                    "- Se usará el CUIT como contraseña inicial\n" +
+                    "- El proveedor deberá cambiar su contraseña al iniciar sesión",
+                    "Confirmar asignación",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (resultado == DialogResult.No)
+                    return;
+
+                // Obtener grupo Proveedor
+                var grupoProveedor = controladoraUsuario.ObtenerGrupoPorNombre("Proveedor");
+                if (grupoProveedor == null)
+                {
+                    MessageBox.Show("No se encontró el grupo 'Proveedor'. Por favor, cree este grupo primero.",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Guardamos solo el ID del grupo para evitar problemas de rastreo de entidades
+                int grupoProveedorId = grupoProveedor.Id;
+
+                int proveedoresActualizados = 0;
+                StringBuilder logErrores = new StringBuilder();
+
+                // Procesar cada proveedor sin usuario
+                foreach (var proveedor in proveedoresSinUsuario)
+                {
+                    try
+                    {
+                        // Verificar si ya existe un usuario con ese nombre
+                        string nombreUsuario = $"proveedor_{proveedor.Cuit}";
+                        if (controladoraUsuario.ExisteUsuario(nombreUsuario))
+                        {
+                            // Intenta con una variante
+                            nombreUsuario = $"proveedor_{proveedor.Cuit}_{proveedor.Id}";
+                            if (controladoraUsuario.ExisteUsuario(nombreUsuario))
+                            {
+                                logErrores.AppendLine($"No se pudo crear usuario para {proveedor.RazonSocial}: " +
+                                                   $"Ya existe un usuario con nombre {nombreUsuario}");
+                                continue;
+                            }
+                        }
+
+                        // Crear usuario con su grupo
+                        var usuario = new Usuario
+                        {
+                            NombreUsuario = nombreUsuario,
+                            Contraseña = proveedor.Cuit, // Se hasheará automáticamente
+                            Email = $"{nombreUsuario}@frescomarket.com",
+                            Estado = true,
+                            FechaCreacion = DateTime.Now,
+                            IntentosIngreso = 0,
+                            Rol = "Proveedor"
+                        };
+
+                        // Utilizar el método de agregar usuario con grupo
+                        controladoraUsuario.AgregarUsuarioConGrupo(usuario, grupoProveedorId);
+
+                        // Actualizar el proveedor con el ID del usuario
+                        proveedor.UsuarioId = usuario.Id;
+                        controladora.ActualizarUsuarioEnProveedor(proveedor.Id, usuario.Id);
+
+                        proveedoresActualizados++;
+                    }
+                    catch (Exception ex)
+                    {
+                        logErrores.AppendLine($"Error con proveedor {proveedor.RazonSocial}: {ex.Message}");
+                    }
+                }
+
+                // Mostrar resultados
+                string mensaje = $"Proceso completado.\nProveedores actualizados: {proveedoresActualizados} de {proveedoresSinUsuario.Count}";
+                if (logErrores.Length > 0)
+                {
+                    mensaje += $"\n\nErrores encontrados:\n{logErrores}";
+                }
+
+                MessageBox.Show(mensaje, "Resultado", MessageBoxButtons.OK,
+                    proveedoresActualizados == proveedoresSinUsuario.Count ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
+
+                // Recargar datos
+                CargarDatosEnDataGridView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error en el proceso: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

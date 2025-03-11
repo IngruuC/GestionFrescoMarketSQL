@@ -99,5 +99,31 @@ namespace VISTA
                     "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult resultado = MessageBox.Show("¿Está seguro que desea cerrar sesión?",
+                    "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (resultado == DialogResult.Yes)
+                {
+                    SesionActual.CerrarSesion();
+                    Login loginForm = new Login();
+                    this.Hide(); // Oculta el formulario actual
+                    DialogResult loginResult = loginForm.ShowDialog();
+
+                    if (loginResult != DialogResult.OK)
+                    {
+                        this.Close(); // Cierra el formulario actual si no se inició sesión
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cerrar sesión: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

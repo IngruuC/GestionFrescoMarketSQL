@@ -135,7 +135,37 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarritoTemporal.cs" />
+    <Compile Include="COMPRA\FormMisProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="COMPRA\FormMisProductos.Designer.cs">
+      <DependentUpon>FormMisProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="COMPRA\FormPerfilProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="COMPRA\FormPerfilProveedor.Designer.cs">
+      <DependentUpon>FormPerfilProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="COMPRA\FormVistaPrincipalProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="COMPRA\FormVistaPrincipalProveedor.Designer.cs">
+      <DependentUpon>FormVistaPrincipalProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="COMPRA\FormHistorialCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="COMPRA\FormHistorialCompras.Designer.cs">
+      <DependentUpon>FormHistorialCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="COMPRA\FormReportesProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="COMPRA\FormReportesProveedor.Designer.cs">
+      <DependentUpon>FormReportesProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VENTA\CarritoTemporal.cs" />
     <Compile Include="COMPRA\FormCompra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,10 +190,10 @@
     <Compile Include="COMPRA\FormAsignarProductos.Designer.cs">
       <DependentUpon>FormAsignarProductos.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormBackupRestauracionBD.cs">
+    <Compile Include="SEGURIDAD\FormBackupRestauracionBD.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormBackupRestauracionBD.Designer.cs">
+    <Compile Include="SEGURIDAD\FormBackupRestauracionBD.Designer.cs">
       <DependentUpon>FormBackupRestauracionBD.cs</DependentUpon>
     </Compile>
     <Compile Include="VENTA\FormCarritoCompra.cs">
@@ -190,10 +220,10 @@
     <Compile Include="VENTA\FormPerfilCliente.Designer.cs">
       <DependentUpon>FormPerfilCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPrincipal.cs">
+    <Compile Include="VENTA\FormPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPrincipal.Designer.cs">
+    <Compile Include="VENTA\FormPrincipal.Designer.cs">
       <DependentUpon>FormPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="VENTA\FormVistaCliente.cs">
@@ -207,12 +237,6 @@
     </Compile>
     <Compile Include="VENTA\FormVistaPrincipalCliente.Designer.cs">
       <DependentUpon>FormVistaPrincipalCliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="COMPRA\FormVistaProveedor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="COMPRA\FormVistaProveedor.Designer.cs">
-      <DependentUpon>FormVistaProveedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -262,10 +286,10 @@
     <Compile Include="VENTA\FormVentasTotales.Designer.cs">
       <DependentUpon>FormVentasTotales.cs</DependentUpon>
     </Compile>
-    <Compile Include="Inicio.cs">
+    <Compile Include="SEGURIDAD\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Inicio.Designer.cs">
+    <Compile Include="SEGURIDAD\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
     <Compile Include="SEGURIDAD\Login.cs">
@@ -282,16 +306,28 @@
     <EmbeddedResource Include="COMPRA\FormComprasTotales.resx">
       <DependentUpon>FormComprasTotales.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="COMPRA\FormMisProductos.resx">
+      <DependentUpon>FormMisProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="COMPRA\FormPerfilProveedor.resx">
+      <DependentUpon>FormPerfilProveedor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="COMPRA\FormReportesCompras.resx">
       <DependentUpon>FormReportesCompras.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="COMPRA\FormAsignarProductos.resx">
       <DependentUpon>FormAsignarProductos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormBackupRestauracionBD.resx">
+    <EmbeddedResource Include="COMPRA\FormVistaPrincipalProveedor.resx">
+      <DependentUpon>FormVistaPrincipalProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="COMPRA\FormReportesProveedor.resx">
+      <DependentUpon>FormReportesProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SEGURIDAD\FormBackupRestauracionBD.resx">
       <DependentUpon>FormBackupRestauracionBD.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormPrincipal.resx">
+    <EmbeddedResource Include="VENTA\FormPrincipal.resx">
       <DependentUpon>FormPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VENTA\FormComprasCliente.resx">
@@ -324,7 +360,7 @@
     <EmbeddedResource Include="VENTA\FormVentasTotales.resx">
       <DependentUpon>FormVentasTotales.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Inicio.resx">
+    <EmbeddedResource Include="SEGURIDAD\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SEGURIDAD\Login.resx">

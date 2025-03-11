@@ -1,7 +1,9 @@
 ﻿using CONTROLADORA;
 using ENTIDADES;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace VISTA
@@ -20,12 +22,84 @@ namespace VISTA
 
         private void ConfigurarDataGridView()
         {
-            dgvCliente.AutoGenerateColumns = true;
-            dgvCliente.ReadOnly = true;
-            dgvCliente.AllowUserToAddRows = false;
-            dgvCliente.AllowUserToDeleteRows = false;
-            dgvCliente.MultiSelect = false;
-            dgvCliente.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvCliente.AutoGenerateColumns = false;
+
+            // Columnas existentes
+            dgvCliente.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Documento",
+                HeaderText = "Documento",
+                Width = 100
+            });
+
+            dgvCliente.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Nombre",
+                HeaderText = "Nombre",
+                Width = 150
+            });
+
+            dgvCliente.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Apellido",
+                HeaderText = "Apellido",
+                Width = 150
+            });
+
+            dgvCliente.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Direccion",
+                HeaderText = "Direccion",
+                Width = 200
+            });
+
+            dgvCliente.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "UsuarioId",
+                HeaderText = "UsuarioId",
+                Width = 80
+            });
+
+            // Nueva columna que muestra solo el nombre de usuario
+            dgvCliente.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "NombreUsuario", // Nombre interno de la columna
+                HeaderText = "Nombre de Usuario",
+                Width = 150,
+                // No podemos usar DataPropertyName directamente con propiedades anidadas
+            });
+
+            dgvCliente.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "DatosCompletos",
+                HeaderText = "Datos Completos",
+                Width = 250
+            });
+
+            // Configurar el evento CellFormatting para manejar la columna de nombre de usuario
+            dgvCliente.CellFormatting += DgvCliente_CellFormatting;
+        }
+
+        private void DgvCliente_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Si es la columna "NombreUsuario" y el valor de la celda no está formateado aún
+            if (dgvCliente.Columns[e.ColumnIndex].Name == "NombreUsuario" && e.RowIndex >= 0)
+            {
+                // Obtener el cliente de la fila actual
+                var cliente = (Cliente)dgvCliente.Rows[e.RowIndex].DataBoundItem;
+
+                // Verificar si tiene un usuario asignado
+                if (cliente.Usuario != null)
+                {
+                    e.Value = cliente.Usuario.NombreUsuario;
+                }
+                else
+                {
+                    e.Value = "No asignado";
+                }
+
+                e.FormattingApplied = true;
+            }
         }
 
         private void ConfigurarControles()
@@ -106,6 +180,9 @@ namespace VISTA
 
             try
             {
+                var controladoraUsuario = ControladoraUsuario.ObtenerInstancia();
+
+                // Crear el cliente
                 var cliente = new Cliente
                 {
                     Documento = txtDocumento.Text.Trim(),
@@ -114,8 +191,28 @@ namespace VISTA
                     Direccion = txtDireccion.Text.Trim()
                 };
 
-                controladora.AgregarCliente(cliente);
-                MessageBox.Show("Cliente guardado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Generar un usuario para este cliente
+                var nombreUsuario = $"cliente_{txtDocumento.Text.Trim()}";
+                var contraseñaDefault = txtDocumento.Text.Trim(); // Usar el DNI como contraseña inicial
+                var correo = $"{nombreUsuario}@frescomarket.com"; // Correo genérico
+
+                var usuario = new Usuario
+                {
+                    NombreUsuario = nombreUsuario,
+                    Contraseña = contraseñaDefault, // Se hará hash en el controlador
+                    Email = correo,
+                    Estado = true,
+                    FechaCreacion = DateTime.Now,
+                    IntentosIngreso = 0,
+                    Rol = "Cliente"
+                };
+
+                // Registrar cliente con su usuario
+                controladoraUsuario.RegistrarCliente(usuario, cliente);
+
+                MessageBox.Show($"Cliente guardado exitosamente.\nSe ha creado el usuario: {nombreUsuario}\nContraseña inicial: {contraseñaDefault}",
+                    "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 LimpiarCampos();
                 CargarDatosEnDataGridView();
             }
@@ -253,6 +350,122 @@ namespace VISTA
         private void FormRegistroCliente_Load(object sender, EventArgs e)
         {
             CargarDatosEnDataGridView();
+        }
+
+        private void btnAsignarUsuarios_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var controladoraCliente = ControladoraCliente.ObtenerInstancia();
+                var controladoraUsuario = ControladoraUsuario.ObtenerInstancia();
+
+                // Obtener todos los clientes
+                var clientes = controladoraCliente.ObtenerClientes();
+
+                // Filtrar clientes sin usuario
+                var clientesSinUsuario = clientes.Where(c => c.UsuarioId == null).ToList();
+
+                if (clientesSinUsuario.Count == 0)
+                {
+                    MessageBox.Show("Todos los clientes ya tienen usuarios asignados.",
+                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Confirmar la operación
+                var resultado = MessageBox.Show(
+                    $"Se encontraron {clientesSinUsuario.Count} clientes sin usuario asignado.\n" +
+                    "¿Desea crear usuarios automáticamente para estos clientes?\n\n" +
+                    "- Se usará el formato cliente_DNI como nombre de usuario\n" +
+                    "- Se usará el DNI como contraseña inicial\n" +
+                    "- El cliente deberá cambiar su contraseña al iniciar sesión",
+                    "Confirmar asignación",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (resultado == DialogResult.No)
+                    return;
+
+                // Obtener ID del grupo Cliente (utilizando ControladoraUsuario)
+                var grupoCliente = controladoraUsuario.ObtenerGrupoPorNombre("Cliente");
+                if (grupoCliente == null)
+                {
+                    MessageBox.Show("No se encontró el grupo 'Cliente'. Por favor, cree este grupo primero.",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Guardamos solo el ID del grupo para evitar problemas de rastreo de entidades
+                int grupoClienteId = grupoCliente.Id;
+
+                int clientesActualizados = 0;
+                StringBuilder logErrores = new StringBuilder();
+
+                // Procesar cada cliente sin usuario
+                foreach (var cliente in clientesSinUsuario)
+                {
+                    try
+                    {
+                        // Verificar si ya existe un usuario con ese nombre
+                        string nombreUsuario = $"cliente_{cliente.Documento}";
+                        if (controladoraUsuario.ExisteUsuario(nombreUsuario))
+                        {
+                            // Intenta con una variante
+                            nombreUsuario = $"cliente_{cliente.Documento}_{cliente.Id}";
+                            if (controladoraUsuario.ExisteUsuario(nombreUsuario))
+                            {
+                                logErrores.AppendLine($"No se pudo crear usuario para {cliente.Nombre} {cliente.Apellido}: " +
+                                                   $"Ya existe un usuario con nombre {nombreUsuario}");
+                                continue;
+                            }
+                        }
+
+                        // En lugar de usar RegistrarCliente, crearemos y asignaremos manualmente
+
+                        // 1. Crear usuario con su grupo
+                        var usuario = new Usuario
+                        {
+                            NombreUsuario = nombreUsuario,
+                            Contraseña = cliente.Documento, // Se hasheará automáticamente
+                            Email = $"{nombreUsuario}@frescomarket.com",
+                            Estado = true,
+                            FechaCreacion = DateTime.Now,
+                            IntentosIngreso = 0,
+                            Rol = "Cliente"
+                        };
+
+                        // Utilizar el método de agregar usuario con grupo
+                        controladoraUsuario.AgregarUsuarioConGrupo(usuario, grupoClienteId);
+
+                        // 2. Actualizar el cliente con el ID del usuario
+                        cliente.UsuarioId = usuario.Id;
+                        controladoraCliente.ActualizarUsuarioEnCliente(cliente.Id, usuario.Id);
+
+                        clientesActualizados++;
+                    }
+                    catch (Exception ex)
+                    {
+                        logErrores.AppendLine($"Error con cliente {cliente.Nombre} {cliente.Apellido}: {ex.Message}");
+                    }
+                }
+
+                // Mostrar resultados
+                string mensaje = $"Proceso completado.\nClientes actualizados: {clientesActualizados} de {clientesSinUsuario.Count}";
+                if (logErrores.Length > 0)
+                {
+                    mensaje += $"\n\nErrores encontrados:\n{logErrores}";
+                }
+
+                MessageBox.Show(mensaje, "Resultado", MessageBoxButtons.OK,
+                    clientesActualizados == clientesSinUsuario.Count ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
+
+                // Recargar datos
+                CargarDatosEnDataGridView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error en el proceso: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

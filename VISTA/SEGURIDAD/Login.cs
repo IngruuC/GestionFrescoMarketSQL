@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using CONTROLADORA;
 using DevExpress.CodeParser;
 using ENTIDADES;
+using VISTA.COMPRA;
 
 namespace VISTA
 {
@@ -82,7 +83,7 @@ namespace VISTA
                         formularioDestino = new FormPrincipal();
                         break;
                     case "PROVEEDOR":
-                        formularioDestino = new FormVistaProveedor();
+                        formularioDestino = new FormVistaPrincipalProveedor(); 
                         break;
                     case "CLIENTE":
                         formularioDestino = new FormVistaPrincipalCliente();

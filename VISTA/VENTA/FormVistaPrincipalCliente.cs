@@ -169,16 +169,27 @@ namespace VISTA
 
         private void btnCerrarSesion_Click_1(object sender, EventArgs e)
         {
-            var resultado = MessageBox.Show("¿Está seguro que desea cerrar sesión?",
-        "Cerrar Sesión",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question);
-
-            if (resultado == DialogResult.Yes)
+            try
             {
-                SesionActual.CerrarSesion();
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                DialogResult resultado = MessageBox.Show("¿Está seguro que desea cerrar sesión?",
+                    "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (resultado == DialogResult.Yes)
+                {
+                    SesionActual.CerrarSesion();
+                    Login loginForm = new Login();
+                    this.Hide(); // Oculta el formulario actual
+                    DialogResult loginResult = loginForm.ShowDialog();
+
+                    if (loginResult != DialogResult.OK)
+                    {
+                        this.Close(); // Cierra el formulario actual
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cerrar sesión: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

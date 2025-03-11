@@ -43,7 +43,7 @@ namespace VISTA
             bool esProveedor = cmbTipoUsuario.SelectedItem.ToString() == "Proveedor";
 
             // Campos comunes que siempre deben estar visibles
-           // lblUsuario.Visible = true;
+            lblUsuario.Visible = true;
             txtUsuario.Visible = true;
             lblContraseña.Visible = true;
             txtContraseña.Visible = true;
@@ -51,6 +51,15 @@ namespace VISTA
             txtConfirmarContraseña.Visible = true;
             lblEmail.Visible = true;
             txtEmail.Visible = true;
+
+            // IMPORTANTE: Documento y Nombre SIEMPRE visibles para ambos tipos
+            lblDocumento.Visible = true;
+            txtDocumento.Visible = true;
+            lblNombre.Visible = true;
+            txtNombre.Visible = true;
+            lblApellido.Visible = true;
+            txtApellido.Visible = true;
+
 
             // Campos específicos de Proveedor
             lblCuit.Visible = esProveedor;
@@ -63,20 +72,18 @@ namespace VISTA
             txtDireccionProveedor.Visible = esProveedor;
 
             // Campos específicos de Cliente
-            lblDocumento.Visible = !esProveedor;
-            txtDocumento.Visible = !esProveedor;
-            lblNombre.Visible = !esProveedor;
-            txtNombre.Visible = !esProveedor;
-            lblApellido.Visible = !esProveedor;
-            txtApellido.Visible = !esProveedor;
             lblDireccionCliente.Visible = !esProveedor;
             txtDireccionCliente.Visible = !esProveedor;
+
+
         }
 
        
 
         private bool ValidarCampos()
         {
+            bool esProveedor = cmbTipoUsuario.SelectedItem.ToString() == "Proveedor";
+
             if (string.IsNullOrWhiteSpace(txtUsuario.Text))
             {
                 MostrarError("Debe ingresar un nombre de usuario");
@@ -119,18 +126,53 @@ namespace VISTA
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(txtApellido.Text))
+            // Validaciones específicas para Cliente
+            if (!esProveedor)
             {
-                MostrarError("Debe ingresar un apellido");
-                txtApellido.Focus();
-                return false;
-            }
+                if (string.IsNullOrWhiteSpace(txtApellido.Text))
+                {
+                    MostrarError("Debe ingresar un apellido");
+                    txtApellido.Focus();
+                    return false;
+                }
 
-            if (string.IsNullOrWhiteSpace(txtDireccionCliente.Text))
+                if (string.IsNullOrWhiteSpace(txtDireccionCliente.Text))
+                {
+                    MostrarError("Debe ingresar una dirección");
+                    txtDireccionCliente.Focus();
+                    return false;
+                }
+            }
+            // Validaciones específicas para Proveedor
+            else
             {
-                MostrarError("Debe ingresar una dirección");
-                txtDireccionCliente.Focus();
-                return false;
+                if (string.IsNullOrWhiteSpace(txtCuit.Text))
+                {
+                    MostrarError("Debe ingresar un CUIT");
+                    txtCuit.Focus();
+                    return false;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtRazonSocial.Text))
+                {
+                    MostrarError("Debe ingresar una Razón Social");
+                    txtRazonSocial.Focus();
+                    return false;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtTelefono.Text))
+                {
+                    MostrarError("Debe ingresar un Teléfono");
+                    txtTelefono.Focus();
+                    return false;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtDireccionProveedor.Text))
+                {
+                    MostrarError("Debe ingresar una dirección");
+                    txtDireccionProveedor.Focus();
+                    return false;
+                }
             }
 
             return true;
@@ -196,12 +238,43 @@ namespace VISTA
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                else if (tipoUsuario == "Proveedor")
+                {
+                    try
+                    {
+                        var proveedor = new Proveedor
+                        {
+                            Cuit = txtCuit.Text.Trim(),
+                            RazonSocial = txtRazonSocial.Text.Trim(),
+                            Telefono = txtTelefono.Text.Trim(),
+                            Email = txtEmail.Text.Trim(),
+                            Direccion = txtDireccionProveedor.Text.Trim(),
+                            Compras = new List<Compra>() // Inicializamos la lista de compras
+                        };
+
+                        controladora.RegistrarProveedor(usuario, proveedor);
+
+                        MessageBox.Show("Proveedor registrado exitosamente", "Éxito",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error específico al registrar proveedor: {ex.Message}\nDetalles: {ex.InnerException?.Message}",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error general al registrar usuario: {ex.Message}\nDetalles: {ex.InnerException?.Message}",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
+
+
         }
     }
 }

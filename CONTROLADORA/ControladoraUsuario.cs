@@ -416,6 +416,42 @@ namespace CONTROLADORA
         {
             return contexto.Grupos.FirstOrDefault(g => g.NombreGrupo == nombreGrupo);
         }
+
+        public void AgregarUsuarioConGrupo(Usuario usuario, int grupoId)
+        {
+            using (var contexto = new Contexto())
+            {
+                // Verificar si el grupo existe
+                var grupo = contexto.Grupos.Find(grupoId);
+                if (grupo == null)
+                    throw new Exception($"Grupo con ID {grupoId} no encontrado");
+
+                // Hashear la contraseña
+                usuario.Contraseña = BCrypt.Net.BCrypt.HashPassword(usuario.Contraseña);
+
+                // Inicializar la colección de grupos
+                usuario.Grupos = new List<Grupo> { grupo };
+
+                // Agregar usuario
+                contexto.Usuarios.Add(usuario);
+                contexto.SaveChanges();
+            }
+        }
+
+        public void CambiarContrasena(int usuarioId, string nuevaContrasena)
+        {
+            var usuario = contexto.Usuarios.Find(usuarioId);
+            if (usuario == null)
+                throw new Exception("Usuario no encontrado");
+
+            // Hashear la nueva contraseña
+            usuario.Contraseña = BCrypt.Net.BCrypt.HashPassword(nuevaContrasena);
+
+            // Resetear intentos de ingreso
+            usuario.IntentosIngreso = 0;
+
+            contexto.SaveChanges();
+        }
     }
 }
 
