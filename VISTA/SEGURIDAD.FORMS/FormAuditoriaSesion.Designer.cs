@@ -168,6 +168,7 @@
             this.Name = "FormAuditoriaSesion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Auditoría de Sesiones";
+            this.Load += new System.EventHandler(this.FormAuditoriaSesion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAuditorias)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

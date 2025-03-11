@@ -404,13 +404,13 @@ namespace VISTA
                         }
 
                         // Importar Ventas
-                        if (ds.Tables.Contains("Ventas"))
+                        if (ds.Tables.Contains("Venta"))
                         {
-                            foreach (DataRow row in ds.Tables["Ventas"].Rows)
+                            foreach (DataRow row in ds.Tables["Venta"].Rows)
                             {
                                 var venta = new ENTIDADES.Venta();
 
-                                foreach (DataColumn column in ds.Tables["Ventas"].Columns)
+                                foreach (DataColumn column in ds.Tables["Venta"].Columns)
                                 {
                                     if (row[column] != DBNull.Value)
                                     {

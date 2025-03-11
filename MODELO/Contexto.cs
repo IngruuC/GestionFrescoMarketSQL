@@ -24,7 +24,7 @@ namespace MODELO
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Venta> Ventas { get; set; }
         public DbSet<DetalleVenta> DetallesVenta { get; set; }
-    //  public DbSet<AuditoriaSesion> AuditoriasSesion { get; set; } //
+      public DbSet<AuditoriaSesion> AuditoriasSesion { get; set; } //
 
         public DbSet<Grupo> Grupos { get; set; }
         public DbSet<Permiso> Permisos { get; set; }
@@ -212,7 +212,7 @@ namespace MODELO
 
 
             // Auditoria
-         // modelBuilder.Entity<AuditoriaSesion>().ToTable("AuditoriasSesion");
+          modelBuilder.Entity<AuditoriaSesion>().ToTable("AuditoriasSesion");
 
             base.OnModelCreating(modelBuilder);
 

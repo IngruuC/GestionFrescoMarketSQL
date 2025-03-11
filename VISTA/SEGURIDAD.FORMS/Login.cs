@@ -111,7 +111,7 @@ namespace VISTA
                 var controladoraAuditoria = new ControladoraAuditoria();
 
                 // Registrar inicio de sesión
- //ERROR  // controladoraAuditoria.RegistrarInicioSesion(loginResultado.Usuario, direccionIP);
+ controladoraAuditoria.RegistrarInicioSesion(loginResultado.Usuario, direccionIP);
 
                 // Actualizar último acceso
                 controladora.ActualizarAcceso(loginResultado.Usuario.Id);

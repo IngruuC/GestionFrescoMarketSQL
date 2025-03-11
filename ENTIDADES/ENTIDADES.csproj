@@ -64,6 +64,7 @@
     <Compile Include="SEGURIDAD\EmailService.cs" />
     <Compile Include="SEGURIDAD\SesionActual.cs" />
     <Compile Include="SEGURIDAD\ValidadorContraseña.cs" />
+    <Compile Include="VENTA\CarritoTemporal.cs" />
     <Compile Include="VENTA\Cliente.cs" />
     <Compile Include="COMPRA\Compra.cs" />
     <Compile Include="COMPRA\DetalleCompra.cs" />

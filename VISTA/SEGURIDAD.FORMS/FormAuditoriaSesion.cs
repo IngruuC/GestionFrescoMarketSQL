@@ -1,4 +1,6 @@
 ﻿using CONTROLADORA;
+using ENTIDADES;
+using ENTIDADES.SEGURIDAD;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,12 +11,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace VISTA
 {
     public partial class FormAuditoriaSesion : Form
     {
         private ControladoraAuditoria controladoraAuditoria;
         private ControladoraUsuario controladoraUsuario;
+        private ControladoraAuditoria _controladoraAuditoria;
 
         public FormAuditoriaSesion()
         {
@@ -22,6 +26,7 @@ namespace VISTA
             // Inicializar las controladoras
             controladoraAuditoria = new ControladoraAuditoria();
             controladoraUsuario = ControladoraUsuario.ObtenerInstancia();
+            _controladoraAuditoria = new ControladoraAuditoria();
             ConfigurarControles();
         }
 
@@ -60,57 +65,58 @@ namespace VISTA
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            //*try
-          //{
+            try
+            {
                 // Debug: Imprimir valores seleccionados
-      //        Console.WriteLine($"Usuario seleccionado: {cboUsuarios.SelectedValue}");
- //*            Console.WriteLine($"Fecha desde: {dtpDesde.Value}");
-    //       Console.WriteLine($"Fecha hasta: {dtpHasta.Value}");
-//
-          //    int? usuarioId = cboUsuarios.SelectedIndex != -1
-         //         ? (int?)cboUsuarios.SelectedValue
-         //         : null;
+                Console.WriteLine($"Usuario seleccionado: {cboUsuarios.SelectedValue}");
+                Console.WriteLine($"Fecha desde: {dtpDesde.Value}");
+                Console.WriteLine($"Fecha hasta: {dtpHasta.Value}");
 
-       //       var sesiones = controladoraAuditoria.ObtenerHistorialSesiones(
-     //             usuarioId,
-   //               dtpDesde.Value,
- //               dtpHasta.Value
-            //  );
+                int? usuarioId = cboUsuarios.SelectedIndex != -1
+                    ? (int?)cboUsuarios.SelectedValue
+                    : null;
+
+                var sesiones = controladoraAuditoria.ObtenerHistorialSesiones(
+                    usuarioId,
+                    dtpDesde.Value,
+                    dtpHasta.Value
+                );
 
                 // Imprimir los resultados en la consola
-                //      foreach (var sesion in sesiones)
-              //{
-                    //         Console.WriteLine($"Sesión - ID: {sesion.Id}, Usuario: {sesion.NombreUsuario}, Fecha Ingreso: {sesion.FechaIngreso}");
-                    //      }
-
-                    //   if (sesiones == null || sesiones.Count == 0)
-                    //     {
-                    //       MessageBox.Show("No se encontraron registros de sesión para los criterios seleccionados.",
-                    //         "Sin Resultados",
-                    //           MessageBoxButtons.OK,
-                    //             MessageBoxIcon.Information);
-                    //
-                    //       dgvAuditorias.DataSource = null;
-                    //     return;
-                    //
-
-                    //              dgvAuditorias.DataSource = sesiones;
-                    //        }
-                    //      catch (Exception ex)
-                    {
-                        // Logging de errores más detallado
-                        //       Console.WriteLine($"Error en búsqueda: {ex.Message}");
-                        //     Console.WriteLine($"Detalles internos: {ex.InnerException?.Message}");
-                        //
-                        //   MessageBox.Show($"Error al buscar registros de sesión: {ex.Message}",
-                        //     "Error",
-                        //    MessageBoxButtons.OK,
-                        //   MessageBoxIcon.Error);
-                    }
-
+                foreach (var sesion in sesiones)
+                {
+                    Console.WriteLine($"Sesión - ID: {sesion.Id}, Usuario: {sesion.NombreUsuario}, Fecha Ingreso: {sesion.FechaIngreso}");
                 }
 
-                private void btnLimpiar_Click(object sender, EventArgs e)
+                if (sesiones == null || sesiones.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron registros de sesión para los criterios seleccionados.",
+                        "Sin Resultados",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    dgvAuditorias.DataSource = null;
+                    return;
+                }
+
+                dgvAuditorias.DataSource = sesiones;
+            }
+            catch (Exception ex)
+            {
+                // Logging de errores más detallado
+                Console.WriteLine($"Error en búsqueda: {ex.Message}");
+                Console.WriteLine($"Detalles internos: {ex.InnerException?.Message}");
+
+                MessageBox.Show($"Error al buscar registros de sesión: {ex.Message}",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+
+
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
                 {
                     // Restablecer controles
                     cboUsuarios.SelectedIndex = -1;
@@ -121,6 +127,21 @@ namespace VISTA
                     dgvAuditorias.DataSource = null;
 
                 }
-            }
+
+        private void FormAuditoriaSesion_Load(object sender, EventArgs e)
+        {
+            CargarHistorialSesiones();
+        }
+
+
+        private void CargarHistorialSesiones()
+        {
+         
+            int usuarioId = SesionActual.Usuario.Id;
+            List<AuditoriaSesion> auditorias = _controladoraAuditoria.ObtenerAuditoriasPorUsuario(usuarioId);
+
+        dgvAuditorias.DataSource = auditorias;
+        }
+    }
         }
     
