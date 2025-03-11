@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rectangle = System.Drawing.Rectangle;
 using System.Windows.Media;
+using LiveCharts.Configurations;
 
 namespace VISTA
 {
@@ -23,11 +24,22 @@ namespace VISTA
     {
         private ControladoraReporte controladoraReporte;
         private ControladoraVenta controladoraVenta;
-        private LiveCharts.WinForms.CartesianChart chartVentas;
 
         public FormReportes()
         {
             InitializeComponent();
+
+           try
+            {
+                controladoraReporte = ControladoraReporte.ObtenerInstancia();
+                controladoraVenta = ControladoraVenta.ObtenerInstancia();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al inicializar controladores: {ex.Message}");
+            }
+
+            this.Load += FormReportes_Load;
             controladoraReporte = ControladoraReporte.ObtenerInstancia();
             controladoraVenta = ControladoraVenta.ObtenerInstancia();
             
@@ -35,20 +47,45 @@ namespace VISTA
             // Fechas iniciales conf
             dtpFechaInicio.Value = DateTime.Today.AddDays(-30);
             dtpFechaFin.Value = DateTime.Today;
+            // Eventos para actualizar el gráfico
+            dtpFechaInicio.ValueChanged += (s, e) => ActualizarGrafico();
+            dtpFechaFin.ValueChanged += (s, e) => ActualizarGrafico();
 
+            this.Shown += (s, e) => ActualizarGrafico();
             InicializarGrafico();  
         }
 
         private void FormReportes_Load(object sender, EventArgs e)
         {
-            ActualizarGrafico();
+           try
+            {
+                System.Diagnostics.Debug.WriteLine("Entrando en FormReportes_Load");
+
+                // Asegúrate de que el gráfico esté visible
+                chartVentas.Visible = true;
+
+                // Actualiza el gráfico
+                ActualizarGrafico();
+
+                System.Diagnostics.Debug.WriteLine("Saliendo de FormReportes_Load");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error en FormReportes_Load: {ex}");
+                MessageBox.Show($"Error al cargar el formulario: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ActualizarGrafico()
         {
+
             try
             {
-                var ventas = controladoraVenta.ObtenerVentasPorFecha(dtpFechaInicio.Value.Date, dtpFechaFin.Value.Date.AddDays(1).AddSeconds(-1));
+                var ventas = controladoraVenta.ObtenerVentasPorFecha(
+                    dtpFechaInicio.Value.Date,
+                    dtpFechaFin.Value.Date.AddDays(1).AddSeconds(-1)
+                );
 
                 if (ventas == null || !ventas.Any())
                 {
@@ -59,54 +96,44 @@ namespace VISTA
 
                 var ventasPorDia = ventas.GroupBy(v => v.FechaVenta.Date)
                                        .Select(g => new {
-                                           Fecha = g.Key,
+                                           Fecha = g.Key.ToString("dd/MM"),
                                            Total = g.Sum(v => v.Total)
                                        })
                                        .OrderBy(x => x.Fecha)
                                        .ToList();
 
-                // Configurar el gráfico
+                // Limpiar series existentes
                 chartVentas.Series.Clear();
                 chartVentas.AxisX.Clear();
                 chartVentas.AxisY.Clear();
 
-                var series = new LineSeries
+                // Configurar serie de columnas
+                var columnSeries = new ColumnSeries
                 {
                     Title = "Ventas Diarias",
                     Values = new ChartValues<decimal>(ventasPorDia.Select(v => v.Total)),
-                    PointGeometry = DefaultGeometries.Circle,
-                    PointGeometrySize = 15,
-                    LineSmoothness = 0.5,
-                    StrokeThickness = 4,
-                    Stroke = new System.Windows.Media.SolidColorBrush(
-                        System.Windows.Media.Color.FromRgb(184, 134, 11)),
-                    Fill = new System.Windows.Media.LinearGradientBrush
-                    {
-                        GradientStops = new System.Windows.Media.GradientStopCollection
-                    {
-                        new System.Windows.Media.GradientStop(
-                            System.Windows.Media.Color.FromArgb(100, 184, 134, 11), 0),
-                        new System.Windows.Media.GradientStop(
-                            System.Windows.Media.Color.FromArgb(0, 184, 134, 11), 1)
-                    }
-                    }
+                    MaxColumnWidth = 50,
+                    Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(70, 130, 180))
                 };
 
-                chartVentas.Series = new SeriesCollection { series };
+                // Añadir series
+                chartVentas.Series = new SeriesCollection { columnSeries };
 
+                // Configurar eje X
                 chartVentas.AxisX.Add(new Axis
                 {
                     Title = "Fecha",
-                    Labels = ventasPorDia.Select(v => v.Fecha.ToString("dd/MM")).ToList(),
-                    LabelsRotation = 20,
+                    Labels = ventasPorDia.Select(v => v.Fecha).ToList(),
+                    LabelsRotation = 45,
                     Separator = new Separator
                     {
-                        Step = Math.Max(1, ventasPorDia.Count / 10),
+                        Step = 1,
                         StrokeThickness = 1,
                         StrokeDashArray = new DoubleCollection { 2 }
                     }
                 });
 
+                // Configurar eje Y
                 chartVentas.AxisY.Add(new Axis
                 {
                     Title = "Ventas Totales ($)",
@@ -114,13 +141,7 @@ namespace VISTA
                     MinValue = 0
                 });
 
-                chartVentas.LegendLocation = LegendLocation.Top;
-
- 
-                chartVentas.DataTooltip = new DefaultTooltip
-                {
-                    SelectionMode = TooltipSelectionMode.SharedYValues
-                };
+                chartVentas.LegendLocation = LegendLocation.Right;
             }
             catch (Exception ex)
             {
@@ -156,7 +177,7 @@ namespace VISTA
                     using (var ms = new MemoryStream())
                     {
                         var bitmap = new Bitmap(chartVentas.Width, chartVentas.Height);
-                        chartVentas.DrawToBitmap(bitmap, new Rectangle(0, 0, chartVentas.Width, chartVentas.Height));
+                        chartVentas.DrawToBitmap(bitmap, new Rectangle(0, 0, chartVentas    .Width, chartVentas.Height));
                         bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                         imagenGrafico = ms.ToArray();
                     }
@@ -193,7 +214,7 @@ namespace VISTA
         private void InicializarGrafico()
         {
   
-            chartVentas = new LiveCharts.WinForms.CartesianChart
+          /*  chartVentas = new LiveCharts.WinForms.CartesianChart
             {
                 Location = new System.Drawing.Point(330, 76),
                 Name = "chartVentas",
@@ -204,7 +225,7 @@ namespace VISTA
             this.Controls.Add(chartVentas);
 
            
-            ActualizarGrafico();
+            ActualizarGrafico();*/
         }
 
 

@@ -21,10 +21,10 @@ namespace VISTA
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dtpFechaInicio = new System.Windows.Forms.DateTimePicker();
             this.dtpFechaFin = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaInicio = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnGenerarPDF = new System.Windows.Forms.Button();
             this.chartVentas = new LiveCharts.WinForms.CartesianChart();
             this.panel1.SuspendLayout();
@@ -48,7 +48,7 @@ namespace VISTA
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(12, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(235, 25);
+            this.label1.Size = new System.Drawing.Size(255, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "REPORTES DE VENTA";
             // 
@@ -63,25 +63,16 @@ namespace VISTA
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(312, 100);
             this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
             this.groupBox1.Text = "PERÍODO";
             // 
-            // label2
+            // dtpFechaFin
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 30);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 16);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Desde:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 60);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 16);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Hasta:";
+            this.dtpFechaFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFechaFin.Location = new System.Drawing.Point(75, 57);
+            this.dtpFechaFin.Name = "dtpFechaFin";
+            this.dtpFechaFin.Size = new System.Drawing.Size(200, 22);
+            this.dtpFechaFin.TabIndex = 3;
             // 
             // dtpFechaInicio
             // 
@@ -91,13 +82,23 @@ namespace VISTA
             this.dtpFechaInicio.Size = new System.Drawing.Size(200, 22);
             this.dtpFechaInicio.TabIndex = 2;
             // 
-            // dtpFechaFin
+            // label3
             // 
-            this.dtpFechaFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaFin.Location = new System.Drawing.Point(75, 57);
-            this.dtpFechaFin.Name = "dtpFechaFin";
-            this.dtpFechaFin.Size = new System.Drawing.Size(200, 22);
-            this.dtpFechaFin.TabIndex = 3;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(15, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 16);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Hasta:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 30);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 16);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Desde:";
             // 
             // btnGenerarPDF
             // 
@@ -115,22 +116,21 @@ namespace VISTA
             // 
             // chartVentas
             // 
-            this.chartVentas.Location = new System.Drawing.Point(330, 76);
-            this.chartVentas.Name = "chartVentas";
-            this.chartVentas.Size = new System.Drawing.Size(800, 400);
+            this.chartVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.chartVentas.BackColor = System.Drawing.Color.White;
-            this.chartVentas.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
-
-            // Configuración del formulario
-            this.BackColor = System.Drawing.Color.LemonChiffon;
-            this.ClientSize = new System.Drawing.Size(1200, 600); // Formulario más grande
+            this.chartVentas.Location = new System.Drawing.Point(350, 85);
+            this.chartVentas.Name = "chartVentas";
+            this.chartVentas.Size = new System.Drawing.Size(618, 361);
+            this.chartVentas.TabIndex = 7;
             // 
             // FormReportes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LemonChiffon;
-            this.ClientSize = new System.Drawing.Size(1000, 550);
+            this.ClientSize = new System.Drawing.Size(1000, 533);
             this.Controls.Add(this.chartVentas);
             this.Controls.Add(this.btnGenerarPDF);
             this.Controls.Add(this.groupBox1);
@@ -146,6 +146,7 @@ namespace VISTA
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         private System.Windows.Forms.Panel panel1;
@@ -156,5 +157,6 @@ namespace VISTA
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnGenerarPDF;
+        private LiveCharts.WinForms.CartesianChart chartVentas;
     }
 }
