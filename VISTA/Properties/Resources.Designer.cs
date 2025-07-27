@@ -103,6 +103,86 @@ namespace VISTA.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_full_shopping_basket_75 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-full-shopping-basket-75", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_house_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-house-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_house_100__1_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8-house-100 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_house_100__2_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8-house-100 (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_house_100__3_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8-house-100 (3)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_house_50 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-house-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_house_50__1_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8-house-50 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_house_75 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-house-75", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_inventory_64__1_ {
             get {
                 object obj = ResourceManager.GetObject("icons8-inventory-64 (1)", resourceCulture);
@@ -163,6 +243,16 @@ namespace VISTA.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_star_filled_75 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-star-filled-75", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_supplier_60 {
             get {
                 object obj = ResourceManager.GetObject("icons8-supplier-60", resourceCulture);
@@ -206,6 +296,16 @@ namespace VISTA.Properties {
         internal static System.Drawing.Bitmap icons8_upselling_641 {
             get {
                 object obj = ResourceManager.GetObject("icons8-upselling-641", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_user_75 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-user-75", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

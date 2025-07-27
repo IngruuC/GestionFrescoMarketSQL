@@ -30,6 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPrincipal));
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panelContenedor = new System.Windows.Forms.Panel();
+            this.lblFrescoMarket = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnGestionBackup = new System.Windows.Forms.Button();
             this.btnComprasTotales = new System.Windows.Forms.Button();
             this.btnRealizarVenta = new System.Windows.Forms.Button();
@@ -38,14 +44,8 @@
             this.btnRealizarCompra = new System.Windows.Forms.Button();
             this.btnVentasTotales = new System.Windows.Forms.Button();
             this.btnRegistrarProveedor = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panelContenedor = new System.Windows.Forms.Panel();
-            this.lblFrescoMarket = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.AuditoriasSesion = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panelContenedor.SuspendLayout();
@@ -69,6 +69,66 @@
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(225, 632);
             this.panelMenu.TabIndex = 3;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.panel3.Controls.Add(this.AuditoriasSesion);
+            this.panel3.Controls.Add(this.btnSalir);
+            this.panel3.Controls.Add(this.label2);
+            this.panel3.Location = new System.Drawing.Point(207, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1114, 114);
+            this.panel3.TabIndex = 12;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("MingLiU-ExtB", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(377, 3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(236, 96);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Menú";
+            // 
+            // panelContenedor
+            // 
+            this.panelContenedor.Controls.Add(this.lblFrescoMarket);
+            this.panelContenedor.Location = new System.Drawing.Point(232, 120);
+            this.panelContenedor.Name = "panelContenedor";
+            this.panelContenedor.Size = new System.Drawing.Size(1089, 610);
+            this.panelContenedor.TabIndex = 13;
+            this.panelContenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContenedor_Paint);
+            // 
+            // lblFrescoMarket
+            // 
+            this.lblFrescoMarket.AutoSize = true;
+            this.lblFrescoMarket.Font = new System.Drawing.Font("MingLiU-ExtB", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFrescoMarket.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblFrescoMarket.Location = new System.Drawing.Point(221, 202);
+            this.lblFrescoMarket.Name = "lblFrescoMarket";
+            this.lblFrescoMarket.Size = new System.Drawing.Size(628, 96);
+            this.lblFrescoMarket.TabIndex = 0;
+            this.lblFrescoMarket.Text = "FrescoMarket";
+            this.lblFrescoMarket.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Location = new System.Drawing.Point(1, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(213, 114);
+            this.panel1.TabIndex = 14;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(45, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(126, 131);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // btnGestionBackup
             // 
@@ -189,16 +249,21 @@
             this.btnRegistrarProveedor.UseVisualStyleBackColor = false;
             this.btnRegistrarProveedor.Click += new System.EventHandler(this.btnRegistrarProveedor_Click);
             // 
-            // panel3
+            // AuditoriasSesion
             // 
-            this.panel3.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.panel3.Controls.Add(this.AuditoriasSesion);
-            this.panel3.Controls.Add(this.btnSalir);
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(207, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1114, 114);
-            this.panel3.TabIndex = 12;
+            this.AuditoriasSesion.BackColor = System.Drawing.Color.Transparent;
+            this.AuditoriasSesion.FlatAppearance.BorderSize = 0;
+            this.AuditoriasSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AuditoriasSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AuditoriasSesion.ForeColor = System.Drawing.Color.Transparent;
+            this.AuditoriasSesion.Image = ((System.Drawing.Image)(resources.GetObject("AuditoriasSesion.Image")));
+            this.AuditoriasSesion.Location = new System.Drawing.Point(994, 65);
+            this.AuditoriasSesion.Name = "AuditoriasSesion";
+            this.AuditoriasSesion.Size = new System.Drawing.Size(63, 49);
+            this.AuditoriasSesion.TabIndex = 8;
+            this.AuditoriasSesion.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.AuditoriasSesion.UseVisualStyleBackColor = false;
+            this.AuditoriasSesion.Click += new System.EventHandler(this.AuditoriasSesion_Click);
             // 
             // btnSalir
             // 
@@ -215,70 +280,6 @@
             this.btnSalir.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("MingLiU-ExtB", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(377, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(236, 96);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Menú";
-            // 
-            // panelContenedor
-            // 
-            this.panelContenedor.Controls.Add(this.lblFrescoMarket);
-            this.panelContenedor.Location = new System.Drawing.Point(232, 120);
-            this.panelContenedor.Name = "panelContenedor";
-            this.panelContenedor.Size = new System.Drawing.Size(1089, 610);
-            this.panelContenedor.TabIndex = 13;
-            // 
-            // lblFrescoMarket
-            // 
-            this.lblFrescoMarket.AutoSize = true;
-            this.lblFrescoMarket.Font = new System.Drawing.Font("MingLiU-ExtB", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFrescoMarket.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblFrescoMarket.Location = new System.Drawing.Point(221, 202);
-            this.lblFrescoMarket.Name = "lblFrescoMarket";
-            this.lblFrescoMarket.Size = new System.Drawing.Size(628, 96);
-            this.lblFrescoMarket.TabIndex = 0;
-            this.lblFrescoMarket.Text = "FrescoMarket";
-            this.lblFrescoMarket.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(1, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(213, 114);
-            this.panel1.TabIndex = 14;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(45, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(126, 131);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // AuditoriasSesion
-            // 
-            this.AuditoriasSesion.BackColor = System.Drawing.Color.Transparent;
-            this.AuditoriasSesion.FlatAppearance.BorderSize = 0;
-            this.AuditoriasSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AuditoriasSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AuditoriasSesion.ForeColor = System.Drawing.Color.Transparent;
-            this.AuditoriasSesion.Image = ((System.Drawing.Image)(resources.GetObject("AuditoriasSesion.Image")));
-            this.AuditoriasSesion.Location = new System.Drawing.Point(994, 65);
-            this.AuditoriasSesion.Name = "AuditoriasSesion";
-            this.AuditoriasSesion.Size = new System.Drawing.Size(63, 49);
-            this.AuditoriasSesion.TabIndex = 8;
-            this.AuditoriasSesion.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.AuditoriasSesion.UseVisualStyleBackColor = false;
-            this.AuditoriasSesion.Click += new System.EventHandler(this.AuditoriasSesion_Click);
             // 
             // FormPrincipal
             // 

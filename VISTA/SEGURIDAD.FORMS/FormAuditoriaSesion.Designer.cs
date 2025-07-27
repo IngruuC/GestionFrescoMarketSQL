@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAuditoriaSesion));
             this.lblTitulo = new System.Windows.Forms.Label();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.cboUsuarios = new System.Windows.Forms.ComboBox();
@@ -125,33 +126,50 @@
             // 
             // dgvAuditorias
             // 
+            this.dgvAuditorias.BackgroundColor = System.Drawing.Color.Cornsilk;
+            this.dgvAuditorias.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvAuditorias.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dgvAuditorias.GridColor = System.Drawing.Color.Goldenrod;
             this.dgvAuditorias.Location = new System.Drawing.Point(15, 140);
             this.dgvAuditorias.Name = "dgvAuditorias";
-            this.dgvAuditorias.Size = new System.Drawing.Size(750, 300);
+            this.dgvAuditorias.Size = new System.Drawing.Size(750, 258);
             this.dgvAuditorias.TabIndex = 9;
             // 
             // btnExportarPDF
             // 
-            this.btnExportarPDF.Location = new System.Drawing.Point(15, 450);
+            this.btnExportarPDF.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportarPDF.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnExportarPDF.Image = ((System.Drawing.Image)(resources.GetObject("btnExportarPDF.Image")));
+            this.btnExportarPDF.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnExportarPDF.Location = new System.Drawing.Point(18, 404);
             this.btnExportarPDF.Name = "btnExportarPDF";
-            this.btnExportarPDF.Size = new System.Drawing.Size(150, 30);
+            this.btnExportarPDF.Size = new System.Drawing.Size(149, 75);
             this.btnExportarPDF.TabIndex = 10;
             this.btnExportarPDF.Text = "Exportar a PDF";
+            this.btnExportarPDF.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnExportarPDF.UseVisualStyleBackColor = true;
+            this.btnExportarPDF.Click += new System.EventHandler(this.btnExportarPDF_Click);
             // 
             // btnCerrar
             // 
-            this.btnCerrar.Location = new System.Drawing.Point(615, 450);
+            this.btnCerrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCerrar.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrar.Image")));
+            this.btnCerrar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnCerrar.Location = new System.Drawing.Point(616, 404);
             this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(150, 30);
+            this.btnCerrar.Size = new System.Drawing.Size(149, 75);
             this.btnCerrar.TabIndex = 11;
             this.btnCerrar.Text = "Cerrar";
+            this.btnCerrar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnCerrar.UseVisualStyleBackColor = true;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // FormAuditoriaSesion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LemonChiffon;
             this.ClientSize = new System.Drawing.Size(784, 491);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.btnExportarPDF);

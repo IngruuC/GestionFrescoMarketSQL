@@ -9,6 +9,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using System.Windows.Forms;
 
 
@@ -141,6 +143,127 @@ namespace VISTA
             List<AuditoriaSesion> auditorias = _controladoraAuditoria.ObtenerAuditoriasPorUsuario(usuarioId);
 
         dgvAuditorias.DataSource = auditorias;
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnExportarPDF_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Verificar si hay datos para exportar
+                if (dgvAuditorias.DataSource == null || dgvAuditorias.Rows.Count == 0)
+                {
+                    MessageBox.Show("No hay datos para exportar.",
+                        "Exportar a PDF",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Configurar diálogo para guardar archivo
+                SaveFileDialog saveFileDialog = new SaveFileDialog
+                {
+                    Filter = "Archivos PDF (*.pdf)|*.pdf",
+                    Title = "Guardar reporte de auditoría de sesiones",
+                    FileName = $"Auditoria_Sesiones_{DateTime.Now:yyyyMMdd_HHmmss}.pdf"
+                };
+
+                if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                // Crear documento PDF
+                using (var document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 10f, 10f, 10f, 10f))
+                {
+                    // Crear el escritor de PDF
+                    var writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, new System.IO.FileStream(
+                        saveFileDialog.FileName, System.IO.FileMode.Create));
+
+                    document.Open();
+
+                    // Añadir información del documento
+                    document.AddTitle("Reporte de Auditoría de Sesiones");
+                    document.AddAuthor("Sistema de Gestión");
+                    document.AddCreationDate();
+
+                    // Fuentes y colores
+                    var titleFont = iTextSharp.text.FontFactory.GetFont(iTextSharp.text.FontFactory.HELVETICA_BOLD, 16);
+                    var headerFont = iTextSharp.text.FontFactory.GetFont(iTextSharp.text.FontFactory.HELVETICA_BOLD, 12);
+                    var contentFont = iTextSharp.text.FontFactory.GetFont(iTextSharp.text.FontFactory.HELVETICA, 10);
+                    var footerFont = iTextSharp.text.FontFactory.GetFont(iTextSharp.text.FontFactory.HELVETICA, 8, iTextSharp.text.Font.ITALIC);
+
+                    // Añadir título
+                    var title = new iTextSharp.text.Paragraph("Reporte de Auditoría de Sesiones", titleFont);
+                    title.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+                    title.SpacingAfter = 20f;
+                    document.Add(title);
+
+                    // Añadir información del filtro
+                    var filtroInfo = new iTextSharp.text.Paragraph();
+                    filtroInfo.Add(new iTextSharp.text.Chunk("Filtros aplicados:", headerFont));
+                    filtroInfo.Add(new iTextSharp.text.Chunk("\nUsuario: ", headerFont));
+                    filtroInfo.Add(new iTextSharp.text.Chunk(cboUsuarios.SelectedIndex != -1 ? cboUsuarios.Text : "Todos", contentFont));
+                    filtroInfo.Add(new iTextSharp.text.Chunk("\nFecha desde: ", headerFont));
+                    filtroInfo.Add(new iTextSharp.text.Chunk(dtpDesde.Value.ToString("dd/MM/yyyy"), contentFont));
+                    filtroInfo.Add(new iTextSharp.text.Chunk("\nFecha hasta: ", headerFont));
+                    filtroInfo.Add(new iTextSharp.text.Chunk(dtpHasta.Value.ToString("dd/MM/yyyy"), contentFont));
+                    filtroInfo.SpacingAfter = 15f;
+                    document.Add(filtroInfo);
+
+                    // Crear tabla para los datos
+                    var table = new iTextSharp.text.pdf.PdfPTable(dgvAuditorias.Columns.Count);
+                    table.WidthPercentage = 100;
+                    table.DefaultCell.Padding = 3;
+
+                    // Añadir encabezados
+                    foreach (DataGridViewColumn column in dgvAuditorias.Columns)
+                    {
+                        var cell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(column.HeaderText, headerFont));
+                        cell.BackgroundColor = new iTextSharp.text.BaseColor(240, 240, 240);
+                        cell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
+                        table.AddCell(cell);
+                    }
+
+                    // Añadir filas
+                    foreach (DataGridViewRow row in dgvAuditorias.Rows)
+                    {
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            var value = cell.Value?.ToString() ?? string.Empty;
+                            table.AddCell(new iTextSharp.text.Phrase(value, contentFont));
+                        }
+                    }
+
+                    document.Add(table);
+
+                    // Añadir pie de página
+                    var footer = new iTextSharp.text.Paragraph($"Fecha de generación: {DateTime.Now:dd/MM/yyyy HH:mm:ss}", footerFont);
+                    footer.Alignment = iTextSharp.text.Element.ALIGN_RIGHT;
+                    footer.SpacingBefore = 10f;
+                    document.Add(footer);
+
+                    document.Close();
+
+                    MessageBox.Show($"El reporte se ha exportado correctamente a:\n{saveFileDialog.FileName}",
+                        "Exportación Exitosa",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    // Abrir el archivo PDF
+                    System.Diagnostics.Process.Start(saveFileDialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al exportar a PDF: {ex.Message}\n\nDetalles: {ex.InnerException?.Message}",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                Console.WriteLine($"Error de exportación PDF: {ex}");
+            }
         }
     }
         }

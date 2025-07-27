@@ -97,45 +97,10 @@ namespace VISTA
 
         private void btnRestaurar_Click_1(object sender, EventArgs e)
         {
-            if (cboBackups.SelectedIndex < 0)
-            {
-                MessageBox.Show("Por favor, seleccione un backup para restaurar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            var confirmResult = MessageBox.Show(
-                "¿Está seguro que desea restaurar la base de datos desde el backup seleccionado?\n\n" +
-                "ADVERTENCIA: Todos los datos actuales serán reemplazados con los datos del backup.\n" +
-                "Esta operación no se puede deshacer.",
-                "Confirmar Restauración",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning);
-
-            if (confirmResult == DialogResult.Yes)
-            {
-                try
-                {
-                    Cursor = Cursors.WaitCursor;
-
-                    // Obtener nombre del archivo de backup seleccionado
-                    string backupFileName = cboBackups.SelectedItem.ToString().Split(new[] { " - " }, StringSplitOptions.None)[0];
-                    string backupFilePath = Path.Combine(backupFolder, backupFileName);
-
-                    ImportarDesdeXml(backupFilePath);
-
-                    MessageBox.Show("Base de datos restaurada exitosamente desde el archivo XML.",
-                        "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error al restaurar la base de datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    Cursor = Cursors.Default;
-                }
-            }
+                                     
         }
+
+        
 
         private void btnCrearBackup_Click(object sender, EventArgs e)
         {
@@ -236,225 +201,7 @@ namespace VISTA
             }
         }
 
-        private void ImportarDesdeXml(string filePath)
-        {
-            try
-            {
-                // Cargar el DataSet desde el archivo XML
-                DataSet ds = new DataSet();
-                ds.ReadXml(filePath);
-
-                using (var contexto = new MODELO.Contexto())
-                {
-                    // Desactivar temporalmente la verificación de restricciones de clave foránea
-                    contexto.Database.ExecuteSqlCommand("EXEC sp_MSforeachtable 'ALTER TABLE ? NOCHECK CONSTRAINT ALL'");
-
-                    try
-                    {
-                        // Eliminar datos existentes en orden inverso de dependencias
-                        contexto.Database.ExecuteSqlCommand("DELETE FROM DetallesVenta");
-                        contexto.Database.ExecuteSqlCommand("DELETE FROM Ventas");
-                        contexto.Database.ExecuteSqlCommand("DELETE FROM DetallesCompra");
-                        contexto.Database.ExecuteSqlCommand("DELETE FROM Compras");
-                        contexto.Database.ExecuteSqlCommand("DELETE FROM Productos");
-                        contexto.Database.ExecuteSqlCommand("DELETE FROM Proveedores");
-                        contexto.Database.ExecuteSqlCommand("DELETE FROM Clientes");
-                        contexto.Database.ExecuteSqlCommand("DELETE FROM UsuariosGrupos");
-                        contexto.Database.ExecuteSqlCommand("DELETE FROM Usuarios");
-
-                        // Reiniciar los contadores de identidad
-                        contexto.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Usuarios', RESEED, 0)");
-                        contexto.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Clientes', RESEED, 0)");
-                        contexto.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Proveedores', RESEED, 0)");
-                        contexto.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Productos', RESEED, 0)");
-                        contexto.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Ventas', RESEED, 0)");
-                        contexto.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('DetallesVenta', RESEED, 0)");
-                        contexto.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Compras', RESEED, 0)");
-                        contexto.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('DetallesCompra', RESEED, 0)");
-
-                        contexto.SaveChanges();
-
-                        // Importar Usuarios
-                        if (ds.Tables.Contains("Usuarios"))
-                        {
-                            foreach (DataRow row in ds.Tables["Usuarios"].Rows)
-                            {
-                                var usuario = new ENTIDADES.Usuario();
-
-                                // Solo asignar valores a propiedades que existen en la DataRow
-                                foreach (DataColumn column in ds.Tables["Usuarios"].Columns)
-                                {
-                                    if (row[column] != DBNull.Value)
-                                    {
-                                        var prop = typeof(ENTIDADES.Usuario).GetProperty(column.ColumnName);
-                                        if (prop != null && prop.CanWrite)
-                                        {
-                                            try
-                                            {
-                                                var value = Convert.ChangeType(row[column], prop.PropertyType);
-                                                prop.SetValue(usuario, value);
-                                            }
-                                            catch
-                                            {
-                                                // Ignorar errores de conversión
-                                            }
-                                        }
-                                    }
-                                }
-
-                                contexto.Usuarios.Add(usuario);
-                            }
-                            contexto.SaveChanges();
-                        }
-
-                        // Importar Clientes con el mismo enfoque dinámico
-                        if (ds.Tables.Contains("Clientes"))
-                        {
-                            foreach (DataRow row in ds.Tables["Clientes"].Rows)
-                            {
-                                var cliente = new ENTIDADES.Cliente();
-
-                                foreach (DataColumn column in ds.Tables["Clientes"].Columns)
-                                {
-                                    if (row[column] != DBNull.Value)
-                                    {
-                                        var prop = typeof(ENTIDADES.Cliente).GetProperty(column.ColumnName);
-                                        if (prop != null && prop.CanWrite)
-                                        {
-                                            try
-                                            {
-                                                var value = Convert.ChangeType(row[column], prop.PropertyType);
-                                                prop.SetValue(cliente, value);
-                                            }
-                                            catch
-                                            {
-                                                // Ignorar errores de conversión
-                                            }
-                                        }
-                                    }
-                                }
-
-                                contexto.Clientes.Add(cliente);
-                            }
-                            contexto.SaveChanges();
-                        }
-
-                        // Importar Proveedores
-                        if (ds.Tables.Contains("Proveedores"))
-                        {
-                            foreach (DataRow row in ds.Tables["Proveedores"].Rows)
-                            {
-                                var proveedor = new ENTIDADES.Proveedor();
-
-                                foreach (DataColumn column in ds.Tables["Proveedores"].Columns)
-                                {
-                                    if (row[column] != DBNull.Value)
-                                    {
-                                        var prop = typeof(ENTIDADES.Proveedor).GetProperty(column.ColumnName);
-                                        if (prop != null && prop.CanWrite)
-                                        {
-                                            try
-                                            {
-                                                var value = Convert.ChangeType(row[column], prop.PropertyType);
-                                                prop.SetValue(proveedor, value);
-                                            }
-                                            catch
-                                            {
-                                                // Ignorar errores de conversión
-                                            }
-                                        }
-                                    }
-                                }
-
-                                contexto.Proveedores.Add(proveedor);
-                            }
-                            contexto.SaveChanges();
-                        }
-
-                        // Importar Productos
-                        if (ds.Tables.Contains("Productos"))
-                        {
-                            foreach (DataRow row in ds.Tables["Productos"].Rows)
-                            {
-                                var producto = new ENTIDADES.Producto();
-
-                                foreach (DataColumn column in ds.Tables["Productos"].Columns)
-                                {
-                                    if (row[column] != DBNull.Value)
-                                    {
-                                        var prop = typeof(ENTIDADES.Producto).GetProperty(column.ColumnName);
-                                        if (prop != null && prop.CanWrite)
-                                        {
-                                            try
-                                            {
-                                                var value = Convert.ChangeType(row[column], prop.PropertyType);
-                                                prop.SetValue(producto, value);
-                                            }
-                                            catch
-                                            {
-                                                // Ignorar errores de conversión
-                                            }
-                                        }
-                                    }
-                                }
-
-                                contexto.Productos.Add(producto);
-                            }
-                            contexto.SaveChanges();
-                        }
-
-                        // Importar Ventas
-                        if (ds.Tables.Contains("Venta"))
-                        {
-                            foreach (DataRow row in ds.Tables["Venta"].Rows)
-                            {
-                                var venta = new ENTIDADES.Venta();
-
-                                foreach (DataColumn column in ds.Tables["Venta"].Columns)
-                                {
-                                    if (row[column] != DBNull.Value)
-                                    {
-                                        var prop = typeof(ENTIDADES.Venta).GetProperty(column.ColumnName);
-                                        if (prop != null && prop.CanWrite)
-                                        {
-                                            try
-                                            {
-                                                var value = Convert.ChangeType(row[column], prop.PropertyType);
-                                                prop.SetValue(venta, value);
-                                            }
-                                            catch
-                                            {
-                                                // Ignorar errores de conversión
-                                            }
-                                        }
-                                    }
-                                }
-
-                                contexto.Ventas.Add(venta);
-                            }
-                            contexto.SaveChanges();
-                        }
-
-                        // Reactivar las restricciones de clave foránea
-                        contexto.Database.ExecuteSqlCommand("EXEC sp_MSforeachtable 'ALTER TABLE ? CHECK CONSTRAINT ALL'");
-
-                        MessageBox.Show("Base de datos restaurada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        // En caso de error, asegurarse de reactivar las restricciones
-                        try { contexto.Database.ExecuteSqlCommand("EXEC sp_MSforeachtable 'ALTER TABLE ? CHECK CONSTRAINT ALL'"); }
-                        catch { /* Ignorar errores aquí */ }
-
-                        throw new Exception($"Error al importar datos desde XML: {ex.Message}", ex);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error al restaurar la base de datos: {ex.Message}", ex);
-            }
-        }
+        
 
         // Método genérico para convertir cualquier lista a DataTable
         private DataTable ConvertirListaADataTable<T>(List<T> items, string tableName)
@@ -543,5 +290,32 @@ namespace VISTA
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        
+
+        
+        
+
+       
+
+        
+        private void ExecuteNonQuery(string sql, SqlConnection connection, SqlTransaction transaction)
+        {
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(sql, connection, transaction))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error ejecutando SQL [{sql}]: {ex.Message}");
+                throw;
+            }
+        }
+
+        
+
     }
 }

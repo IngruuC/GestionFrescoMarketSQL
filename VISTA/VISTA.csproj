@@ -226,6 +226,12 @@
     <Compile Include="VENTA\IU_CLIENTE\FormFavoritosCliente.Designer.cs">
       <DependentUpon>FormFavoritosCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="VENTA\IU_CLIENTE\FormInicioCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VENTA\IU_CLIENTE\FormInicioCliente.Designer.cs">
+      <DependentUpon>FormInicioCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="VENTA\IU_CLIENTE\FormPerfilCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -347,11 +353,17 @@
     <EmbeddedResource Include="VENTA\IU_ADMIN\FormPrincipal.resx">
       <DependentUpon>FormPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="VENTA\IU_CLIENTE\FormCarritoCompra.resx">
+      <DependentUpon>FormCarritoCompra.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VENTA\IU_CLIENTE\FormComprasCliente.resx">
       <DependentUpon>FormComprasCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VENTA\IU_CLIENTE\FormFavoritosCliente.resx">
       <DependentUpon>FormFavoritosCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VENTA\IU_CLIENTE\FormInicioCliente.resx">
+      <DependentUpon>FormInicioCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VENTA\IU_CLIENTE\FormPerfilCliente.resx">
       <DependentUpon>FormPerfilCliente.cs</DependentUpon>
@@ -427,10 +439,20 @@
     <Content Include="Resources\icons8-casa.gif" />
     <Content Include="Resources\icons8-clients-64.png" />
     <Content Include="Resources\icons8-doble-derecha.gif" />
+    <None Include="Resources\icons8-user-75.png" />
+    <None Include="Resources\icons8-house-100.png" />
+    <None Include="Resources\icons8-house-100 %281%29.png" />
+    <None Include="Resources\icons8-house-100 %282%29.png" />
+    <None Include="Resources\icons8-house-50.png" />
+    <None Include="Resources\icons8-house-50 %281%29.png" />
+    <None Include="Resources\icons8-house-100 %283%29.png" />
+    <None Include="Resources\icons8-house-75.png" />
+    <None Include="Resources\icons8-full-shopping-basket-75.png" />
     <Content Include="Resources\icons8-inventory-64 %281%29.png" />
     <Content Include="Resources\icons8-low-sales-64.png" />
     <Content Include="Resources\icons8-product-64.png" />
     <Content Include="Resources\icons8-salida.gif" />
+    <None Include="Resources\icons8-star-filled-75.png" />
     <Content Include="Resources\icons8-supplier-60.png" />
     <Content Include="Resources\icons8-supplier-64.png" />
     <Content Include="Resources\icons8-upselling-64.png" />

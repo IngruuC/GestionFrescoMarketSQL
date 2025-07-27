@@ -144,5 +144,10 @@ namespace VISTA
                     MessageBoxIcon.Warning);
             }
         }
+
+        private void panelContenedor_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

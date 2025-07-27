@@ -180,8 +180,6 @@ namespace VISTA
 
             try
             {
-                var controladoraUsuario = ControladoraUsuario.ObtenerInstancia();
-
                 // Crear el cliente
                 var cliente = new Cliente
                 {
@@ -189,28 +187,13 @@ namespace VISTA
                     Nombre = txtNombre.Text.Trim(),
                     Apellido = txtApellido.Text.Trim(),
                     Direccion = txtDireccion.Text.Trim()
+                    // UsuarioId = null por defecto
                 };
 
-                // Generar un usuario para este cliente
-                var nombreUsuario = $"cliente_{txtDocumento.Text.Trim()}";
-                var contraseñaDefault = txtDocumento.Text.Trim(); // Usar el DNI como contraseña inicial
-                var correo = $"{nombreUsuario}@frescomarket.com"; // Correo genérico
+                // Guardar cliente SIN usuario
+                controladora.AgregarCliente(cliente);
 
-                var usuario = new Usuario
-                {
-                    NombreUsuario = nombreUsuario,
-                    Contraseña = contraseñaDefault, // Se hará hash en el controlador
-                    Email = correo,
-                    Estado = true,
-                    FechaCreacion = DateTime.Now,
-                    IntentosIngreso = 0,
-                    Rol = "Cliente"
-                };
-
-                // Registrar cliente con su usuario
-                controladoraUsuario.RegistrarCliente(usuario, cliente);
-
-                MessageBox.Show($"Cliente guardado exitosamente.\nSe ha creado el usuario: {nombreUsuario}\nContraseña inicial: {contraseñaDefault}",
+                MessageBox.Show("Cliente guardado exitosamente.",
                     "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 LimpiarCampos();
