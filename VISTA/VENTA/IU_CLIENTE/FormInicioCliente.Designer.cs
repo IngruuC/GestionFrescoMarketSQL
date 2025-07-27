@@ -34,14 +34,13 @@
             this.panelOferta3 = new System.Windows.Forms.Panel();
             this.lblOfertasEspeciales = new System.Windows.Forms.Label();
             this.panelOferta1 = new System.Windows.Forms.Panel();
-            this.lblCantidadCarrito = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblRecomendados
             // 
             this.lblRecomendados.AutoSize = true;
             this.lblRecomendados.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.lblRecomendados.Location = new System.Drawing.Point(16, 168);
+            this.lblRecomendados.Location = new System.Drawing.Point(12, 216);
             this.lblRecomendados.Name = "lblRecomendados";
             this.lblRecomendados.Size = new System.Drawing.Size(234, 20);
             this.lblRecomendados.TabIndex = 12;
@@ -52,15 +51,15 @@
             this.panelOferta2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelOferta2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelOferta2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelOferta2.Location = new System.Drawing.Point(340, 42);
+            this.panelOferta2.Location = new System.Drawing.Point(304, 42);
             this.panelOferta2.Name = "panelOferta2";
-            this.panelOferta2.Size = new System.Drawing.Size(160, 108);
+            this.panelOferta2.Size = new System.Drawing.Size(216, 149);
             this.panelOferta2.TabIndex = 16;
             // 
             // panelRecomendados
             // 
             this.panelRecomendados.BackColor = System.Drawing.Color.White;
-            this.panelRecomendados.Location = new System.Drawing.Point(16, 188);
+            this.panelRecomendados.Location = new System.Drawing.Point(12, 236);
             this.panelRecomendados.Name = "panelRecomendados";
             this.panelRecomendados.Size = new System.Drawing.Size(800, 250);
             this.panelRecomendados.TabIndex = 13;
@@ -70,9 +69,9 @@
             this.panelOferta3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelOferta3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelOferta3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelOferta3.Location = new System.Drawing.Point(656, 42);
+            this.panelOferta3.Location = new System.Drawing.Point(596, 42);
             this.panelOferta3.Name = "panelOferta3";
-            this.panelOferta3.Size = new System.Drawing.Size(160, 108);
+            this.panelOferta3.Size = new System.Drawing.Size(216, 149);
             this.panelOferta3.TabIndex = 15;
             // 
             // lblOfertasEspeciales
@@ -91,19 +90,10 @@
             this.panelOferta1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelOferta1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.panelOferta1.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.panelOferta1.Location = new System.Drawing.Point(30, 42);
+            this.panelOferta1.Location = new System.Drawing.Point(16, 42);
             this.panelOferta1.Name = "panelOferta1";
-            this.panelOferta1.Size = new System.Drawing.Size(160, 108);
+            this.panelOferta1.Size = new System.Drawing.Size(216, 149);
             this.panelOferta1.TabIndex = 14;
-            // 
-            // lblCantidadCarrito
-            // 
-            this.lblCantidadCarrito.AutoSize = true;
-            this.lblCantidadCarrito.Location = new System.Drawing.Point(727, 487);
-            this.lblCantidadCarrito.Name = "lblCantidadCarrito";
-            this.lblCantidadCarrito.Size = new System.Drawing.Size(89, 13);
-            this.lblCantidadCarrito.TabIndex = 17;
-            this.lblCantidadCarrito.Text = "lblCantidadCarrito";
             // 
             // FormInicioCliente
             // 
@@ -111,7 +101,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LemonChiffon;
             this.ClientSize = new System.Drawing.Size(865, 537);
-            this.Controls.Add(this.lblCantidadCarrito);
             this.Controls.Add(this.lblRecomendados);
             this.Controls.Add(this.panelOferta2);
             this.Controls.Add(this.panelRecomendados);
@@ -133,6 +122,5 @@
         private System.Windows.Forms.Panel panelOferta3;
         private System.Windows.Forms.Label lblOfertasEspeciales;
         private System.Windows.Forms.Panel panelOferta1;
-        private System.Windows.Forms.Label lblCantidadCarrito;
     }
 }

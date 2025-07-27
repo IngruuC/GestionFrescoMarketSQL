@@ -63,6 +63,36 @@ namespace VISTA.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_add_shopping_cart_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-add-shopping-cart-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_add_shopping_cart_50 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-add-shopping-cart-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_add_shopping_cart_75 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-add-shopping-cart-75", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_clients_64 {
             get {
                 object obj = ResourceManager.GetObject("icons8-clients-64", resourceCulture);
@@ -216,6 +246,16 @@ namespace VISTA.Properties {
         internal static System.Drawing.Bitmap icons8_low_sales_64 {
             get {
                 object obj = ResourceManager.GetObject("icons8-low-sales-64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_product_50 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-product-50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

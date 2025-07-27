@@ -436,6 +436,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\icons8-add-shopping-cart-50.png" />
+    <None Include="Resources\icons8-add-shopping-cart-100.png" />
+    <None Include="Resources\icons8-add-shopping-cart-75.png" />
     <Content Include="Resources\icons8-casa.gif" />
     <Content Include="Resources\icons8-clients-64.png" />
     <Content Include="Resources\icons8-doble-derecha.gif" />
@@ -450,6 +453,7 @@
     <None Include="Resources\icons8-full-shopping-basket-75.png" />
     <Content Include="Resources\icons8-inventory-64 %281%29.png" />
     <Content Include="Resources\icons8-low-sales-64.png" />
+    <None Include="Resources\icons8-product-50.png" />
     <Content Include="Resources\icons8-product-64.png" />
     <Content Include="Resources\icons8-salida.gif" />
     <None Include="Resources\icons8-star-filled-75.png" />

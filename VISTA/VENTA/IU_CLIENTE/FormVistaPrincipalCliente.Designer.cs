@@ -17,6 +17,7 @@
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormVistaPrincipalCliente));
             this.panelMenu = new System.Windows.Forms.Panel();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
@@ -25,18 +26,18 @@
             this.lblBienvenido = new System.Windows.Forms.Label();
             this.panelOfertas = new System.Windows.Forms.Panel();
             this.panelContenedorInicio = new System.Windows.Forms.Panel();
+            this.timerActualizarCarrito = new System.Windows.Forms.Timer(this.components);
             this.btnFavoritos = new System.Windows.Forms.Button();
             this.btnPerfil = new System.Windows.Forms.Button();
             this.btnMisCompras = new System.Windows.Forms.Button();
             this.btnInicio = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.btnCarrito = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMenu
@@ -70,9 +71,9 @@
             // panelSuperior
             // 
             this.panelSuperior.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.panelSuperior.Controls.Add(this.pictureBox3);
             this.panelSuperior.Controls.Add(this.lblCantidadCarrito);
-            this.panelSuperior.Controls.Add(this.pictureBox2);
+            this.panelSuperior.Controls.Add(this.btnCarrito);
+            this.panelSuperior.Controls.Add(this.pictureBox3);
             this.panelSuperior.Controls.Add(this.lblBienvenido);
             this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSuperior.Location = new System.Drawing.Point(0, 0);
@@ -85,11 +86,10 @@
             this.lblCantidadCarrito.AutoSize = true;
             this.lblCantidadCarrito.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCantidadCarrito.ForeColor = System.Drawing.Color.Brown;
-            this.lblCantidadCarrito.Location = new System.Drawing.Point(860, 50);
+            this.lblCantidadCarrito.Location = new System.Drawing.Point(1093, 73);
             this.lblCantidadCarrito.Name = "lblCantidadCarrito";
-            this.lblCantidadCarrito.Size = new System.Drawing.Size(153, 20);
+            this.lblCantidadCarrito.Size = new System.Drawing.Size(0, 20);
             this.lblCantidadCarrito.TabIndex = 11;
-            this.lblCantidadCarrito.Text = "lblCantidadCarrito";
             // 
             // lblBienvenido
             // 
@@ -197,14 +197,20 @@
             this.pictureBox3.TabIndex = 12;
             this.pictureBox3.TabStop = false;
             // 
-            // pictureBox2
+            // btnCarrito
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(1051, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(99, 90);
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
+            this.btnCarrito.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnCarrito.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCarrito.Image = global::VISTA.Properties.Resources.icons8_add_shopping_cart_100;
+            this.btnCarrito.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnCarrito.Location = new System.Drawing.Point(1054, 0);
+            this.btnCarrito.Name = "btnCarrito";
+            this.btnCarrito.Size = new System.Drawing.Size(96, 114);
+            this.btnCarrito.TabIndex = 7;
+            this.btnCarrito.Text = "CARRITO";
+            this.btnCarrito.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnCarrito.UseVisualStyleBackColor = false;
+            this.btnCarrito.Click += new System.EventHandler(this.btnCarrito_Click_1);
             // 
             // FormVistaPrincipalCliente
             // 
@@ -224,7 +230,6 @@
             this.panelSuperior.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -237,7 +242,6 @@
 
         private System.Windows.Forms.Panel panelOfertas;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label lblCantidadCarrito;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button btnInicio;
@@ -245,6 +249,8 @@
         private System.Windows.Forms.Button btnPerfil;
         private System.Windows.Forms.Button btnFavoritos;
         private System.Windows.Forms.Button btnMisCompras;
+        private System.Windows.Forms.Timer timerActualizarCarrito;
+        private System.Windows.Forms.Button btnCarrito;
     }
 }
 #endregion

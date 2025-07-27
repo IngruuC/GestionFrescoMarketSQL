@@ -20,9 +20,9 @@ namespace VISTA.COMPRA
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormVistaPrincipalProveedor));
             this.panelMenu = new System.Windows.Forms.Panel();
             this.btnHistorial = new System.Windows.Forms.Button();
-            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.btnMiPerfil = new System.Windows.Forms.Button();
             this.btnMisProductos = new System.Windows.Forms.Button();
             this.btnReportes = new System.Windows.Forms.Button();
@@ -48,8 +48,9 @@ namespace VISTA.COMPRA
             this.lblPedidosRecientes = new System.Windows.Forms.Label();
             this.lblPedidosRecientesTitulo = new System.Windows.Forms.Label();
             this.lblTituloDashboard = new System.Windows.Forms.Label();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.panelSuperior.SuspendLayout();
             this.panelDashboard.SuspendLayout();
             this.panelMasVendidos.SuspendLayout();
@@ -61,6 +62,8 @@ namespace VISTA.COMPRA
             this.panelTotalVentas.SuspendLayout();
             this.panelTotalProductos.SuspendLayout();
             this.panelPedidosRecientes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMenu
@@ -73,9 +76,9 @@ namespace VISTA.COMPRA
             this.panelMenu.Controls.Add(this.btnReportes);
             this.panelMenu.Controls.Add(this.btnCerrarSesion);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelMenu.Location = new System.Drawing.Point(0, 80);
+            this.panelMenu.Location = new System.Drawing.Point(0, 114);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(250, 570);
+            this.panelMenu.Size = new System.Drawing.Size(225, 536);
             this.panelMenu.TabIndex = 0;
             // 
             // btnHistorial
@@ -84,7 +87,7 @@ namespace VISTA.COMPRA
             this.btnHistorial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHistorial.Font = new System.Drawing.Font("Microsoft Tai Le", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHistorial.ForeColor = System.Drawing.Color.White;
-            this.btnHistorial.Location = new System.Drawing.Point(3, 244);
+            this.btnHistorial.Location = new System.Drawing.Point(-8, 244);
             this.btnHistorial.Name = "btnHistorial";
             this.btnHistorial.Size = new System.Drawing.Size(250, 50);
             this.btnHistorial.TabIndex = 6;
@@ -92,22 +95,13 @@ namespace VISTA.COMPRA
             this.btnHistorial.UseVisualStyleBackColor = true;
             this.btnHistorial.Click += new System.EventHandler(this.btnHistorial_Click);
             // 
-            // pictureBoxLogo
-            // 
-            this.pictureBoxLogo.Location = new System.Drawing.Point(75, 30);
-            this.pictureBoxLogo.Name = "pictureBoxLogo";
-            this.pictureBoxLogo.Size = new System.Drawing.Size(100, 100);
-            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxLogo.TabIndex = 5;
-            this.pictureBoxLogo.TabStop = false;
-            // 
             // btnMiPerfil
             // 
             this.btnMiPerfil.FlatAppearance.BorderSize = 0;
             this.btnMiPerfil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMiPerfil.Font = new System.Drawing.Font("Microsoft Tai Le", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMiPerfil.ForeColor = System.Drawing.Color.White;
-            this.btnMiPerfil.Location = new System.Drawing.Point(0, 150);
+            this.btnMiPerfil.Location = new System.Drawing.Point(-11, 150);
             this.btnMiPerfil.Name = "btnMiPerfil";
             this.btnMiPerfil.Size = new System.Drawing.Size(250, 50);
             this.btnMiPerfil.TabIndex = 0;
@@ -121,7 +115,7 @@ namespace VISTA.COMPRA
             this.btnMisProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMisProductos.Font = new System.Drawing.Font("Microsoft Tai Le", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMisProductos.ForeColor = System.Drawing.Color.White;
-            this.btnMisProductos.Location = new System.Drawing.Point(0, 200);
+            this.btnMisProductos.Location = new System.Drawing.Point(-11, 200);
             this.btnMisProductos.Name = "btnMisProductos";
             this.btnMisProductos.Size = new System.Drawing.Size(250, 50);
             this.btnMisProductos.TabIndex = 1;
@@ -135,7 +129,7 @@ namespace VISTA.COMPRA
             this.btnReportes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReportes.Font = new System.Drawing.Font("Microsoft Tai Le", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReportes.ForeColor = System.Drawing.Color.White;
-            this.btnReportes.Location = new System.Drawing.Point(0, 300);
+            this.btnReportes.Location = new System.Drawing.Point(-11, 300);
             this.btnReportes.Name = "btnReportes";
             this.btnReportes.Size = new System.Drawing.Size(250, 50);
             this.btnReportes.TabIndex = 3;
@@ -149,7 +143,7 @@ namespace VISTA.COMPRA
             this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrarSesion.Font = new System.Drawing.Font("Microsoft Tai Le", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
-            this.btnCerrarSesion.Location = new System.Drawing.Point(-3, 520);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(-11, 486);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.Size = new System.Drawing.Size(250, 50);
             this.btnCerrarSesion.TabIndex = 4;
@@ -160,21 +154,22 @@ namespace VISTA.COMPRA
             // panelSuperior
             // 
             this.panelSuperior.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.panelSuperior.Controls.Add(this.pictureBox1);
             this.panelSuperior.Controls.Add(this.lblBienvenido);
             this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSuperior.Location = new System.Drawing.Point(0, 0);
             this.panelSuperior.Name = "panelSuperior";
-            this.panelSuperior.Size = new System.Drawing.Size(1100, 80);
+            this.panelSuperior.Size = new System.Drawing.Size(1150, 114);
             this.panelSuperior.TabIndex = 1;
             // 
             // lblBienvenido
             // 
             this.lblBienvenido.AutoSize = true;
-            this.lblBienvenido.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBienvenido.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBienvenido.ForeColor = System.Drawing.Color.White;
-            this.lblBienvenido.Location = new System.Drawing.Point(260, 25);
+            this.lblBienvenido.Location = new System.Drawing.Point(256, 29);
             this.lblBienvenido.Name = "lblBienvenido";
-            this.lblBienvenido.Size = new System.Drawing.Size(365, 31);
+            this.lblBienvenido.Size = new System.Drawing.Size(623, 55);
             this.lblBienvenido.TabIndex = 0;
             this.lblBienvenido.Text = "Bienvenido, [Razón Social]";
             // 
@@ -186,10 +181,10 @@ namespace VISTA.COMPRA
             this.panelDashboard.Controls.Add(this.panelEstadisticas);
             this.panelDashboard.Controls.Add(this.lblTituloDashboard);
             this.panelDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDashboard.Location = new System.Drawing.Point(250, 80);
+            this.panelDashboard.Location = new System.Drawing.Point(225, 114);
             this.panelDashboard.Name = "panelDashboard";
             this.panelDashboard.Padding = new System.Windows.Forms.Padding(20);
-            this.panelDashboard.Size = new System.Drawing.Size(850, 570);
+            this.panelDashboard.Size = new System.Drawing.Size(925, 536);
             this.panelDashboard.TabIndex = 2;
             // 
             // panelMasVendidos
@@ -197,7 +192,7 @@ namespace VISTA.COMPRA
             this.panelMasVendidos.BackColor = System.Drawing.Color.White;
             this.panelMasVendidos.Controls.Add(this.dgvProductosMasVendidos);
             this.panelMasVendidos.Controls.Add(this.lblProductosMasVendidos);
-            this.panelMasVendidos.Location = new System.Drawing.Point(443, 180);
+            this.panelMasVendidos.Location = new System.Drawing.Point(456, 180);
             this.panelMasVendidos.Name = "panelMasVendidos";
             this.panelMasVendidos.Size = new System.Drawing.Size(380, 350);
             this.panelMasVendidos.TabIndex = 3;
@@ -230,7 +225,7 @@ namespace VISTA.COMPRA
             this.panelComprasRecientes.BackColor = System.Drawing.Color.White;
             this.panelComprasRecientes.Controls.Add(this.dgvComprasRecientes);
             this.panelComprasRecientes.Controls.Add(this.lblComprasRecientes);
-            this.panelComprasRecientes.Location = new System.Drawing.Point(23, 180);
+            this.panelComprasRecientes.Location = new System.Drawing.Point(36, 180);
             this.panelComprasRecientes.Name = "panelComprasRecientes";
             this.panelComprasRecientes.Size = new System.Drawing.Size(380, 350);
             this.panelComprasRecientes.TabIndex = 2;
@@ -261,7 +256,7 @@ namespace VISTA.COMPRA
             // panelEstadisticas
             // 
             this.panelEstadisticas.Controls.Add(this.tableLayoutPanel1);
-            this.panelEstadisticas.Location = new System.Drawing.Point(23, 60);
+            this.panelEstadisticas.Location = new System.Drawing.Point(36, 60);
             this.panelEstadisticas.Name = "panelEstadisticas";
             this.panelEstadisticas.Size = new System.Drawing.Size(800, 100);
             this.panelEstadisticas.TabIndex = 1;
@@ -389,17 +384,36 @@ namespace VISTA.COMPRA
             // 
             this.lblTituloDashboard.AutoSize = true;
             this.lblTituloDashboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTituloDashboard.Location = new System.Drawing.Point(23, 20);
+            this.lblTituloDashboard.Location = new System.Drawing.Point(36, 20);
             this.lblTituloDashboard.Name = "lblTituloDashboard";
             this.lblTituloDashboard.Size = new System.Drawing.Size(240, 25);
             this.lblTituloDashboard.TabIndex = 0;
             this.lblTituloDashboard.Text = "Panel de Estadísticas";
             // 
+            // pictureBoxLogo
+            // 
+            this.pictureBoxLogo.Image = global::VISTA.Properties.Resources.icons8_product_50;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(64, 30);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxLogo.TabIndex = 5;
+            this.pictureBoxLogo.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(64, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(126, 131);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
             // FormVistaPrincipalProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1100, 650);
+            this.ClientSize = new System.Drawing.Size(1150, 650);
             this.Controls.Add(this.panelDashboard);
             this.Controls.Add(this.panelMenu);
             this.Controls.Add(this.panelSuperior);
@@ -409,7 +423,6 @@ namespace VISTA.COMPRA
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fresco Market - Portal de Proveedor";
             this.panelMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.panelSuperior.ResumeLayout(false);
             this.panelSuperior.PerformLayout();
             this.panelDashboard.ResumeLayout(false);
@@ -428,6 +441,8 @@ namespace VISTA.COMPRA
             this.panelTotalProductos.PerformLayout();
             this.panelPedidosRecientes.ResumeLayout(false);
             this.panelPedidosRecientes.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -462,5 +477,6 @@ namespace VISTA.COMPRA
         private System.Windows.Forms.DataGridView dgvProductosMasVendidos;
         private System.Windows.Forms.Label lblProductosMasVendidos;
         private Button btnHistorial;
+        private PictureBox pictureBox1;
     }
 }

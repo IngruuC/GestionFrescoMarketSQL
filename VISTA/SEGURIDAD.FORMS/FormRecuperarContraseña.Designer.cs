@@ -79,6 +79,7 @@ namespace VISTA
             // 
             // FormRecuperarContraseña
             // 
+            this.BackColor = System.Drawing.Color.LemonChiffon;
             this.ClientSize = new System.Drawing.Size(300, 200);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnRecuperar);
