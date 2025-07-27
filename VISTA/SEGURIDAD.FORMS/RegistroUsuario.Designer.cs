@@ -84,7 +84,7 @@
             // lblUsuario
             // 
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(36, 90);
+            this.lblUsuario.Location = new System.Drawing.Point(36, 115);
             this.lblUsuario.Name = "lblUsuario";
             this.lblUsuario.Size = new System.Drawing.Size(46, 13);
             this.lblUsuario.TabIndex = 1;
@@ -92,7 +92,7 @@
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(160, 87);
+            this.txtUsuario.Location = new System.Drawing.Point(160, 112);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(280, 20);
             this.txtUsuario.TabIndex = 2;
@@ -100,7 +100,7 @@
             // lblContraseña
             // 
             this.lblContraseña.AutoSize = true;
-            this.lblContraseña.Location = new System.Drawing.Point(36, 116);
+            this.lblContraseña.Location = new System.Drawing.Point(36, 141);
             this.lblContraseña.Name = "lblContraseña";
             this.lblContraseña.Size = new System.Drawing.Size(64, 13);
             this.lblContraseña.TabIndex = 3;
@@ -108,7 +108,7 @@
             // 
             // txtContraseña
             // 
-            this.txtContraseña.Location = new System.Drawing.Point(160, 113);
+            this.txtContraseña.Location = new System.Drawing.Point(160, 138);
             this.txtContraseña.Name = "txtContraseña";
             this.txtContraseña.PasswordChar = '*';
             this.txtContraseña.Size = new System.Drawing.Size(280, 20);
@@ -117,7 +117,7 @@
             // lblConfirmarContraseña
             // 
             this.lblConfirmarContraseña.AutoSize = true;
-            this.lblConfirmarContraseña.Location = new System.Drawing.Point(36, 142);
+            this.lblConfirmarContraseña.Location = new System.Drawing.Point(36, 167);
             this.lblConfirmarContraseña.Name = "lblConfirmarContraseña";
             this.lblConfirmarContraseña.Size = new System.Drawing.Size(110, 13);
             this.lblConfirmarContraseña.TabIndex = 5;
@@ -125,7 +125,7 @@
             // 
             // txtConfirmarContraseña
             // 
-            this.txtConfirmarContraseña.Location = new System.Drawing.Point(160, 139);
+            this.txtConfirmarContraseña.Location = new System.Drawing.Point(160, 164);
             this.txtConfirmarContraseña.Name = "txtConfirmarContraseña";
             this.txtConfirmarContraseña.PasswordChar = '*';
             this.txtConfirmarContraseña.Size = new System.Drawing.Size(280, 20);
@@ -134,7 +134,7 @@
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(36, 168);
+            this.lblEmail.Location = new System.Drawing.Point(36, 193);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(35, 13);
             this.lblEmail.TabIndex = 7;
@@ -142,7 +142,7 @@
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(160, 165);
+            this.txtEmail.Location = new System.Drawing.Point(160, 190);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(280, 20);
             this.txtEmail.TabIndex = 8;
@@ -150,7 +150,7 @@
             // lblTipoUsuario
             // 
             this.lblTipoUsuario.AutoSize = true;
-            this.lblTipoUsuario.Location = new System.Drawing.Point(36, 194);
+            this.lblTipoUsuario.Location = new System.Drawing.Point(36, 219);
             this.lblTipoUsuario.Name = "lblTipoUsuario";
             this.lblTipoUsuario.Size = new System.Drawing.Size(83, 13);
             this.lblTipoUsuario.TabIndex = 9;
@@ -160,7 +160,7 @@
             // 
             this.cmbTipoUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoUsuario.FormattingEnabled = true;
-            this.cmbTipoUsuario.Location = new System.Drawing.Point(160, 191);
+            this.cmbTipoUsuario.Location = new System.Drawing.Point(160, 216);
             this.cmbTipoUsuario.Name = "cmbTipoUsuario";
             this.cmbTipoUsuario.Size = new System.Drawing.Size(280, 21);
             this.cmbTipoUsuario.TabIndex = 10;
@@ -168,7 +168,7 @@
             // lblDocumento
             // 
             this.lblDocumento.AutoSize = true;
-            this.lblDocumento.Location = new System.Drawing.Point(36, 220);
+            this.lblDocumento.Location = new System.Drawing.Point(36, 89);
             this.lblDocumento.Name = "lblDocumento";
             this.lblDocumento.Size = new System.Drawing.Size(65, 13);
             this.lblDocumento.TabIndex = 11;
@@ -176,7 +176,7 @@
             // 
             // txtDocumento
             // 
-            this.txtDocumento.Location = new System.Drawing.Point(160, 217);
+            this.txtDocumento.Location = new System.Drawing.Point(160, 86);
             this.txtDocumento.Name = "txtDocumento";
             this.txtDocumento.Size = new System.Drawing.Size(280, 20);
             this.txtDocumento.TabIndex = 12;
@@ -314,6 +314,7 @@
             this.btnCancelar.TabIndex = 28;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // RegistroUsuario
             // 

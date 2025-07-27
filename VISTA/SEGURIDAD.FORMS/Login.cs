@@ -21,6 +21,7 @@ namespace VISTA
         private readonly ControladoraUsuario controladora;
         private ControladoraAuditoria controladoraAuditoria;
 
+
         public Login()
         {
             InitializeComponent();
@@ -177,27 +178,72 @@ namespace VISTA
         {
             try
             {
-                using (var formRegistro = new RegistroUsuario())
-                {
-                    this.Hide(); // Ocultamos el login
+                var formRegistro = new RegistroUsuario();
+                var resultado = formRegistro.ShowDialog();
 
-                    if (formRegistro.ShowDialog() == DialogResult.OK)
+                if (resultado == DialogResult.OK)
+                {
+                    // Verificar si el usuario ya fue logueado automáticamente (primer acceso sin usuario previo)
+                    if (SesionActual.Usuario != null)
                     {
-                        MessageBox.Show("Usuario registrado exitosamente. Por favor inicie sesión.",
-                            "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // El usuario se registró como cliente existente y ya está logueado
+                        MessageBox.Show(
+                            $"¡Bienvenido {SesionActual.Usuario.NombreUsuario}!\n" +
+                            "Tu sesión ha sido iniciada automáticamente.",
+                            "Sesión iniciada",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                        return;
                     }
 
-                    this.Show(); // Volvemos a mostrar el login
-                    txtUsuario.Clear();
-                    txtContraseña.Clear();
-                    txtUsuario.Focus();
+                    // Registro normal exitoso
+                    MessageBox.Show(
+                        "Usuario registrado exitosamente.\n" +
+                        "Ahora puedes iniciar sesión con tus credenciales.",
+                        "Registro exitoso",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else if (resultado == DialogResult.Cancel)
+                {
+                    // Verificar si viene con credenciales específicas (usuario ya tenía cuenta)
+                    if (!string.IsNullOrEmpty(formRegistro.UsuarioCreado))
+                    {
+                        // Pre-llenar el usuario
+                        txtUsuario.Text = formRegistro.UsuarioCreado;
+                        txtContraseña.Focus();
+
+                        // Solo mostrar recordatorio si es un usuario automático (que usa DNI como contraseña)
+                        if (formRegistro.UsuarioCreado.StartsWith("cliente_"))
+                        {
+                            // Usuario automático - mostrar recordatorio sobre contraseña = DNI
+                            var timer = new System.Windows.Forms.Timer();
+                            timer.Interval = 500; // Medio segundo
+                            timer.Tick += (s, args) =>
+                            {
+                                timer.Stop();
+                                MessageBox.Show(
+                                    "💡 Recordatorio:\n\n" +
+                                    "Tu contraseña actual es tu número de documento.\n" +
+                                    "Te recomendamos cambiarla por una personalizada después de iniciar sesión.\n\n" +
+                                    "Puedes hacerlo desde: Menú → Mi Perfil → Cambiar Contraseña",
+                                    "Contraseña Temporal",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                            };
+                            timer.Start();
+                        }
+                        // Si no es usuario automático, no mostramos recordatorio porque no sabemos su contraseña
+                    }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al abrir el formulario de registro: {ex.Message}",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Show();
             }
 
 
