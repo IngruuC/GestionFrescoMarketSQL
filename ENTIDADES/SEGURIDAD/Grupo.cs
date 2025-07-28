@@ -52,7 +52,7 @@ namespace ENTIDADES
             Usuarios = new HashSet<Usuario>();
             Acciones = new HashSet<Accion>();
             Hijos = new List<object>();
-            ComponenteId = Id; // Por defecto
+           // ComponenteId = Id; // Por defecto
             GrupoId = Id; // Por defecto
         }
         // NUEVOS MÉTODOS

@@ -174,7 +174,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.Goldenrod;
-            this.tabPage2.Controls.Add(this.dgvAcciones);
+            this.tabPage2.Controls.Add(this.dgvGrupos);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -188,7 +188,7 @@
             this.dgvAcciones.AllowUserToDeleteRows = false;
             this.dgvAcciones.BackgroundColor = System.Drawing.Color.Khaki;
             this.dgvAcciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAcciones.Location = new System.Drawing.Point(27, 6);
+            this.dgvAcciones.Location = new System.Drawing.Point(25, 6);
             this.dgvAcciones.MultiSelect = false;
             this.dgvAcciones.Name = "dgvAcciones";
             this.dgvAcciones.ReadOnly = true;
@@ -239,14 +239,14 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(141, 64);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(490, 31);
+            this.label1.Size = new System.Drawing.Size(517, 31);
             this.label1.TabIndex = 10;
-            this.label1.Text = "AGREGAR O MODIFICAR GRUPOS";
+            this.label1.Text = "AGREGAR O MODIFICAR USUARIOS";
             // 
             // lblAgregaroModificar
             // 
             this.lblAgregaroModificar.AutoSize = true;
-            this.lblAgregaroModificar.Location = new System.Drawing.Point(666, 64);
+            this.lblAgregaroModificar.Location = new System.Drawing.Point(367, 101);
             this.lblAgregaroModificar.Name = "lblAgregaroModificar";
             this.lblAgregaroModificar.Size = new System.Drawing.Size(35, 13);
             this.lblAgregaroModificar.TabIndex = 36;
@@ -297,7 +297,7 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.Goldenrod;
-            this.tabPage3.Controls.Add(this.dgvGrupos);
+            this.tabPage3.Controls.Add(this.dgvAcciones);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -311,7 +311,7 @@
             this.dgvGrupos.AllowUserToDeleteRows = false;
             this.dgvGrupos.BackgroundColor = System.Drawing.Color.Khaki;
             this.dgvGrupos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvGrupos.Location = new System.Drawing.Point(28, 6);
+            this.dgvGrupos.Location = new System.Drawing.Point(25, 6);
             this.dgvGrupos.MultiSelect = false;
             this.dgvGrupos.Name = "dgvGrupos";
             this.dgvGrupos.ReadOnly = true;
@@ -324,7 +324,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LemonChiffon;
-            this.ClientSize = new System.Drawing.Size(800, 424);
+            this.ClientSize = new System.Drawing.Size(766, 438);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);

@@ -35,6 +35,7 @@ namespace VISTA.SEGURIDAD.FORMS
             InitializeComponent();
             controladoraSeguridad = ControladoraSeguridad.Instancia;
             dgvGestionarUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvGestionarUsuarios.CellFormatting += DgvGestionarUsuarios_CellFormatting;
             ActualizarGrilla();
             CargarComboBoxes();
         }
@@ -43,13 +44,59 @@ namespace VISTA.SEGURIDAD.FORMS
             dgvGestionarUsuarios.DataSource = null;
             dgvGestionarUsuarios.DataSource = controladoraSeguridad.RecuperarUsuarios();
 
-            // Ocultar columnas sensibles
+            // Ocultar columnas sensibles y técnicas
             if (dgvGestionarUsuarios.Columns.Contains("Contraseña"))
                 dgvGestionarUsuarios.Columns["Contraseña"].Visible = false;
             if (dgvGestionarUsuarios.Columns.Contains("Id"))
                 dgvGestionarUsuarios.Columns["Id"].Visible = false;
+            if (dgvGestionarUsuarios.Columns.Contains("Clave"))
+                dgvGestionarUsuarios.Columns["Clave"].Visible = false;
+            if (dgvGestionarUsuarios.Columns.Contains("Perfil"))
+                dgvGestionarUsuarios.Columns["Perfil"].Visible = false;
+            if (dgvGestionarUsuarios.Columns.Contains("EstadoUsuarioId"))
+                dgvGestionarUsuarios.Columns["EstadoUsuarioId"].Visible = false;
+            if (dgvGestionarUsuarios.Columns.Contains("Clave_Alias"))
+                dgvGestionarUsuarios.Columns["Clave_Alias"].Visible = false;
         }
+        private void DgvGestionarUsuarios_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvGestionarUsuarios.Rows[e.RowIndex].DataBoundItem is Usuario usuario)
+            {
+                string nombreColumna = dgvGestionarUsuarios.Columns[e.ColumnIndex].Name;
 
+                switch (nombreColumna)
+                {
+                    case "NombreyApellido":
+                    case "NombreApellido":
+                        e.Value = usuario.NombreyApellido ?? "No especificado";
+                        e.FormattingApplied = true;
+                        break;
+
+                    case "EstadoUsuario":
+                        e.Value = usuario.EstadoUsuario?.Nombre ?? "Sin Estado";
+                        e.FormattingApplied = true;
+                        break;
+
+                    case "Grupos":
+                        if (usuario.Grupos != null && usuario.Grupos.Any())
+                        {
+                            e.Value = string.Join(", ", usuario.Grupos.Select(g => g.NombreGrupo));
+                        }
+                        else
+                        {
+                            e.Value = "Sin Grupos";
+                        }
+                        e.FormattingApplied = true;
+                        break;
+
+                    case "Clave":
+                    case "Clave_Alias":
+                        e.Value = "****"; // Ocultar contraseña
+                        e.FormattingApplied = true;
+                        break;
+                }
+            }
+        }
         private void CargarComboBoxes()
         {
             // Cargar estados de usuario
