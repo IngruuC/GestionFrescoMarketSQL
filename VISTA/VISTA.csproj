@@ -166,11 +166,41 @@
     <Compile Include="COMPRA\IU.PROVEEDOR\FormReportesProveedor.Designer.cs">
       <DependentUpon>FormReportesProveedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="IU_ADMIN\formGestionarGrupos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IU_ADMIN\formGestionarGrupos.Designer.cs">
+      <DependentUpon>formGestionarGrupos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IU_ADMIN\formGrupo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IU_ADMIN\formGrupo.Designer.cs">
+      <DependentUpon>formGrupo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IU_ADMIN\FormModalSeguridad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IU_ADMIN\FormModalSeguridad.Designer.cs">
+      <DependentUpon>FormModalSeguridad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IU_ADMIN\formUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IU_ADMIN\formUsuario.Designer.cs">
+      <DependentUpon>formUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="SEGURIDAD.FORMS\FormAuditoriaSesion.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SEGURIDAD.FORMS\FormAuditoriaSesion.Designer.cs">
       <DependentUpon>FormAuditoriaSesion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IU_ADMIN\FormGestionarUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IU_ADMIN\FormGestionarUsuarios.Designer.cs">
+      <DependentUpon>FormGestionarUsuarios.cs</DependentUpon>
     </Compile>
     <Compile Include="SEGURIDAD.FORMS\FormRecuperarContraseña.cs">
       <SubType>Form</SubType>
@@ -341,8 +371,23 @@
     <EmbeddedResource Include="COMPRA\IU.PROVEEDOR\FormReportesProveedor.resx">
       <DependentUpon>FormReportesProveedor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IU_ADMIN\formGestionarGrupos.resx">
+      <DependentUpon>formGestionarGrupos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IU_ADMIN\formGrupo.resx">
+      <DependentUpon>formGrupo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IU_ADMIN\FormModalSeguridad.resx">
+      <DependentUpon>FormModalSeguridad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IU_ADMIN\formUsuario.resx">
+      <DependentUpon>formUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SEGURIDAD.FORMS\FormAuditoriaSesion.resx">
       <DependentUpon>FormAuditoriaSesion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IU_ADMIN\FormGestionarUsuarios.resx">
+      <DependentUpon>FormGestionarUsuarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SEGURIDAD.FORMS\FormRecuperarContraseña.resx">
       <DependentUpon>FormRecuperarContraseña.cs</DependentUpon>
@@ -436,11 +481,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\icons8-users-65.png" />
     <None Include="Resources\icons8-add-shopping-cart-50.png" />
     <None Include="Resources\icons8-add-shopping-cart-100.png" />
     <None Include="Resources\icons8-add-shopping-cart-75.png" />
     <Content Include="Resources\icons8-casa.gif" />
     <Content Include="Resources\icons8-clients-64.png" />
+    <None Include="Resources\icons8-close-30.png" />
     <Content Include="Resources\icons8-doble-derecha.gif" />
     <None Include="Resources\icons8-user-75.png" />
     <None Include="Resources\icons8-house-100.png" />
@@ -455,8 +502,12 @@
     <Content Include="Resources\icons8-low-sales-64.png" />
     <None Include="Resources\icons8-product-50.png" />
     <Content Include="Resources\icons8-product-64.png" />
+    <None Include="Resources\icons8-resume-65.png" />
+    <None Include="Resources\icons8-refresh-30.png" />
     <Content Include="Resources\icons8-salida.gif" />
     <None Include="Resources\icons8-star-filled-75.png" />
+    <None Include="Resources\icons8-select-users-75.png" />
+    <None Include="Resources\icons8-select-users-65.png" />
     <Content Include="Resources\icons8-supplier-60.png" />
     <Content Include="Resources\icons8-supplier-64.png" />
     <Content Include="Resources\icons8-upselling-64.png" />

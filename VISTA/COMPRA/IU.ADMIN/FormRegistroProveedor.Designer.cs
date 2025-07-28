@@ -45,7 +45,6 @@ namespace VISTA
             this.label6 = new System.Windows.Forms.Label();
             this.btnLimpiarBusqueda = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
-            this.btnQuitarProducto = new System.Windows.Forms.Button();
             this.btnAsignarProductos = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAsignarUsuarios = new System.Windows.Forms.Button();
@@ -327,25 +326,12 @@ namespace VISTA
             this.btnCerrar.UseVisualStyleBackColor = false;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
-            // btnQuitarProducto
-            // 
-            this.btnQuitarProducto.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnQuitarProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuitarProducto.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.btnQuitarProducto.Location = new System.Drawing.Point(23, 21);
-            this.btnQuitarProducto.Name = "btnQuitarProducto";
-            this.btnQuitarProducto.Size = new System.Drawing.Size(104, 49);
-            this.btnQuitarProducto.TabIndex = 10;
-            this.btnQuitarProducto.Text = "QUITAR";
-            this.btnQuitarProducto.UseVisualStyleBackColor = false;
-            this.btnQuitarProducto.Click += new System.EventHandler(this.btnQuitarProducto_Click);
-            // 
             // btnAsignarProductos
             // 
             this.btnAsignarProductos.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnAsignarProductos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAsignarProductos.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.btnAsignarProductos.Location = new System.Drawing.Point(133, 21);
+            this.btnAsignarProductos.Location = new System.Drawing.Point(6, 25);
             this.btnAsignarProductos.Name = "btnAsignarProductos";
             this.btnAsignarProductos.Size = new System.Drawing.Size(101, 49);
             this.btnAsignarProductos.TabIndex = 11;
@@ -359,7 +345,6 @@ namespace VISTA
             this.groupBox2.Controls.Add(this.btnAsignarUsuarios);
             this.groupBox2.Controls.Add(this.btnAsignarProductos);
             this.groupBox2.Controls.Add(this.btnCerrar);
-            this.groupBox2.Controls.Add(this.btnQuitarProducto);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(297, 498);
             this.groupBox2.Name = "groupBox2";
@@ -427,7 +412,6 @@ namespace VISTA
         private Button btnCerrar;
         private Button btnBuscarProveedor;
         private Button btnActualizar;
-        private Button btnQuitarProducto;
         private Button btnAsignarProductos;
         private GroupBox groupBox2;
         private Button btnAsignarUsuarios;

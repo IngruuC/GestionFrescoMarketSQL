@@ -374,11 +374,6 @@ namespace VISTA
             }
         }
 
-        private void btnQuitarProducto_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Esta funcionalidad se implementará en una futura versión.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
         private void btnAsignarProductos_Click(object sender, EventArgs e)
         {
             if (dgvProveedores.SelectedRows.Count == 0)

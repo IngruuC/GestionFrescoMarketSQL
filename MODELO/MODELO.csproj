@@ -68,9 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexto.cs" />
-    <Compile Include="Migrations\202503110523074_AgregarAuditoriaSesion.cs" />
-    <Compile Include="Migrations\202503110523074_AgregarAuditoriaSesion.Designer.cs">
-      <DependentUpon>202503110523074_AgregarAuditoriaSesion.cs</DependentUpon>
+    <Compile Include="Migrations\202507281307019_CrearModuloSeguridad.cs" />
+    <Compile Include="Migrations\202507281307019_CrearModuloSeguridad.Designer.cs">
+      <DependentUpon>202507281307019_CrearModuloSeguridad.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,8 +86,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202503110523074_AgregarAuditoriaSesion.resx">
-      <DependentUpon>202503110523074_AgregarAuditoriaSesion.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202507281307019_CrearModuloSeguridad.resx">
+      <DependentUpon>202507281307019_CrearModuloSeguridad.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -20,9 +20,9 @@ namespace CONTROLADORA
 
         // Método para obtener historial de sesiones
         public List<AuditoriaSesion> ObtenerHistorialSesiones(
-    int? usuarioId = null,
-    DateTime? fechaDesde = null,
-    DateTime? fechaHasta = null)
+                int? usuarioId = null,
+               DateTime? fechaDesde = null,
+                DateTime? fechaHasta = null)
         {
             try
             {
@@ -77,6 +77,33 @@ namespace CONTROLADORA
             }
         }
 
+        //  Método para obtener TODAS las sesiones (sin filtros)
+        public List<AuditoriaSesion> ObtenerTodasLasSesiones()
+        {
+            try
+            {
+                Console.WriteLine("Obteniendo TODAS las sesiones de TODOS los usuarios");
+
+                var resultados = contexto.AuditoriasSesion
+                    .OrderByDescending(a => a.FechaIngreso)
+                    .ToList();
+
+                Console.WriteLine($"Total de sesiones encontradas: {resultados.Count}");
+
+                // Debug: Mostrar usuarios únicos
+                var usuariosUnicos = resultados.Select(r => r.NombreUsuario).Distinct().ToList();
+                Console.WriteLine($"Usuarios en el historial: {string.Join(", ", usuariosUnicos)}");
+
+                return resultados;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener todas las sesiones: {ex.Message}");
+                Console.WriteLine($"Detalles internos: {ex.InnerException?.Message}");
+                return new List<AuditoriaSesion>();
+            }
+        }
+
         public void RegistrarInicioSesion(Usuario usuario, string direccionIP)
         {
             if (usuario == null)
@@ -124,19 +151,69 @@ namespace CONTROLADORA
         {
             try
             {
+                Console.WriteLine($"=== INICIANDO CIERRE DE SESIÓN ===");
+                Console.WriteLine($"Usuario ID: {usuarioId}");
+                Console.WriteLine($"Fecha actual: {DateTime.Now}");
+
+                // Buscar la sesión activa más reciente del usuario
                 var sesionActiva = contexto.AuditoriasSesion
-                    .FirstOrDefault(a => a.UsuarioId == usuarioId && a.SesionActiva);
+                    .Where(a => a.UsuarioId == usuarioId && a.SesionActiva)
+                    .OrderByDescending(a => a.FechaIngreso)
+                    .FirstOrDefault();
 
                 if (sesionActiva != null)
                 {
+                    Console.WriteLine($"Sesión activa encontrada:");
+                    Console.WriteLine($"  - ID Auditoría: {sesionActiva.Id}");
+                    Console.WriteLine($"  - Usuario: {sesionActiva.NombreUsuario}");
+                    Console.WriteLine($"  - Fecha Ingreso: {sesionActiva.FechaIngreso}");
+                    Console.WriteLine($"  - Sesión Activa: {sesionActiva.SesionActiva}");
+
+                    // Registrar la fecha de salida
                     sesionActiva.FechaSalida = DateTime.Now;
                     sesionActiva.SesionActiva = false;
-                    contexto.SaveChanges();
+
+                    Console.WriteLine($"  - Nueva Fecha Salida: {sesionActiva.FechaSalida}");
+                    Console.WriteLine($"  - Nueva Sesión Activa: {sesionActiva.SesionActiva}");
+
+                    // Guardar cambios
+                    int cambiosGuardados = contexto.SaveChanges();
+                    Console.WriteLine($"Cambios guardados en BD: {cambiosGuardados}");
+
+                    if (cambiosGuardados > 0)
+                    {
+                        Console.WriteLine("✅ CIERRE DE SESIÓN REGISTRADO EXITOSAMENTE");
+                    }
+                    else
+                    {
+                        Console.WriteLine("⚠️ No se guardaron cambios en la BD");
+                    }
                 }
+                else
+                {
+                    Console.WriteLine("❌ NO SE ENCONTRÓ SESIÓN ACTIVA");
+
+                    // Debug: Mostrar todas las sesiones del usuario
+                    var todasSesiones = contexto.AuditoriasSesion
+                        .Where(a => a.UsuarioId == usuarioId)
+                        .OrderByDescending(a => a.FechaIngreso)
+                        .Take(3)
+                        .ToList();
+
+                    Console.WriteLine($"Últimas sesiones del usuario {usuarioId}:");
+                    foreach (var s in todasSesiones)
+                    {
+                        Console.WriteLine($"  - ID: {s.Id}, Ingreso: {s.FechaIngreso}, Salida: {s.FechaSalida}, Activa: {s.SesionActiva}");
+                    }
+                }
+
+                Console.WriteLine($"=== FIN CIERRE DE SESIÓN ===");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error al cerrar sesión: {ex.Message}");
+                Console.WriteLine($"❌ ERROR al cerrar sesión: {ex.Message}");
+                Console.WriteLine($"Detalles: {ex.InnerException?.Message}");
+                Console.WriteLine($"StackTrace: {ex.StackTrace}");
             }
         }
 

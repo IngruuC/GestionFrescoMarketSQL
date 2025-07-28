@@ -30,6 +30,8 @@ namespace VISTA
             // Cargar FormInicioCliente por defecto para que sea mas detallado
             FormInicioCliente frm = new FormInicioCliente();
             AbrirFormEnPanel(frm);
+
+            this.FormClosing += FormVistaPrincipalCliente_FormClosing;
         }
 
         private void ConfigurarControles()
@@ -242,9 +244,18 @@ namespace VISTA
             {
                 DialogResult resultado = MessageBox.Show("¿Está seguro que desea cerrar sesión?",
                     "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
                 if (resultado == DialogResult.Yes)
                 {
+                    // AGREGAR ESTO: Registrar cierre de sesión ANTES de limpiar
+                    if (SesionActual.Usuario != null)
+                    {
+                        Console.WriteLine($"[CLIENTE] Cerrando sesión del usuario: {SesionActual.Usuario.NombreUsuario} (ID: {SesionActual.Usuario.Id})");
+
+                        var controladoraAuditoria = new ControladoraAuditoria();
+                        controladoraAuditoria.RegistrarCierreSesion(SesionActual.Usuario.Id);
+                    }
+
+                    // Tu código existente
                     // Limpiar carrito al cerrar sesión
                     CarritoTemporal.VaciarCarrito();
 
@@ -259,7 +270,6 @@ namespace VISTA
                     Login loginForm = new Login();
                     this.Hide();
                     DialogResult loginResult = loginForm.ShowDialog();
-
                     if (loginResult != DialogResult.OK)
                     {
                         this.Close();
@@ -273,11 +283,28 @@ namespace VISTA
             }
         }
 
+        // PARA CUANDO SE CIERRE CON X
+        private void FormVistaPrincipalCliente_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                if (SesionActual.Usuario != null)
+                {
+                    Console.WriteLine($"[CLIENTE] Cerrando ventana - registrando cierre de sesión para: {SesionActual.Usuario.NombreUsuario}");
+
+                    var controladoraAuditoria = new ControladoraAuditoria();
+                    controladoraAuditoria.RegistrarCierreSesion(SesionActual.Usuario.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al registrar cierre: {ex.Message}");
+            }
+        }
 
 
-       
 
-  
+
 
         private void panelContenedorInicio_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {

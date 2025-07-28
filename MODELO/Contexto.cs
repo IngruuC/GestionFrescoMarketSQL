@@ -8,6 +8,7 @@ using ENTIDADES;
 using System.Reflection.Emit;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.ComponentModel.DataAnnotations.Schema;
+using ENTIDADES.SEGURIDAD;
 
 namespace MODELO
 {
@@ -33,6 +34,12 @@ namespace MODELO
         public DbSet<Proveedor> Proveedores { get; set; } //
         public DbSet<Compra> Compras { get; set; } //
         public DbSet<DetalleCompra> DetallesCompra { get; set; } //
+
+        // Agregar estos DbSet en la clase Contexto
+        public DbSet<EstadoUsuario> EstadosUsuario { get; set; }
+        public DbSet<EstadoGrupo> EstadosGrupo { get; set; }
+        public DbSet<Accion> Acciones { get; set; }
+
 
 
 
@@ -238,6 +245,42 @@ namespace MODELO
                     m.MapRightKey("PermisoId");
                 });
 
+            //
+            // Y en OnModelCreating, agregar estas configuraciones:
+            // Configuración EstadoUsuario
+            modelBuilder.Entity<EstadoUsuario>().ToTable("EstadosUsuario");
+            modelBuilder.Entity<EstadoUsuario>().HasKey(e => e.Id);
+
+            // Configuración EstadoGrupo  
+            modelBuilder.Entity<EstadoGrupo>().ToTable("EstadosGrupo");
+            modelBuilder.Entity<EstadoGrupo>().HasKey(e => e.Id);
+
+            // Configuración Accion
+            modelBuilder.Entity<Accion>().ToTable("Acciones");
+            modelBuilder.Entity<Accion>().HasKey(a => a.Id);
+
+            // Relación Usuario-EstadoUsuario
+            modelBuilder.Entity<Usuario>()
+                .HasOptional(u => u.EstadoUsuario)
+                .WithMany(e => e.Usuarios)
+                .HasForeignKey(u => u.EstadoUsuarioId);
+
+            // Relación Grupo-EstadoGrupo
+            modelBuilder.Entity<Grupo>()
+                .HasOptional(g => g.EstadoGrupo)
+                .WithMany(e => e.Grupos)
+                .HasForeignKey(g => g.EstadoGrupoId);
+
+            // Relación Grupo-Acciones (Many to Many)
+            modelBuilder.Entity<Grupo>()
+                .HasMany(g => g.Acciones)
+                .WithMany(a => a.Grupos)
+                .Map(m =>
+                {
+                    m.ToTable("GruposAcciones");
+                    m.MapLeftKey("GrupoId");
+                    m.MapRightKey("AccionId");
+                });
         }
     }
 }

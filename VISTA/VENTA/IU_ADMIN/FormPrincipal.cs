@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using VISTA.COMPRA;
 using ENTIDADES;
 using ENTIDADES.SEGURIDAD;
+using VISTA.IU_ADMIN;
+using CONTROLADORA;
 
 namespace VISTA
 {
@@ -108,16 +110,33 @@ namespace VISTA
             {
                 DialogResult resultado = MessageBox.Show("¿Está seguro que desea cerrar sesión?",
                     "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
                 if (resultado == DialogResult.Yes)
                 {
+                    // NUEVO: Registrar cierre de sesión ANTES de cerrar
+                    if (SesionActual.Usuario != null)
+                    {
+                        Console.WriteLine($"Cerrando sesión del usuario: {SesionActual.Usuario.NombreUsuario} (ID: {SesionActual.Usuario.Id})");
+
+                        var controladoraAuditoria = new ControladoraAuditoria();
+                        controladoraAuditoria.RegistrarCierreSesion(SesionActual.Usuario.Id);
+                    }
+
+                    // Cerrar sesión actual
                     SesionActual.CerrarSesion();
+
+                    // Mostrar login
                     Login loginForm = new Login();
-                    this.Hide(); // Oculta el formulario actual
+                    this.Hide();
                     DialogResult loginResult = loginForm.ShowDialog();
 
                     if (loginResult != DialogResult.OK)
                     {
-                        this.Close(); // Cierra el formulario actual si no se inició sesión
+                        this.Close();
+                    }
+                    else
+                    {
+                        this.Show();
                     }
                 }
             }
@@ -127,21 +146,37 @@ namespace VISTA
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void FormPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                // Registrar cierre cuando se cierra la ventana con la X
+                if (SesionActual.Usuario != null)
+                {
+                    Console.WriteLine($"Cerrando ventana - registrando cierre de sesión para: {SesionActual.Usuario.NombreUsuario}");
+
+                    var controladoraAuditoria = new ControladoraAuditoria();
+                    controladoraAuditoria.RegistrarCierreSesion(SesionActual.Usuario.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al registrar cierre: {ex.Message}");
+            }
+        }
 
 
         private void AuditoriasSesion_Click(object sender, EventArgs e)
         {
             if (SesionActual.EsAdministrador())
             {
-                FormAuditoriaSesion formAuditoria = new FormAuditoriaSesion();
-                AbrirFormEnPanel(formAuditoria);
+                FormModalSeguridad formSeguridad = new FormModalSeguridad();
+                formSeguridad.ShowDialog();
             }
             else
             {
-                MessageBox.Show("Solo los administradores pueden acceder a la auditoría de sesiones.",
-                    "Acceso Denegado",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBox.Show("Solo los administradores pueden acceder a la gestión de seguridad.",
+                   "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -149,5 +184,6 @@ namespace VISTA
         {
 
         }
+
     }
 }

@@ -7,13 +7,13 @@ namespace MODELO.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AgregarAuditoriaSesion : IMigrationMetadata
+    public sealed partial class CrearModuloSeguridad : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AgregarAuditoriaSesion));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CrearModuloSeguridad));
         
         string IMigrationMetadata.Id
         {
-            get { return "202503110523074_AgregarAuditoriaSesion"; }
+            get { return "202507281307019_CrearModuloSeguridad"; }
         }
         
         string IMigrationMetadata.Source

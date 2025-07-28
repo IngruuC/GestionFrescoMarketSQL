@@ -60,8 +60,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SEGURIDAD\Accion.cs" />
     <Compile Include="SEGURIDAD\AuditoriaSesion.cs" />
     <Compile Include="SEGURIDAD\EmailService.cs" />
+    <Compile Include="SEGURIDAD\EstadoGrupo.cs" />
+    <Compile Include="SEGURIDAD\EstadoUsuario.cs" />
     <Compile Include="SEGURIDAD\SesionActual.cs" />
     <Compile Include="SEGURIDAD\ValidadorContraseña.cs" />
     <Compile Include="VENTA\CarritoTemporal.cs" />

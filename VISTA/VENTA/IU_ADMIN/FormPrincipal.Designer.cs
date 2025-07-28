@@ -36,7 +36,6 @@
             this.lblFrescoMarket = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnGestionBackup = new System.Windows.Forms.Button();
             this.btnComprasTotales = new System.Windows.Forms.Button();
             this.btnRealizarVenta = new System.Windows.Forms.Button();
             this.btnRegistrarCliente = new System.Windows.Forms.Button();
@@ -57,7 +56,6 @@
             // 
             this.panelMenu.AutoScroll = true;
             this.panelMenu.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.panelMenu.Controls.Add(this.btnGestionBackup);
             this.panelMenu.Controls.Add(this.btnComprasTotales);
             this.panelMenu.Controls.Add(this.btnRealizarVenta);
             this.panelMenu.Controls.Add(this.btnRegistrarCliente);
@@ -129,20 +127,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(126, 131);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // btnGestionBackup
-            // 
-            this.btnGestionBackup.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnGestionBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnGestionBackup.Image = ((System.Drawing.Image)(resources.GetObject("btnGestionBackup.Image")));
-            this.btnGestionBackup.Location = new System.Drawing.Point(7, 664);
-            this.btnGestionBackup.Name = "btnGestionBackup";
-            this.btnGestionBackup.Size = new System.Drawing.Size(194, 87);
-            this.btnGestionBackup.TabIndex = 1;
-            this.btnGestionBackup.Text = "BACKUP";
-            this.btnGestionBackup.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnGestionBackup.UseVisualStyleBackColor = false;
-            this.btnGestionBackup.Click += new System.EventHandler(this.btnGestionBackup_Click);
             // 
             // btnComprasTotales
             // 
@@ -319,7 +303,6 @@
         private System.Windows.Forms.Label lblFrescoMarket;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnGestionBackup;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button AuditoriasSesion;
     }

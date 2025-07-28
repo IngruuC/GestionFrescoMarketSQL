@@ -132,17 +132,62 @@ namespace VISTA
 
         private void FormAuditoriaSesion_Load(object sender, EventArgs e)
         {
+            Console.WriteLine("=== FormAuditoriaSesion_Load INICIADO ===");
+            Console.WriteLine($"Usuario actual: {SesionActual.Usuario?.NombreUsuario}");
+            Console.WriteLine($"Es administrador: {SesionActual.EsAdministrador()}");
+
+            // Verificar que solo administradores puedan ver todas las auditorías
+            if (!SesionActual.EsAdministrador())
+            {
+                MessageBox.Show("Solo los administradores pueden acceder a la auditoría completa del sistema.",
+                    "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Close();
+                return;
+            }
+
             CargarHistorialSesiones();
+            Console.WriteLine("=== FormAuditoriaSesion_Load TERMINADO ===");
         }
 
 
         private void CargarHistorialSesiones()
         {
-         
-            int usuarioId = SesionActual.Usuario.Id;
-            List<AuditoriaSesion> auditorias = _controladoraAuditoria.ObtenerAuditoriasPorUsuario(usuarioId);
 
-        dgvAuditorias.DataSource = auditorias;
+            Console.WriteLine("=== CargarHistorialSesiones INICIADO ===");
+
+            try
+            {
+                // CAMBIO: Usar ObtenerTodasLasSesiones() en lugar de ObtenerAuditoriasPorUsuario()
+                List<AuditoriaSesion> auditorias = _controladoraAuditoria.ObtenerTodasLasSesiones();
+
+                Console.WriteLine($"Total auditorías cargadas: {auditorias.Count}");
+
+                // Debug: Mostrar usuarios únicos
+                if (auditorias.Count > 0)
+                {
+                    var usuariosUnicos = auditorias.Select(a => a.NombreUsuario).Distinct().ToList();
+                    Console.WriteLine($"Usuarios encontrados: {string.Join(", ", usuariosUnicos)}");
+
+                    // Mostrar primeros 3 registros
+                    Console.WriteLine("Primeros registros:");
+                    for (int i = 0; i < Math.Min(3, auditorias.Count); i++)
+                    {
+                        var a = auditorias[i];
+                        Console.WriteLine($"  {i + 1}. {a.NombreUsuario} - {a.FechaIngreso}");
+                    }
+                }
+
+                dgvAuditorias.DataSource = auditorias;
+                Console.WriteLine("DataSource asignado correctamente");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR en CargarHistorialSesiones: {ex.Message}");
+                MessageBox.Show($"Error al cargar historial: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            Console.WriteLine("=== CargarHistorialSesiones TERMINADO ===");
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
