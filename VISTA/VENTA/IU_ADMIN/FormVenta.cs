@@ -65,7 +65,9 @@ namespace VISTA
             CargarClientes();
             CargarProductos();
 
-            
+        
+
+
             nudCantidad.Minimum = 1;
             nudCantidad.Maximum = 9999;
             nudCantidad.Value = 1;
@@ -76,6 +78,8 @@ namespace VISTA
             dgvVenta.SelectionChanged += dgvVenta_SelectionChanged;
 
             cboClientes.SelectedIndexChanged += cboClientes_SelectedIndexChanged;
+
+          
         }
 
         private void cboClientes_SelectedIndexChanged(object sender, EventArgs e)
@@ -144,6 +148,13 @@ namespace VISTA
         {
             dgvVenta.DataSource = null;
             dgvVenta.DataSource = new BindingList<DetalleVenta>(detallesVenta);
+
+            // Ocultar columnas de navegación de Entity Framework
+            if (dgvVenta.Columns["Venta"] != null)
+                dgvVenta.Columns["Venta"].Visible = false;
+
+            if (dgvVenta.Columns["Producto"] != null)
+                dgvVenta.Columns["Producto"].Visible = false;
             ActualizarTotal();
         }
 

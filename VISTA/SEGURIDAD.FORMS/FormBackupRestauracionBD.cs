@@ -17,53 +17,58 @@ namespace VISTA
     public partial class FormBackupRestauracionBD : Form
     {
         private string connectionString;
-        private string backupFolder;
+        private string backupDirectory;
+        private string ultimoBackup = string.Empty;
+
 
         public FormBackupRestauracionBD()
         {
-            InitializeComponent();
 
+            InitializeComponent();
             // Obtener la cadena de conexión desde una instancia del contexto
             using (var contexto = new MODELO.Contexto())
             {
                 connectionString = contexto.Database.Connection.ConnectionString;
             }
 
-            // Crear carpeta para backups si no existe
-            backupFolder = Path.Combine(Application.StartupPath, "Backups");
-            if (!Directory.Exists(backupFolder))
+            // Crear el directorio de backups si no existe
+            backupDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SupermercadoBackups");
+            if (!Directory.Exists(backupDirectory))
             {
-                Directory.CreateDirectory(backupFolder);
+                Directory.CreateDirectory(backupDirectory);
             }
 
-            CargarFechaUltimoBackup();
+            CargarUltimoBackUp();
             CargarListaBackups();
         }
 
-        private void CargarFechaUltimoBackup()
+        //
+        private void CargarUltimoBackUp()
         {
             try
             {
-                // Usar un patrón más genérico para encontrar todos los archivos .xml
-                var files = Directory.GetFiles(backupFolder, "*.xml");
-                if (files.Length > 0)
+                if (Directory.Exists(backupDirectory))
                 {
-                    // Ordenar por fecha de creación descendente
-                    var lastFile = new FileInfo(files
-                        .OrderByDescending(f => new FileInfo(f).CreationTime)
-                        .First());
+                    var archivos = Directory.GetFiles(backupDirectory, "*.bak")
+                                           .OrderByDescending(f => new FileInfo(f).CreationTime)
+                                           .ToList();
 
-                    lblUltimoBackup.Text = $"Último Backup Realizado: {lastFile.CreationTime}";
-                }
-                else
-                {
-                    lblUltimoBackup.Text = "Último Backup Realizado: Ninguno";
+                    if (archivos.Any())
+                    {
+                        ultimoBackup = archivos.First();
+                        DateTime fechaUltimoBackup = File.GetCreationTime(ultimoBackup);
+                        lblUltimoBackup.Text = $"Último Backup Realizado: {fechaUltimoBackup.ToString("dd/MM/yyyy HH:mm:ss")}";
+                    }
+                    else
+                    {
+                        lblUltimoBackup.Text = "Último Backup Realizado: No se encontraron backups";
+                    }
                 }
             }
             catch (Exception ex)
             {
-                lblUltimoBackup.Text = "Error al obtener último backup";
-                MessageBox.Show($"Error al obtener último backup: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al cargar el último backup: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblUltimoBackup.Text = "Último Backup Realizado: Error al cargar";
             }
         }
 
@@ -72,10 +77,9 @@ namespace VISTA
             try
             {
                 cboBackups.Items.Clear();
-                // Usar un patrón más genérico para encontrar todos los archivos .xml
-                var files = Directory.GetFiles(backupFolder, "*.xml");
+                var files = Directory.GetFiles(backupDirectory, "*.bak");
 
-                // Ordenar por fecha de creación
+                // Ordenar por fecha de creación descendente
                 var orderedFiles = files
                     .OrderByDescending(f => new FileInfo(f).CreationTime)
                     .ToList();
@@ -83,7 +87,7 @@ namespace VISTA
                 foreach (var file in orderedFiles)
                 {
                     var fileInfo = new FileInfo(file);
-                    cboBackups.Items.Add($"{fileInfo.Name} - {fileInfo.CreationTime}");
+                    cboBackups.Items.Add($"{fileInfo.Name} - {fileInfo.CreationTime.ToString("dd/MM/yyyy HH:mm:ss")}");
                 }
 
                 if (cboBackups.Items.Count > 0)
@@ -95,157 +99,267 @@ namespace VISTA
             }
         }
 
-        private void btnRestaurar_Click_1(object sender, EventArgs e)
-        {
-                                     
-        }
-
-        
-
         private void btnCrearBackup_Click(object sender, EventArgs e)
         {
             try
             {
-                // Solicitar al usuario que elija dónde guardar el backup
-                SaveFileDialog saveDialog = new SaveFileDialog
-                {
-                    Title = "Guardar Exportación de Base de Datos",
-                    Filter = "Archivos XML (*.xml)|*.xml",
-                    FileName = $"SupermercadoDB_Export_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.xml",
-                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-                };
-
-                if (saveDialog.ShowDialog() != DialogResult.OK)
-                    return;
-
                 Cursor = Cursors.WaitCursor;
+                string resultado = GenerarBKP();
+                Cursor = Cursors.Default;
 
-                string exportFilePath = saveDialog.FileName;
-                ExportarBaseDatosAXml(exportFilePath);
-
-                // Actualizar historial de backups
-                try
+                if (resultado.EndsWith(".bak"))
                 {
-                    backupFolder = Path.Combine(Application.StartupPath, "Backups");
-                    if (!Directory.Exists(backupFolder))
-                    {
-                        Directory.CreateDirectory(backupFolder);
-                    }
-
-                    string fileName = Path.GetFileName(exportFilePath);
-                    string appBackupPath = Path.Combine(backupFolder, fileName);
-
-                    // Solo copiar si no es la misma ubicación
-                    if (!string.Equals(exportFilePath, appBackupPath, StringComparison.OrdinalIgnoreCase))
-                    {
-                        File.Copy(exportFilePath, appBackupPath, true);
-                    }
+                    MessageBox.Show("Backup creado correctamente en: " + resultado, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CargarUltimoBackUp();
+                    CargarListaBackups();
                 }
-                catch
+                else
                 {
-                    // Si falla la copia, al menos tenemos el archivo original
+                    MessageBox.Show("Error al crear el backup: " + resultado, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                // Refrescar la interfaz
-                this.Refresh();
-                CargarFechaUltimoBackup();
-                CargarListaBackups();
-
-                MessageBox.Show($"Exportación de datos creada correctamente en:\n{exportFilePath}",
-                    "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al exportar datos: {ex.Message}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
                 Cursor = Cursors.Default;
-            }
-        }
-
-        private void ExportarBaseDatosAXml(string filePath)
-        {
-            using (var contexto = new MODELO.Contexto())
-            {
-                DataSet ds = new DataSet("SupermercadoDB");
-
-                // Exportar tabla Clientes
-                var clientes = contexto.Clientes.AsNoTracking().ToList();
-                DataTable dtClientes = ConvertirListaADataTable(clientes, "Clientes");
-                ds.Tables.Add(dtClientes);
-
-                // Exportar tabla Proveedores
-                var proveedores = contexto.Proveedores.AsNoTracking().ToList();
-                DataTable dtProveedores = ConvertirListaADataTable(proveedores, "Proveedores");
-                ds.Tables.Add(dtProveedores);
-
-                // Exportar tabla Productos
-                var productos = contexto.Productos.AsNoTracking().ToList();
-                DataTable dtProductos = ConvertirListaADataTable(productos, "Productos");
-                ds.Tables.Add(dtProductos);
-
-                // Exportar tabla Ventas
-                var ventas = contexto.Ventas.AsNoTracking().ToList();
-                DataTable dtVentas = ConvertirListaADataTable(ventas, "Ventas");
-                ds.Tables.Add(dtVentas);
-
-                // Exportar tabla Usuarios
-                var usuarios = contexto.Usuarios.AsNoTracking().ToList();
-                DataTable dtUsuarios = ConvertirListaADataTable(usuarios, "Usuarios");
-                ds.Tables.Add(dtUsuarios);
-
-                // Guardar el DataSet a un archivo XML
-                ds.WriteXml(filePath, XmlWriteMode.WriteSchema);
+                MessageBox.Show("Error al crear el backup: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         
 
-        // Método genérico para convertir cualquier lista a DataTable
-        private DataTable ConvertirListaADataTable<T>(List<T> items, string tableName)
-        {
-            DataTable dt = new DataTable(tableName);
-            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(T));
-
-            foreach (PropertyDescriptor prop in props)
-            {
-                // No incluir propiedades de navegación para evitar ciclos
-                if (!prop.PropertyType.Namespace.StartsWith("System.Collections") &&
-                    !typeof(ENTIDADES.Usuario).IsAssignableFrom(prop.PropertyType) &&
-                    !typeof(ENTIDADES.Cliente).IsAssignableFrom(prop.PropertyType) &&
-                    !typeof(ENTIDADES.Proveedor).IsAssignableFrom(prop.PropertyType) &&
-                    !typeof(ENTIDADES.Producto).IsAssignableFrom(prop.PropertyType) &&
-                    !typeof(ENTIDADES.Venta).IsAssignableFrom(prop.PropertyType))
-                {
-                    dt.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
-                }
-            }
-
-            foreach (T item in items)
-            {
-                DataRow row = dt.NewRow();
-                foreach (PropertyDescriptor prop in props)
-                {
-                    if (dt.Columns.Contains(prop.Name))
-                    {
-                        row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
-                    }
-                }
-                dt.Rows.Add(row);
-            }
-
-            return dt;
-        }
-
         private void FormBackupRestauracionBD_Load_1(object sender, EventArgs e)
         {
-            CargarFechaUltimoBackup();
+            CargarUltimoBackUp();
             CargarListaBackups();
         }
 
-        private void btnDescargarBackup_Click(object sender, EventArgs e)
+
+
+        private void btnRestaurarBackup_Click(object sender, EventArgs e)
+        {
+            if (cboBackups.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor, seleccione un backup para restaurar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // Obtener el nombre del archivo seleccionado
+                string backupFileName = cboBackups.SelectedItem.ToString().Split(new[] { " - " }, StringSplitOptions.None)[0];
+                string backupFilePath = Path.Combine(backupDirectory, backupFileName);
+
+                if (!File.Exists(backupFilePath))
+                {
+                    MessageBox.Show("El archivo de backup seleccionado no existe", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (MessageBox.Show("¿Está seguro de restaurar la base de datos? Esta acción no se puede deshacer.\n\n" +
+                                   "IMPORTANTE: Se cerrarán todas las conexiones a la base de datos.",
+                                   "Confirmar restauración",
+                                   MessageBoxButtons.YesNo,
+                                   MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    // Deshabilitamos los controles durante la restauración
+                    btnCrearBackup.Enabled = false;
+                    btnRestaurar.Enabled = false;
+                    cboBackups.Enabled = false;
+
+                    MessageBox.Show("La restauración comenzará ahora. Este proceso puede tardar varios minutos.\n" +
+                                   "La aplicación podría parecer que no responde durante este tiempo.\n" +
+                                   "Por favor, espere hasta que se complete.",
+                                   "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    Cursor = Cursors.WaitCursor;
+                    btnRestaurar.Text = "Restaurando...";
+                    Application.DoEvents(); // Permite que la UI se actualice
+
+                    string resultado = RestaurarBKP(backupFilePath);
+
+                    Cursor = Cursors.Default;
+                    btnRestaurar.Text = "Restaurar BD";
+
+                    // Rehabilitamos los controles
+                    btnCrearBackup.Enabled = true;
+                    btnRestaurar.Enabled = true;
+                    cboBackups.Enabled = true;
+
+                    if (resultado == "Restauración realizada con éxito")
+                    {
+                        MessageBox.Show(resultado + "\n\nEs recomendable reiniciar la aplicación para asegurar que los cambios se apliquen correctamente.",
+                                       "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show(resultado, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Cursor = Cursors.Default;
+                btnRestaurar.Text = "Restaurar BD";
+                btnCrearBackup.Enabled = true;
+                btnRestaurar.Enabled = true;
+                cboBackups.Enabled = true;
+                MessageBox.Show("Error al restaurar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        public string GenerarBKP()
+        {
+            // Obtener el nombre de la base de datos desde la cadena de conexión
+            string nombreBD = ObtenerNombreBaseDatos();
+
+            string nombreBackup = string.Format("{0}-{1}-{2}-{3}-{4}-{5}-{6}.bak",
+                DateTime.Today.Day.ToString(),
+                DateTime.Today.Month.ToString(),
+                DateTime.Today.Year.ToString(),
+                DateTime.Now.Hour.ToString(),
+                DateTime.Now.Minute.ToString(),
+                DateTime.Now.Second.ToString(),
+                nombreBD);
+
+            string rutaCompleta = Path.Combine(backupDirectory, nombreBackup);
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand())
+                {
+                    try
+                    {
+                        command.Connection = connection;
+                        connection.Open();
+                        command.CommandText = $"BACKUP DATABASE [{nombreBD}] TO DISK = N'" +
+                            rutaCompleta +
+                            $"' WITH NOFORMAT, NOINIT, NAME = N'{nombreBackup}', SKIP, NOREWIND, NOUNLOAD, STATS = 10";
+                        command.CommandType = System.Data.CommandType.Text;
+                        command.ExecuteNonQuery();
+                        connection.Close();
+                        return rutaCompleta;
+                    }
+                    catch (Exception ex)
+                    {
+                        connection.Close();
+                        return ex.Message;
+                    }
+                }
+            }
+        }
+
+        // Método para restaurar el backup
+        public string RestaurarBKP(string path)
+        {
+            // Obtener el nombre de la base de datos desde la cadena de conexión
+            string nombreBD = ObtenerNombreBaseDatos();
+
+            // Conexión a la base de datos master para restaurar
+            string masterConnectionString = connectionString.Replace($"Initial Catalog={nombreBD}", "Initial Catalog=master");
+
+            using (SqlConnection connection = new SqlConnection(masterConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Cerrar todas las conexiones a la base de datos
+                    string killQuery = $@"
+                DECLARE @kill varchar(8000) = '';
+                SELECT @kill = @kill + 'kill ' + CONVERT(varchar(5), session_id) + ';'
+                FROM sys.dm_exec_sessions
+                WHERE database_id = DB_ID('{nombreBD}')
+                AND session_id <> @@SPID;
+                EXEC(@kill);";
+
+                    using (SqlCommand killCommand = new SqlCommand(killQuery, connection))
+                    {
+                        killCommand.ExecuteNonQuery();
+                    }
+
+                    // Cambiar la base de datos a modo SINGLE_USER
+                    string singleUserQuery = $"ALTER DATABASE [{nombreBD}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE";
+                    using (SqlCommand singleUserCommand = new SqlCommand(singleUserQuery, connection))
+                    {
+                        singleUserCommand.ExecuteNonQuery();
+                    }
+
+                    // Obtener la ruta de datos predeterminada de SQL Server
+                    string defaultDataPath = string.Empty;
+                    string defaultLogPath = string.Empty;
+
+                    string pathQuery = "SELECT SERVERPROPERTY('InstanceDefaultDataPath') AS DataPath, SERVERPROPERTY('InstanceDefaultLogPath') AS LogPath";
+                    using (SqlCommand pathCommand = new SqlCommand(pathQuery, connection))
+                    {
+                        using (SqlDataReader reader = pathCommand.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                defaultDataPath = reader["DataPath"]?.ToString() ?? "";
+                                defaultLogPath = reader["LogPath"]?.ToString() ?? "";
+                            }
+                        }
+                    }
+
+                    // Si no se pueden obtener las rutas predeterminadas, usar rutas alternativas
+                    if (string.IsNullOrEmpty(defaultDataPath))
+                    {
+                        defaultDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Microsoft\Microsoft SQL Server Local DB\Instances\MSSQLLocalDB\";
+                        defaultLogPath = defaultDataPath;
+                    }
+
+                    // Restaurar la base de datos con MOVE para especificar nuevas ubicaciones
+                    string restoreQuery = $@"RESTORE DATABASE [{nombreBD}] FROM DISK = N'{path}' 
+                WITH MOVE '{nombreBD}' TO '{Path.Combine(defaultDataPath, nombreBD + ".mdf")}',
+                MOVE '{nombreBD}_log' TO '{Path.Combine(defaultLogPath, nombreBD + "_log.ldf")}',
+                REPLACE, STATS = 10";
+
+                    using (SqlCommand restoreCommand = new SqlCommand(restoreQuery, connection))
+                    {
+                        restoreCommand.CommandTimeout = 300; // 5 minutos de timeout para operaciones grandes
+                        restoreCommand.ExecuteNonQuery();
+                    }
+
+                    // Cambiar la base de datos a modo MULTI_USER
+                    string multiUserQuery = $"ALTER DATABASE [{nombreBD}] SET MULTI_USER";
+                    using (SqlCommand multiUserCommand = new SqlCommand(multiUserQuery, connection))
+                    {
+                        multiUserCommand.ExecuteNonQuery();
+                    }
+
+                    connection.Close();
+                    return "Restauración realizada con éxito";
+                }
+                catch (Exception ex)
+                {
+                    // Si algo falla, intentamos volver a modo MULTI_USER para no dejar la BD bloqueada
+                    try
+                    {
+                        string emergencyResetQuery = $"ALTER DATABASE [{nombreBD}] SET MULTI_USER";
+                        using (SqlCommand emergencyCommand = new SqlCommand(emergencyResetQuery, connection))
+                        {
+                            emergencyCommand.ExecuteNonQuery();
+                        }
+                    }
+                    catch { /* Ignoramos errores aquí, estamos en modo de recuperación */ }
+
+                    connection.Close();
+                    return "Error al restaurar: " + ex.Message;
+                }
+            }
+        }
+
+        private string ObtenerNombreBaseDatos()
+        {
+            // Extraer el nombre de la base de datos de la cadena de conexión
+            var builder = new SqlConnectionStringBuilder(connectionString);
+            return builder.InitialCatalog;
+        }
+
+     
+
+    private void btnDescargar_Click(object sender, EventArgs e)
         {
             if (cboBackups.SelectedIndex < 0)
             {
@@ -258,7 +372,7 @@ namespace VISTA
             {
                 // Obtener el nombre del archivo de backup seleccionado
                 string backupFileName = cboBackups.SelectedItem.ToString().Split(new[] { " - " }, StringSplitOptions.None)[0];
-                string backupFilePath = Path.Combine(backupFolder, backupFileName);
+                string backupFilePath = Path.Combine(backupDirectory, backupFileName);
 
                 if (!File.Exists(backupFilePath))
                 {
@@ -271,7 +385,7 @@ namespace VISTA
                 SaveFileDialog saveDialog = new SaveFileDialog
                 {
                     FileName = backupFileName,
-                    Filter = "Archivos XML (*.xml)|*.xml",
+                    Filter = "Archivos de backup (*.bak)|*.bak",
                     Title = "Guardar archivo de backup"
                 };
 
@@ -290,32 +404,5 @@ namespace VISTA
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        
-
-        
-        
-
-       
-
-        
-        private void ExecuteNonQuery(string sql, SqlConnection connection, SqlTransaction transaction)
-        {
-            try
-            {
-                using (SqlCommand cmd = new SqlCommand(sql, connection, transaction))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error ejecutando SQL [{sql}]: {ex.Message}");
-                throw;
-            }
-        }
-
-        
-
     }
 }

@@ -35,10 +35,10 @@
             this.lblUltimoBackup = new System.Windows.Forms.Label();
             this.cboBackups = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnRestaurar = new System.Windows.Forms.Button();
             this.btnCrearBackup = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.btnDescargarBackup = new System.Windows.Forms.Button();
+            this.btnRestaurar = new System.Windows.Forms.Button();
+            this.btnDescargar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -77,7 +77,7 @@
             // lblUltimoBackup
             // 
             this.lblUltimoBackup.AutoSize = true;
-            this.lblUltimoBackup.Location = new System.Drawing.Point(290, 144);
+            this.lblUltimoBackup.Location = new System.Drawing.Point(245, 139);
             this.lblUltimoBackup.Name = "lblUltimoBackup";
             this.lblUltimoBackup.Size = new System.Drawing.Size(35, 13);
             this.lblUltimoBackup.TabIndex = 1;
@@ -101,25 +101,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "BACKUP:";
             // 
-            // btnRestaurar
-            // 
-            this.btnRestaurar.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnRestaurar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRestaurar.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.btnRestaurar.Location = new System.Drawing.Point(270, 178);
-            this.btnRestaurar.Name = "btnRestaurar";
-            this.btnRestaurar.Size = new System.Drawing.Size(92, 38);
-            this.btnRestaurar.TabIndex = 3;
-            this.btnRestaurar.Text = "RESTAURAR";
-            this.btnRestaurar.UseVisualStyleBackColor = false;
-            this.btnRestaurar.Click += new System.EventHandler(this.btnRestaurar_Click_1);
-            // 
             // btnCrearBackup
             // 
             this.btnCrearBackup.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnCrearBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCrearBackup.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.btnCrearBackup.Location = new System.Drawing.Point(382, 178);
+            this.btnCrearBackup.Location = new System.Drawing.Point(248, 180);
             this.btnCrearBackup.Name = "btnCrearBackup";
             this.btnCrearBackup.Size = new System.Drawing.Size(89, 38);
             this.btnCrearBackup.TabIndex = 4;
@@ -136,18 +123,31 @@
             this.pictureBox2.TabIndex = 5;
             this.pictureBox2.TabStop = false;
             // 
-            // btnDescargarBackup
+            // btnRestaurar
             // 
-            this.btnDescargarBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDescargarBackup.Image = ((System.Drawing.Image)(resources.GetObject("btnDescargarBackup.Image")));
-            this.btnDescargarBackup.Location = new System.Drawing.Point(558, 102);
-            this.btnDescargarBackup.Name = "btnDescargarBackup";
-            this.btnDescargarBackup.Size = new System.Drawing.Size(111, 95);
-            this.btnDescargarBackup.TabIndex = 6;
-            this.btnDescargarBackup.Text = "DESCARGAR";
-            this.btnDescargarBackup.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnDescargarBackup.UseVisualStyleBackColor = true;
-            this.btnDescargarBackup.Click += new System.EventHandler(this.btnDescargarBackup_Click);
+            this.btnRestaurar.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnRestaurar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRestaurar.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.btnRestaurar.Location = new System.Drawing.Point(365, 180);
+            this.btnRestaurar.Name = "btnRestaurar";
+            this.btnRestaurar.Size = new System.Drawing.Size(92, 38);
+            this.btnRestaurar.TabIndex = 7;
+            this.btnRestaurar.Text = "RESTAURAR";
+            this.btnRestaurar.UseVisualStyleBackColor = false;
+            this.btnRestaurar.Click += new System.EventHandler(this.btnRestaurarBackup_Click);
+            // 
+            // btnDescargar
+            // 
+            this.btnDescargar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDescargar.Image = ((System.Drawing.Image)(resources.GetObject("btnDescargar.Image")));
+            this.btnDescargar.Location = new System.Drawing.Point(586, 94);
+            this.btnDescargar.Name = "btnDescargar";
+            this.btnDescargar.Size = new System.Drawing.Size(111, 95);
+            this.btnDescargar.TabIndex = 9;
+            this.btnDescargar.Text = "DESCARGAR";
+            this.btnDescargar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnDescargar.UseVisualStyleBackColor = true;
+            this.btnDescargar.Click += new System.EventHandler(this.btnDescargar_Click);
             // 
             // FormBackupRestauracionBD
             // 
@@ -155,10 +155,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LemonChiffon;
             this.ClientSize = new System.Drawing.Size(734, 242);
-            this.Controls.Add(this.btnDescargarBackup);
+            this.Controls.Add(this.btnDescargar);
+            this.Controls.Add(this.btnRestaurar);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.btnCrearBackup);
-            this.Controls.Add(this.btnRestaurar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cboBackups);
             this.Controls.Add(this.lblUltimoBackup);
@@ -184,9 +184,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnRestaurar;
         private System.Windows.Forms.Button btnCrearBackup;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Button btnDescargarBackup;
+        private System.Windows.Forms.Button btnRestaurar;
+        private System.Windows.Forms.Button btnDescargar;
     }
 }
