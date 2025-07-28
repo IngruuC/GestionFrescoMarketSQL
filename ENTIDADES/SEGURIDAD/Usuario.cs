@@ -43,7 +43,7 @@ namespace ENTIDADES
 
 
 
-        // NUEVAS PROPIEDADES AGREGADAS
+    
         [StringLength(100)]
         public string NombreyApellido { get; set; }
 
@@ -54,10 +54,10 @@ namespace ENTIDADES
         [ForeignKey("EstadoUsuarioId")]
         public virtual EstadoUsuario EstadoUsuario { get; set; }
 
-        // Relaciones existentes
+        
 
 
-        // NUEVA: Perfil para manejar tanto grupos como acciones
+        //  Perfil para manejar tanto grupos como acciones
         [NotMapped]
         public List<object> Perfil { get; set; }
 
@@ -70,7 +70,7 @@ namespace ENTIDADES
             Perfil = new List<object>();
         }
 
-        // NUEVOS MÉTODOS para manejar permisos
+        // MÉTODOS para manejar permisos
         public void AgregarPermiso(object permiso)
         {
             if (Perfil == null) Perfil = new List<object>();

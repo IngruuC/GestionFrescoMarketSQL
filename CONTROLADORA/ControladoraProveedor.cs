@@ -72,7 +72,7 @@ namespace CONTROLADORA
         {
 
             return contexto.Proveedores
-                .Include("Usuario")  // Usar string en lugar de expresión lambda
+                .Include("Usuario")  
                 .ToList();
         }
 

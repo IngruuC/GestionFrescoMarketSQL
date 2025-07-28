@@ -52,7 +52,7 @@ namespace CONTROLADORA
             clienteExistente.Nombre = cliente.Nombre;
             clienteExistente.Apellido = cliente.Apellido;
             clienteExistente.Direccion = cliente.Direccion;
-            clienteExistente.UsuarioId = cliente.UsuarioId; // Asegurar que se actualiza este campo
+            clienteExistente.UsuarioId = cliente.UsuarioId;
 
             contexto.SaveChanges();
         }
@@ -73,7 +73,7 @@ namespace CONTROLADORA
         public List<Cliente> ObtenerClientes()
         {
             return contexto.Clientes
-                .Include(c => c.Usuario)  // Esto carga explícitamente el objeto Usuario
+                .Include(c => c.Usuario)  
                 .ToList();
         }
 

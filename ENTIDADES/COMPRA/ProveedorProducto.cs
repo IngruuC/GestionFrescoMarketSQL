@@ -23,7 +23,7 @@ namespace ENTIDADES
         [ForeignKey("ProductoId")]
         public virtual Producto Producto { get; set; }
 
-        // Podríamos agregar campos adicionales específicos de la relación
+        
         [Column(TypeName = "decimal")]
         public decimal PrecioCompra { get; set; } // Precio al que nos vende este proveedor
     }

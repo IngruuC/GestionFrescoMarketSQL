@@ -140,7 +140,7 @@ namespace CONTROLADORA
             {
                 // Primero verificamos si el usuario existe
                 var usuarioEncontrado = contexto.Usuarios
-                    .Include(u => u.Grupos)  // Aseguramos que se carguen los grupos
+                    .Include(u => u.Grupos)  
                     .FirstOrDefault(u => u.NombreUsuario == usuario);
 
                 if (usuarioEncontrado == null)

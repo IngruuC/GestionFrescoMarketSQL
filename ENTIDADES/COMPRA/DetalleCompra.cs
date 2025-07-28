@@ -15,11 +15,11 @@ namespace ENTIDADES
         public int Id { get; set; }
 
         [Required]
-        [Column("CompraId")] // Asegurar el nombre correcto
+        [Column("CompraId")] 
         public int CompraId { get; set; }
 
         [Required]
-        [Column("ProductoId")] // Asegurar el nombre correcto
+        [Column("ProductoId")] 
         public int ProductoId { get; set; }
 
         [Required]
@@ -37,9 +37,9 @@ namespace ENTIDADES
         public string ProductoNombre { get; set; }
 
 
-        [ForeignKey("CompraId")] // Vinculación explícita
+        [ForeignKey("CompraId")] 
         public virtual Compra Compra { get; set; }
-        [ForeignKey("ProductoId")] // Vinculación explícita
+        [ForeignKey("ProductoId")] 
         public virtual Producto Producto { get; set; }
     } 
 }

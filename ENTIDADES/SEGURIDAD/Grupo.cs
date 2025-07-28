@@ -12,13 +12,13 @@ namespace ENTIDADES
     public class Grupo
     {
         public int Id { get; set; }
-        public int ComponenteId { get; set; } // NUEVO: Para compatibilidad con sistema de componentes
+        public int ComponenteId { get; set; } // Para compatibilidad con sistema de componentes
 
         [Required]
         [StringLength(50)]
         public string NombreGrupo { get; set; }
 
-        // NUEVAS PROPIEDADES
+        
         [StringLength(50)]
         public string Codigo { get; set; }
 
@@ -40,10 +40,10 @@ namespace ENTIDADES
         public virtual ICollection<Permiso> Permisos { get; set; }
         public virtual ICollection<Usuario> Usuarios { get; set; }
 
-        // NUEVA: Relación con Acciones
+        //  Relación con Acciones
         public virtual ICollection<Accion> Acciones { get; set; }
 
-        // NUEVO: Para manejar jerarquía de permisos
+        //  Para manejar jerarquía de permisos
         [NotMapped]
         public List<object> Hijos { get; set; }
         public Grupo()
@@ -55,7 +55,7 @@ namespace ENTIDADES
            // ComponenteId = Id; // Por defecto
             GrupoId = Id; // Por defecto
         }
-        // NUEVOS MÉTODOS
+        
         public void AgregarHijo(object hijo)
         {
             if (Hijos == null) Hijos = new List<object>();
