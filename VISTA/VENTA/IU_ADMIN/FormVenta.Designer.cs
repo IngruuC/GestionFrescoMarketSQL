@@ -23,7 +23,6 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.groupBoxVenta = new System.Windows.Forms.GroupBox();
             this.cboClientes = new System.Windows.Forms.ComboBox();
-            this.cboProductos = new System.Windows.Forms.ComboBox();
             this.nudCantidad = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -35,6 +34,8 @@
             this.dgvVenta = new System.Windows.Forms.DataGridView();
             this.btnFinalizarVenta = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnSelectorProducto = new System.Windows.Forms.Button();
+            this.lblProductoSeleccionado = new System.Windows.Forms.Label();
             this.panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBoxVenta.SuspendLayout();
@@ -76,8 +77,9 @@
             // 
             // groupBoxVenta
             // 
+            this.groupBoxVenta.Controls.Add(this.lblProductoSeleccionado);
+            this.groupBoxVenta.Controls.Add(this.btnSelectorProducto);
             this.groupBoxVenta.Controls.Add(this.cboClientes);
-            this.groupBoxVenta.Controls.Add(this.cboProductos);
             this.groupBoxVenta.Controls.Add(this.nudCantidad);
             this.groupBoxVenta.Controls.Add(this.label1);
             this.groupBoxVenta.Controls.Add(this.label2);
@@ -103,18 +105,9 @@
             this.cboClientes.Size = new System.Drawing.Size(259, 24);
             this.cboClientes.TabIndex = 0;
             // 
-            // cboProductos
-            // 
-            this.cboProductos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboProductos.FormattingEnabled = true;
-            this.cboProductos.Location = new System.Drawing.Point(20, 123);
-            this.cboProductos.Name = "cboProductos";
-            this.cboProductos.Size = new System.Drawing.Size(259, 24);
-            this.cboProductos.TabIndex = 1;
-            // 
             // nudCantidad
             // 
-            this.nudCantidad.Location = new System.Drawing.Point(20, 184);
+            this.nudCantidad.Location = new System.Drawing.Point(111, 211);
             this.nudCantidad.Minimum = new decimal(new int[] {
             1,
             0,
@@ -141,7 +134,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 104);
+            this.label2.Location = new System.Drawing.Point(17, 111);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 16);
             this.label2.TabIndex = 4;
@@ -150,7 +143,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 165);
+            this.label3.Location = new System.Drawing.Point(17, 213);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 16);
             this.label3.TabIndex = 5;
@@ -161,7 +154,7 @@
             this.btnAgregarProducto.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnAgregarProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregarProducto.ForeColor = System.Drawing.Color.White;
-            this.btnAgregarProducto.Location = new System.Drawing.Point(20, 223);
+            this.btnAgregarProducto.Location = new System.Drawing.Point(20, 315);
             this.btnAgregarProducto.Name = "btnAgregarProducto";
             this.btnAgregarProducto.Size = new System.Drawing.Size(259, 35);
             this.btnAgregarProducto.TabIndex = 6;
@@ -174,7 +167,7 @@
             this.btnModificar.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificar.ForeColor = System.Drawing.Color.White;
-            this.btnModificar.Location = new System.Drawing.Point(20, 275);
+            this.btnModificar.Location = new System.Drawing.Point(20, 367);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(120, 35);
             this.btnModificar.TabIndex = 7;
@@ -187,7 +180,7 @@
             this.btnEliminar.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEliminar.ForeColor = System.Drawing.Color.White;
-            this.btnEliminar.Location = new System.Drawing.Point(159, 275);
+            this.btnEliminar.Location = new System.Drawing.Point(159, 367);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(120, 35);
             this.btnEliminar.TabIndex = 8;
@@ -247,6 +240,33 @@
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // btnSelectorProducto
+            // 
+            this.btnSelectorProducto.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnSelectorProducto.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelectorProducto.ForeColor = System.Drawing.Color.Snow;
+            this.btnSelectorProducto.Location = new System.Drawing.Point(20, 130);
+            this.btnSelectorProducto.Name = "btnSelectorProducto";
+            this.btnSelectorProducto.Size = new System.Drawing.Size(259, 25);
+            this.btnSelectorProducto.TabIndex = 10;
+            this.btnSelectorProducto.Text = "🔍 Seleccionar Producto";
+            this.btnSelectorProducto.UseVisualStyleBackColor = false;
+            this.btnSelectorProducto.Click += new System.EventHandler(this.btnSelectorProducto_Click);
+            // 
+            // lblProductoSeleccionado
+            // 
+            this.lblProductoSeleccionado.AutoEllipsis = true;
+            this.lblProductoSeleccionado.AutoSize = true;
+            this.lblProductoSeleccionado.BackColor = System.Drawing.Color.White;
+            this.lblProductoSeleccionado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblProductoSeleccionado.ForeColor = System.Drawing.Color.Gray;
+            this.lblProductoSeleccionado.Location = new System.Drawing.Point(36, 167);
+            this.lblProductoSeleccionado.Name = "lblProductoSeleccionado";
+            this.lblProductoSeleccionado.Size = new System.Drawing.Size(220, 18);
+            this.lblProductoSeleccionado.TabIndex = 5;
+            this.lblProductoSeleccionado.Text = "Ningún producto seleccionado";
+            this.lblProductoSeleccionado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -282,7 +302,6 @@
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.GroupBox groupBoxVenta;
         private System.Windows.Forms.ComboBox cboClientes;
-        private System.Windows.Forms.ComboBox cboProductos;
         private System.Windows.Forms.NumericUpDown nudCantidad;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -294,5 +313,7 @@
         private System.Windows.Forms.DataGridView dgvVenta;
         private System.Windows.Forms.Button btnFinalizarVenta;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnSelectorProducto;
+        private System.Windows.Forms.Label lblProductoSeleccionado;
     }
 }
