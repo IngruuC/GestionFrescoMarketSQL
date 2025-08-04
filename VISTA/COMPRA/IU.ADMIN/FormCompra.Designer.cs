@@ -25,7 +25,6 @@ namespace VISTA
             this.lblTitulo = new System.Windows.Forms.Label();
             this.groupBoxCompra = new System.Windows.Forms.GroupBox();
             this.cboProveedores = new System.Windows.Forms.ComboBox();
-            this.cboProductos = new System.Windows.Forms.ComboBox();
             this.nudCantidad = new System.Windows.Forms.NumericUpDown();
             this.txtPrecioUnitario = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,6 +38,7 @@ namespace VISTA
             this.dgvCompra = new System.Windows.Forms.DataGridView();
             this.btnFinalizarCompra = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnSelectorProducto = new System.Windows.Forms.Button();
             this.panelSuperior.SuspendLayout();
             this.groupBoxCompra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
@@ -68,8 +68,8 @@ namespace VISTA
             // 
             // groupBoxCompra
             // 
+            this.groupBoxCompra.Controls.Add(this.btnSelectorProducto);
             this.groupBoxCompra.Controls.Add(this.cboProveedores);
-            this.groupBoxCompra.Controls.Add(this.cboProductos);
             this.groupBoxCompra.Controls.Add(this.nudCantidad);
             this.groupBoxCompra.Controls.Add(this.txtPrecioUnitario);
             this.groupBoxCompra.Controls.Add(this.label1);
@@ -95,14 +95,6 @@ namespace VISTA
             this.cboProveedores.Name = "cboProveedores";
             this.cboProveedores.Size = new System.Drawing.Size(259, 24);
             this.cboProveedores.TabIndex = 0;
-            // 
-            // cboProductos
-            // 
-            this.cboProductos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboProductos.Location = new System.Drawing.Point(20, 123);
-            this.cboProductos.Name = "cboProductos";
-            this.cboProductos.Size = new System.Drawing.Size(259, 24);
-            this.cboProductos.TabIndex = 1;
             // 
             // nudCantidad
             // 
@@ -259,6 +251,19 @@ namespace VISTA
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
             // 
+            // btnSelectorProducto
+            // 
+            this.btnSelectorProducto.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnSelectorProducto.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelectorProducto.ForeColor = System.Drawing.Color.Snow;
+            this.btnSelectorProducto.Location = new System.Drawing.Point(20, 123);
+            this.btnSelectorProducto.Name = "btnSelectorProducto";
+            this.btnSelectorProducto.Size = new System.Drawing.Size(259, 25);
+            this.btnSelectorProducto.TabIndex = 12;
+            this.btnSelectorProducto.Text = "🔍 Seleccionar Producto";
+            this.btnSelectorProducto.UseVisualStyleBackColor = false;
+            this.btnSelectorProducto.Click += new System.EventHandler(this.btnSelectorProducto_Click);
+            // 
             // FormCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -289,7 +294,6 @@ namespace VISTA
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.GroupBox groupBoxCompra;
         private System.Windows.Forms.ComboBox cboProveedores;
-        private System.Windows.Forms.ComboBox cboProductos;
         private System.Windows.Forms.NumericUpDown nudCantidad;
         private System.Windows.Forms.TextBox txtPrecioUnitario;
         private System.Windows.Forms.Label label1;
@@ -303,5 +307,6 @@ namespace VISTA
         private System.Windows.Forms.DataGridView dgvCompra;
         private System.Windows.Forms.Button btnFinalizarCompra;
         private System.Windows.Forms.Button btnCancelar;
+        private Button btnSelectorProducto;
     }
 }

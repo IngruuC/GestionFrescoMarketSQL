@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace VISTA
 {
@@ -16,6 +17,13 @@ namespace VISTA
         private List<DetalleCompra> detallesCompra = new List<DetalleCompra>();
         private int compraIdActual;
         private GestorRelacionProveedorProducto gestorRelacion;
+
+        // Nuevas variables para el selector (filtro) de productos
+        private TextBox txtBuscarProducto;
+        private DataGridView dgvSelectorProductos;
+        private Panel panelSelector;
+        private List<Producto> productosDisponibles;
+        private Producto productoSeleccionado;
 
 
         public FormCompra()
@@ -67,7 +75,8 @@ namespace VISTA
 
             // Cargar combos
             CargarProveedores();
-            CargarProductos();
+            // Configurar selector de productos 
+            ConfigurarSelectorProductosNativo();
 
             // Configurar NumericUpDown
             nudCantidad.Minimum = 1;
@@ -80,67 +89,259 @@ namespace VISTA
             dgvCompra.SelectionChanged += dgvCompra_SelectionChanged;
 
             cboProveedores.SelectedIndexChanged += cboProveedores_SelectedIndexChanged;
-            cboProductos.SelectedIndexChanged += cboProductos_SelectedIndexChanged;
+            
 
+        }
+
+        private void ConfigurarSelectorProductosNativo()
+        {
+            // Cargar productos disponibles
+            productosDisponibles = controladoraProducto.ObtenerProductos().ToList();
+
+            // Panel contenedor del selector
+            panelSelector = new Panel
+            {
+                Location = new Point(200, 150),
+                Size = new Size(450, 280),
+                BorderStyle = BorderStyle.FixedSingle,
+                BackColor = Color.White,
+                Visible = false
+            };
+
+            // Barra de título
+            Panel panelTitulo = new Panel
+            {
+                Location = new Point(0, 0),
+                Size = new Size(448, 30),
+                BackColor = Color.FromArgb(0, 120, 215),
+                Cursor = Cursors.SizeAll
+            };
+
+            // Label del título
+            Label lblTitulo = new Label
+            {
+                Text = "Seleccionar Producto",
+                Location = new Point(8, 6),
+                Size = new Size(200, 18),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                BackColor = Color.Transparent
+            };
+
+            // Botón cerrar (X)
+            Button btnCerrar = new Button
+            {
+                Text = "✕",
+                Location = new Point(420, 2),
+                Size = new Size(26, 26),
+                FlatStyle = FlatStyle.Flat,
+                BackColor = Color.Transparent,
+                ForeColor = Color.White,
+                Font = new Font("Arial", 10F, FontStyle.Bold),
+                Cursor = Cursors.Hand
+            };
+            btnCerrar.FlatAppearance.BorderSize = 0;
+            btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(232, 17, 35);
+            btnCerrar.Click += (s, e) => panelSelector.Visible = false;
+
+            panelTitulo.Controls.AddRange(new Control[] { lblTitulo, btnCerrar });
+
+            // Funcionalidad para arrastrar el panel
+            bool arrastrando = false;
+            Point ultimoPunto = Point.Empty;
+
+            panelTitulo.MouseDown += (s, e) =>
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    arrastrando = true;
+                    ultimoPunto = e.Location;
+                }
+            };
+
+            panelTitulo.MouseMove += (s, e) =>
+            {
+                if (arrastrando)
+                {
+                    Point ubicacionActual = panelSelector.Location;
+                    panelSelector.Location = new Point(
+                        ubicacionActual.X + e.X - ultimoPunto.X,
+                        ubicacionActual.Y + e.Y - ultimoPunto.Y
+                    );
+                }
+            };
+
+            panelTitulo.MouseUp += (s, e) => { arrastrando = false; };
+
+            // Panel para filtros
+            Panel panelFiltros = new Panel
+            {
+                Location = new Point(5, 35),
+                Size = new Size(438, 30),
+                BackColor = Color.FromArgb(248, 248, 248),
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            // ComboBox para filtro Perecedero
+            ComboBox cboFiltroPerecedero = new ComboBox
+            {
+                Location = new Point(5, 4),
+                Size = new Size(120, 22),
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Font = new Font("Segoe UI", 8F)
+            };
+            cboFiltroPerecedero.Items.AddRange(new string[] { "Todos", "Perecederos", "No Perecederos" });
+            cboFiltroPerecedero.SelectedIndex = 0;
+            cboFiltroPerecedero.SelectedIndexChanged += (s, e) => FiltrarProductosEnSelector();
+
+            // Label para el filtro
+            Label lblFiltroPerecedero = new Label
+            {
+                Text = "Tipo:",
+                Location = new Point(130, 6),
+                Size = new Size(35, 18),
+                Font = new Font("Segoe UI", 8F),
+                ForeColor = Color.FromArgb(64, 64, 64)
+            };
+
+            panelFiltros.Controls.AddRange(new Control[] { cboFiltroPerecedero, lblFiltroPerecedero });
+
+            // TextBox para búsqueda
+            txtBuscarProducto = new TextBox
+            {
+                Location = new Point(5, 70),
+                Size = new Size(438, 25),
+                Font = new Font("Segoe UI", 10F),
+                Text = "Buscar producto por nombre o código...",
+                ForeColor = Color.Gray
+            };
+
+            txtBuscarProducto.Enter += (s, e) => {
+                if (txtBuscarProducto.Text == "Buscar producto por nombre o código...")
+                {
+                    txtBuscarProducto.Text = "";
+                    txtBuscarProducto.ForeColor = Color.Black;
+                }
+            };
+
+            txtBuscarProducto.Leave += (s, e) => {
+                if (string.IsNullOrWhiteSpace(txtBuscarProducto.Text))
+                {
+                    txtBuscarProducto.Text = "Buscar producto por nombre o código...";
+                    txtBuscarProducto.ForeColor = Color.Gray;
+                }
+            };
+
+            txtBuscarProducto.TextChanged += TxtBuscarProducto_TextChanged;
+            txtBuscarProducto.KeyDown += TxtBuscarProducto_KeyDown;
+
+            // DataGridView para productos
+            dgvSelectorProductos = new DataGridView
+            {
+                Location = new Point(5, 100),
+                Size = new Size(438, 175),
+                BackgroundColor = Color.White,
+                BorderStyle = BorderStyle.None,
+                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+                MultiSelect = false,
+                ReadOnly = true,
+                AllowUserToAddRows = false,
+                AllowUserToDeleteRows = false,
+                AutoGenerateColumns = false,
+                RowHeadersVisible = false,
+                Font = new Font("Segoe UI", 9F),
+                GridColor = Color.FromArgb(230, 230, 230),
+                ColumnHeadersHeight = 35,
+                ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing,
+                DefaultCellStyle = new DataGridViewCellStyle
+                {
+                    BackColor = Color.White,
+                    ForeColor = Color.Black,
+                    SelectionBackColor = Color.FromArgb(0, 120, 215),
+                    SelectionForeColor = Color.White,
+                    Padding = new Padding(5, 3, 5, 3)
+                },
+                AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+                {
+                    BackColor = Color.FromArgb(248, 248, 248)
+                },
+                ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+                {
+                    BackColor = Color.FromArgb(240, 240, 240),
+                    ForeColor = Color.Black,
+                    Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                    Padding = new Padding(8, 8, 8, 8),
+                    Alignment = DataGridViewContentAlignment.MiddleCenter,
+                    WrapMode = DataGridViewTriState.True
+                }
+            };
+
+            // Configurar columnas
+            dgvSelectorProductos.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Nombre",
+                HeaderText = "Producto",
+                Width = 180
+            });
+            dgvSelectorProductos.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "CodigoBarra",
+                HeaderText = "Código",
+                Width = 90
+            });
+            dgvSelectorProductos.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Precio",
+                HeaderText = "Precio",
+                Width = 80,
+                DefaultCellStyle = new DataGridViewCellStyle
+                {
+                    Format = "C2",
+                    Alignment = DataGridViewContentAlignment.MiddleRight
+                }
+            });
+            dgvSelectorProductos.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Stock",
+                HeaderText = "Stock",
+                Width = 60,
+                DefaultCellStyle = new DataGridViewCellStyle
+                {
+                    Alignment = DataGridViewContentAlignment.MiddleCenter
+                }
+            });
+
+            // Eventos del DataGridView
+            dgvSelectorProductos.DoubleClick += DgvSelectorProductos_DoubleClick;
+            dgvSelectorProductos.KeyDown += DgvSelectorProductos_KeyDown;
+
+            // Agregar controles al panel principal
+            panelSelector.Controls.AddRange(new Control[] {
+                panelTitulo,
+                panelFiltros,
+                txtBuscarProducto,
+                dgvSelectorProductos
+            });
+
+            // Guardar referencia al ComboBox para usarlo en filtros
+            panelSelector.Tag = cboFiltroPerecedero;
+
+            this.Controls.Add(panelSelector);
+            panelSelector.BringToFront();
         }
 
         private void cboProveedores_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboProveedores.SelectedIndex != -1)
             {
-                cboProveedores.Enabled = false;  // Bloquea el ComboBox
+                cboProveedores.Enabled = false;
                 int proveedorId = (int)cboProveedores.SelectedValue;
-                CargarProductosDelProveedor(proveedorId);
+                CargarProductosDelProveedorEnSelector(proveedorId);
             }
         }
 
-        private void SimularFiltroProductosPorProveedor(Proveedor proveedor)
-        {
-            try
-            {
-                // Esta es una lógica simple de filtrado. Puedes adaptarla según tu necesidad
-                // Por ejemplo, podríamos filtrar productos que empiecen con la misma letra que el proveedor
-                // O usar otras reglas de negocio que tengan sentido en tu contexto
-
-                var productos = controladoraProducto.ObtenerProductos().ToList();
-
-                // Simulamos un filtro basado en alguna regla arbitraria 
-                // (puedes cambiar esta lógica por algo más relacionado a tu negocio)
-                var productosDelProveedor = productos;
-
-                // Si quieres aplicar algún filtro específico, puedes descomentar esto y ajustarlo:
-                /*
-                // Por ejemplo, si los productos comienzan con la primera letra de la razón social del proveedor
-                char letraInicial = proveedor.RazonSocial.ToUpper()[0];
-                var productosDelProveedor = productos.Where(p => p.Nombre.ToUpper().StartsWith(letraInicial.ToString())).ToList();
-                */
-
-                cboProductos.DataSource = null;
-                cboProductos.DataSource = productosDelProveedor;
-                cboProductos.DisplayMember = "Nombre";
-                cboProductos.ValueMember = "Id";
-                cboProductos.SelectedIndex = -1;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al cargar los productos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private void cboProductos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cboProductos.SelectedIndex != -1)
-            {
-                Producto productoSeleccionado = (Producto)cboProductos.SelectedItem;
-                // Usamos el precio actual del producto como precio de compra sugerido
-                // Quizás podrías aplicar un descuento
-                decimal precioSugerido = productoSeleccionado.Precio * 0.8m; // 20% menos que el precio de venta
-                txtPrecioUnitario.Text = precioSugerido.ToString("N2");
-            }
-            else
-            {
-                txtPrecioUnitario.Clear();
-            }
-        }
+       
+       
 
         private void CargarProveedores()
         {
@@ -158,24 +359,8 @@ namespace VISTA
             }
         }
 
-        private void CargarProductos()
-        {
-            try
-            {
-                var productos = controladoraProducto.ObtenerProductos().ToList();
-                cboProductos.DataSource = null;
-                cboProductos.DataSource = productos;
-                cboProductos.DisplayMember = "Nombre";
-                cboProductos.ValueMember = "Id";
-                cboProductos.SelectedIndex = -1;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al cargar los productos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
-        private void CargarProductosDelProveedor(int proveedorId)
+        private void CargarProductosDelProveedorEnSelector(int proveedorId)
         {
             try
             {
@@ -184,27 +369,139 @@ namespace VISTA
 
                 if (productosProveedor.Count == 0)
                 {
+                    productosDisponibles = todosLosProductos.ToList();
                     MessageBox.Show("Este proveedor no tiene productos asignados. Se mostrarán todos los productos disponibles.",
                         "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    cboProductos.DataSource = null;
-                    cboProductos.DataSource = todosLosProductos;
                 }
                 else
                 {
-                    cboProductos.DataSource = null;
-                    cboProductos.DataSource = productosProveedor;
+                    productosDisponibles = productosProveedor;
                 }
 
-                cboProductos.DisplayMember = "Nombre";
-                cboProductos.ValueMember = "Id";
-                cboProductos.SelectedIndex = -1;
+                // Filtrar productos en el selector si está visible
+                if (panelSelector.Visible)
+                {
+                    FiltrarProductosEnSelector();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al cargar los productos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        // Métodos del selector de productos
+        private void TxtBuscarProducto_TextChanged(object sender, EventArgs e)
+        {
+            FiltrarProductosEnSelector();
+        }
+
+        private void TxtBuscarProducto_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down && dgvSelectorProductos.Rows.Count > 0)
+            {
+                dgvSelectorProductos.Focus();
+                dgvSelectorProductos.Rows[0].Selected = true;
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                panelSelector.Visible = false;
+            }
+            else if (e.KeyCode == Keys.Enter && dgvSelectorProductos.SelectedRows.Count > 0)
+            {
+                SeleccionarProductoDelGrid();
+            }
+        }
+        private void DgvSelectorProductos_DoubleClick(object sender, EventArgs e)
+        {
+            SeleccionarProductoDelGrid();
+        }
+
+        private void DgvSelectorProductos_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SeleccionarProductoDelGrid();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                panelSelector.Visible = false;
+            }
+        }
+
+        private void SeleccionarProductoDelGrid()
+        {
+            if (dgvSelectorProductos.SelectedRows.Count > 0)
+            {
+                productoSeleccionado = (Producto)dgvSelectorProductos.SelectedRows[0].DataBoundItem;
+
+                // Aquí necesitarás un Label para mostrar el producto seleccionado
+                // Por ejemplo: lblProductoSeleccionado.Text = $"{productoSeleccionado.Nombre} - ${productoSeleccionado.Precio:N2}";
+                // lblProductoSeleccionado.ForeColor = Color.Black;
+
+                // Calcular precio sugerido (20% menos que el precio de venta)
+                decimal precioSugerido = productoSeleccionado.Precio * 0.8m;
+                txtPrecioUnitario.Text = precioSugerido.ToString("N2");
+
+                // Ocultar selector y enfocar cantidad
+                panelSelector.Visible = false;
+                nudCantidad.Focus();
+            }
+        }
+
+        private void CargarProductosEnSelector()
+        {
+            if (cboProveedores.SelectedIndex != -1)
+            {
+                int proveedorId = (int)cboProveedores.SelectedValue;
+                CargarProductosDelProveedorEnSelector(proveedorId);
+            }
+            else
+            {
+                productosDisponibles = controladoraProducto.ObtenerProductos().ToList();
+            }
+
+            dgvSelectorProductos.DataSource = null;
+            dgvSelectorProductos.DataSource = productosDisponibles;
+        }
+
+        private void FiltrarProductosEnSelector()
+        {
+            string filtroTexto = txtBuscarProducto.Text.ToLower();
+
+            // Ignorar el texto de placeholder
+            if (filtroTexto == "buscar producto por nombre o código..." || txtBuscarProducto.ForeColor == Color.Gray)
+                filtroTexto = "";
+
+            // Obtener filtro de perecedero del ComboBox
+            var cboFiltroPerecedero = panelSelector?.Tag as ComboBox;
+            string filtroPerecedero = cboFiltroPerecedero?.SelectedItem?.ToString() ?? "Todos";
+
+            var productosFiltrados = productosDisponibles.Where(p =>
+            {
+                // Filtro por texto (nombre o código)
+                bool coincideTexto = string.IsNullOrEmpty(filtroTexto) ||
+                    p.Nombre.ToLower().Contains(filtroTexto) ||
+                    (p.CodigoBarra != null && p.CodigoBarra.ToLower().Contains(filtroTexto));
+
+                // Filtro por perecedero
+                bool coincidePerecedero = filtroPerecedero == "Todos" ||
+                    (filtroPerecedero == "Perecederos" && p.EsPerecedero) ||
+                    (filtroPerecedero == "No Perecederos" && !p.EsPerecedero);
+
+                return coincideTexto && coincidePerecedero;
+            }).ToList();
+
+            dgvSelectorProductos.DataSource = null;
+            dgvSelectorProductos.DataSource = productosFiltrados;
+
+            if (productosFiltrados.Count > 0)
+            {
+                dgvSelectorProductos.Rows[0].Selected = true;
+            }
+        }
+
+        
 
         private int GenerarNuevaCompraId()
         {
@@ -220,11 +517,7 @@ namespace VISTA
 
         private void LimpiarControles()
         {
-            cboProductos.SelectedIndex = -1;
-            nudCantidad.Value = 1;
-            txtPrecioUnitario.Clear();
-            btnModificar.Enabled = false;
-            btnEliminar.Enabled = false;
+            LimpiarControlesSelector();
         }
 
         private void ActualizarDataGridView()
@@ -242,7 +535,7 @@ namespace VISTA
                 return false;
             }
 
-            if (cboProductos.SelectedIndex == -1)
+            if (productoSeleccionado == null)
             {
                 MessageBox.Show("Debe seleccionar un producto.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -315,23 +608,22 @@ namespace VISTA
 
             try
             {
-                var producto = (Producto)cboProductos.SelectedItem;
                 int cantidad = (int)nudCantidad.Value;
                 decimal precioUnitario = decimal.Parse(txtPrecioUnitario.Text);
 
                 var detalle = new DetalleCompra
                 {
-                    ProductoId = producto.Id,
-                    ProductoNombre = producto.Nombre,
+                    ProductoId = productoSeleccionado.Id,
+                    ProductoNombre = productoSeleccionado.Nombre,
                     Cantidad = cantidad,
                     PrecioUnitario = precioUnitario,
                     Subtotal = precioUnitario * cantidad,
-                    Producto = producto
+                    Producto = productoSeleccionado
                 };
 
                 detallesCompra.Add(detalle);
                 ActualizarDataGridView();
-                LimpiarControles();
+                LimpiarControlesSelector();
             }
             catch (Exception ex)
             {
@@ -352,7 +644,13 @@ namespace VISTA
                 return;
             }
 
-            cboProductos.SelectedValue = producto.Id;
+            // Establecer el producto seleccionado
+            productoSeleccionado = producto;
+
+            // Actualizar el label de producto seleccionado si lo tienes
+            // lblProductoSeleccionado.Text = $"{producto.Nombre} - ${producto.Precio:N2}";
+            // lblProductoSeleccionado.ForeColor = Color.Black;
+
             nudCantidad.Value = detalle.Cantidad;
             txtPrecioUnitario.Text = detalle.PrecioUnitario.ToString();
             detallesCompra.Remove(detalle);
@@ -468,6 +766,52 @@ namespace VISTA
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al realizar la compra: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LimpiarControlesSelector()
+        {
+            productoSeleccionado = null;
+            nudCantidad.Value = 1;
+            txtPrecioUnitario.Clear();
+
+            // Limpiar label de producto seleccionado si lo tienes
+            // lblProductoSeleccionado.Text = "Ningún producto seleccionado";
+            // lblProductoSeleccionado.ForeColor = Color.Gray;
+
+            btnModificar.Enabled = false;
+            btnEliminar.Enabled = false;
+        }
+
+        private void btnSelectorProducto_Click(object sender, EventArgs e)
+        {
+            if (cboProveedores.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar un proveedor primero.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (panelSelector.Visible)
+            {
+                panelSelector.Visible = false;
+            }
+            else
+            {
+                // Posicionar el panel cerca del botón
+                Button btn = sender as Button;
+                panelSelector.Location = new Point(btn.Left, btn.Bottom + 5);
+
+                CargarProductosEnSelector();
+                panelSelector.Visible = true;
+                panelSelector.BringToFront();
+
+                // Enfocar y limpiar el textbox
+                txtBuscarProducto.Focus();
+                if (txtBuscarProducto.ForeColor == Color.Gray)
+                {
+                    txtBuscarProducto.Text = "";
+                    txtBuscarProducto.ForeColor = Color.Black;
+                }
             }
         }
     }
