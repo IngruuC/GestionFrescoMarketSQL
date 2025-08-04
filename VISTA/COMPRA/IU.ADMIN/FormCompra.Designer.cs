@@ -39,6 +39,7 @@ namespace VISTA
             this.btnFinalizarCompra = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnSelectorProducto = new System.Windows.Forms.Button();
+            this.lblProductoSeleccionado = new System.Windows.Forms.Label();
             this.panelSuperior.SuspendLayout();
             this.groupBoxCompra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
@@ -68,6 +69,7 @@ namespace VISTA
             // 
             // groupBoxCompra
             // 
+            this.groupBoxCompra.Controls.Add(this.lblProductoSeleccionado);
             this.groupBoxCompra.Controls.Add(this.btnSelectorProducto);
             this.groupBoxCompra.Controls.Add(this.cboProveedores);
             this.groupBoxCompra.Controls.Add(this.nudCantidad);
@@ -98,7 +100,7 @@ namespace VISTA
             // 
             // nudCantidad
             // 
-            this.nudCantidad.Location = new System.Drawing.Point(20, 184);
+            this.nudCantidad.Location = new System.Drawing.Point(20, 208);
             this.nudCantidad.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -120,7 +122,7 @@ namespace VISTA
             // 
             // txtPrecioUnitario
             // 
-            this.txtPrecioUnitario.Location = new System.Drawing.Point(20, 245);
+            this.txtPrecioUnitario.Location = new System.Drawing.Point(20, 269);
             this.txtPrecioUnitario.Name = "txtPrecioUnitario";
             this.txtPrecioUnitario.Size = new System.Drawing.Size(259, 22);
             this.txtPrecioUnitario.TabIndex = 3;
@@ -146,7 +148,7 @@ namespace VISTA
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 165);
+            this.label3.Location = new System.Drawing.Point(17, 189);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 16);
             this.label3.TabIndex = 6;
@@ -155,7 +157,7 @@ namespace VISTA
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 226);
+            this.label4.Location = new System.Drawing.Point(17, 250);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(143, 16);
             this.label4.TabIndex = 7;
@@ -166,7 +168,7 @@ namespace VISTA
             this.btnAgregarProducto.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnAgregarProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregarProducto.ForeColor = System.Drawing.Color.White;
-            this.btnAgregarProducto.Location = new System.Drawing.Point(20, 293);
+            this.btnAgregarProducto.Location = new System.Drawing.Point(20, 317);
             this.btnAgregarProducto.Name = "btnAgregarProducto";
             this.btnAgregarProducto.Size = new System.Drawing.Size(259, 35);
             this.btnAgregarProducto.TabIndex = 8;
@@ -179,7 +181,7 @@ namespace VISTA
             this.btnModificar.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificar.ForeColor = System.Drawing.Color.White;
-            this.btnModificar.Location = new System.Drawing.Point(20, 340);
+            this.btnModificar.Location = new System.Drawing.Point(20, 364);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(120, 35);
             this.btnModificar.TabIndex = 9;
@@ -192,7 +194,7 @@ namespace VISTA
             this.btnEliminar.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEliminar.ForeColor = System.Drawing.Color.White;
-            this.btnEliminar.Location = new System.Drawing.Point(159, 340);
+            this.btnEliminar.Location = new System.Drawing.Point(159, 364);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(120, 35);
             this.btnEliminar.TabIndex = 10;
@@ -264,6 +266,20 @@ namespace VISTA
             this.btnSelectorProducto.UseVisualStyleBackColor = false;
             this.btnSelectorProducto.Click += new System.EventHandler(this.btnSelectorProducto_Click);
             // 
+            // lblProductoSeleccionado
+            // 
+            this.lblProductoSeleccionado.AutoEllipsis = true;
+            this.lblProductoSeleccionado.AutoSize = true;
+            this.lblProductoSeleccionado.BackColor = System.Drawing.Color.White;
+            this.lblProductoSeleccionado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblProductoSeleccionado.ForeColor = System.Drawing.Color.Gray;
+            this.lblProductoSeleccionado.Location = new System.Drawing.Point(38, 151);
+            this.lblProductoSeleccionado.Name = "lblProductoSeleccionado";
+            this.lblProductoSeleccionado.Size = new System.Drawing.Size(220, 18);
+            this.lblProductoSeleccionado.TabIndex = 13;
+            this.lblProductoSeleccionado.Text = "Ningún producto seleccionado";
+            this.lblProductoSeleccionado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -308,5 +324,6 @@ namespace VISTA
         private System.Windows.Forms.Button btnFinalizarCompra;
         private System.Windows.Forms.Button btnCancelar;
         private Button btnSelectorProducto;
+        private Label lblProductoSeleccionado;
     }
 }

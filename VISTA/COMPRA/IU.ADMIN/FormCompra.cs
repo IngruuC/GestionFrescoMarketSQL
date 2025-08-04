@@ -435,9 +435,9 @@ namespace VISTA
             {
                 productoSeleccionado = (Producto)dgvSelectorProductos.SelectedRows[0].DataBoundItem;
 
-                // Aquí necesitarás un Label para mostrar el producto seleccionado
-                // Por ejemplo: lblProductoSeleccionado.Text = $"{productoSeleccionado.Nombre} - ${productoSeleccionado.Precio:N2}";
-                // lblProductoSeleccionado.ForeColor = Color.Black;
+               
+                lblProductoSeleccionado.Text = $"{productoSeleccionado.Nombre} - ${productoSeleccionado.Precio:N2}";
+                lblProductoSeleccionado.ForeColor = Color.Black;
 
                 // Calcular precio sugerido (20% menos que el precio de venta)
                 decimal precioSugerido = productoSeleccionado.Precio * 0.8m;
@@ -647,9 +647,9 @@ namespace VISTA
             // Establecer el producto seleccionado
             productoSeleccionado = producto;
 
-            // Actualizar el label de producto seleccionado si lo tienes
-            // lblProductoSeleccionado.Text = $"{producto.Nombre} - ${producto.Precio:N2}";
-            // lblProductoSeleccionado.ForeColor = Color.Black;
+           
+            lblProductoSeleccionado.Text = $"{producto.Nombre} - ${producto.Precio:N2}";
+            lblProductoSeleccionado.ForeColor = Color.Black;
 
             nudCantidad.Value = detalle.Cantidad;
             txtPrecioUnitario.Text = detalle.PrecioUnitario.ToString();
